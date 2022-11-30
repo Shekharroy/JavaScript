@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Refresher</title>
+</head>
+<body>
+    <h1> Java Script Refresher</h1>
+    
+    <script type="text/javascript">
+        let a = 34; // better pract is to use let instead of var
+        // let a = 45;  // Because here to notify you this varuiable a is already is uesed.
+        console.log(a);
+        function hello(){
+            console.log("This is me...");
+        }
+        let obja = {
+            r: 67,
+            m: 91,
+
+            func: function myFunc(number){
+                console.log("This is value of Number = "+number);
+            }
+        }
+
+        document.addEventListener("click", function click(){
+            console.log("Clicked");
+            alert("hello");
+           let conf = confirm("Are you sure?");
+           console.log(conf);
+        });
+    </script>
+</body>
+</html>
