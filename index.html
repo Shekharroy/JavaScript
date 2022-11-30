@@ -25,12 +25,39 @@
             }
         }
 
-        document.addEventListener("click", function click(){
+        document.addEventListener("click", function click(){ // here you able to see how to work click function using addEventListner function this is inbuild function of javascript
             console.log("Clicked");
             alert("hello");
            let conf = confirm("Are you sure?");
            console.log(conf);
         });
+
+        // How to construct arrays in javascript
+        let  arr = [21, 12,088];
+        // Here you find array length
+        console.log( "The value of arr = "+arr+" Length of arr = "+arr.length+" Last indext this array = "+arr.reverse());
+
+        // create object in javascript
+        let mobj = {
+            a : this,
+            mufunc : function(num){
+                console.log(this); // this, this is refer internal object means mobj;
+            }
+        }
+        // let me execute this function
+        mobj.mufunc();
+
+        // creating objects again but here I am using arrow function
+
+        let newobj = {
+            // even if use below code also
+            b: this,
+            fnc :(number) =>{
+                console.log(this) // this, this is refering windows objects
+            }
+        }
+        // let me execute this 
+        newobj.fnc();
     </script>
 </body>
 </html>
