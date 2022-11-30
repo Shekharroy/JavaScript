@@ -58,6 +58,16 @@
         }
         // let me execute this 
         newobj.fnc();
+
+        // understang of callvback function "callback function invoke when, when oen work is done already see the below code snippets for better understanding.."
+        // javascript follow asynchronus architecture;
+        // without blocking the thread run continuously
+        
+        setTimeout(()=>{
+            console.log("Hey code I am the surprise for you -> understand callback function execution I want this after 3 second the execution below code... Yah got it ")
+        }, 3000);
+
+        console.log("I am the below code after 3 second of my execution of you will surprise... hahha")
     </script>
 </body>
 </html>
