@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="robots" content="noindex,nofollow" />
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=.5, maximum-scale=1.0, user-scalable=yes" name="viewport" />
+	<meta http-equiv="X-UA-Compatible" content="IE=10" />
+	<meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+	<META HTTP-EQUIV="EXPIRES" CONTENT="Mon, 22 Jul 2002 11:12:01 GMT">
+	<meta http-equiv="pragma" content="no-cache" />
+	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png?v=1.30071">
+	<title>DCirrus E-Voting</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css?v=1.30071">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css?v=1.30071">
+    <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css?v=1.30071">
+    <link rel="stylesheet" type="text/css" href="assets/css/select2.min.css?v=1.30071">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css?v=1.30071">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css?v=1.30071">
+    <link rel="stylesheet" type="text/css" href="assets/css/custom.css?v=1.30071">
+    <link rel="stylesheet" type="text/css" href="assets/css/top-alertjs.css?v=1.30071">
+    <link rel="stylesheet" type="text/css" href="assets/plugins/summernote/dist/summernote-bs4.css?v=1.30071">
+    <link rel="stylesheet" type="text/css" href="assets/css/tree/tree.css?v=1.30071">
+    <link rel="stylesheet" type="text/css" href="assets/css/adm/adm.css?v=1.30071">
+	<link rel="stylesheet" type="text/css" href="assets/css/intlTelInput.css?v=1.30071"/>
+	<link rel='stylesheet' type="text/css" href='assets/css/typehead.css?v=1.30071'>
+	<link rel='stylesheet' type="text/css" href='assets/css/forum.css?v=1.30071'>
+	<link rel='stylesheet' type="text/css" href='assets/css/poll/poll.css?v=1.30071'>
+	<link rel='stylesheet' type="text/css" href='assets/css/daterangepicker.css?v=1.30071'>
+	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png?v=1.30071">
+	<style>
+		.tox-menubar{
+			display: none !important;
+		}
+		.tox-statusbar{
+			display: none !important;
+		}
+	</style>
+<script>
+	document.onkeydown = function (e) {
+	    e = e || window.event;//Get event
+		var code = e.which || e.keyCode;//Get key code
+	    if (e.ctrlKey) {
+	    	if(code == 80){
+	    		e.preventDefault();
+	            e.stopPropagation();
+			}
+	    }
+	};
+</script>
+
+</head>
+
+<body ondragstart="return false;" onload="pollCommon();">
+	<div class="paymentwarningclass" id="paymentwarningid"
+		style="display: none; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+		<p><i id="warning" class="fa fa-exclamation-triangle warningclass"></i><span id="billnotpaid"
+				class="billnotpaidclass"></span></p>
+		</div>
+    <div class="main-wrapper" style="overflow-y: scroll;" id="divmain">
+		<div class="header todolistid" id="divforum" style="height:56px;" > <!-- Drive start -->
+			<div class="row">
+				<div class="col-sm-1 col-1" style="padding-left: 0%;">
+					<div class="header-left" style="height:56px;">
+
+					<span class="logo">
+							<img src="assets/img/logo1.png"  id="clogoimg" alt="" id="customerLogo" style="width:60px;height:50px;margin-top:-8px;">
+
+						</span>
+						<!--<p style="font-size: 12px; margin-top: -12% !important;" id="ltext">Powered by Dcirrus</p>-->
+					</div>
+				</div>
+
+				<div class="col-sm-11 col-11">
+					<div class="row nav user-menu ">
+						<div class="col-sm-5 col-5">
+							<h3 style="color:#01c0c8; margin-left:8%; text-align:center; margin-top:10px;" id="divpagetitle">E-Voting</h3>
+						</div>
+						<div class="col-sm-7 col-7" style="margin-bottom:7px !important; margin-left: 0px auto; padding-left: 0px;">
+							<div class="flor">
+								<a class='profIm' id="profIm"
+									style="margin-top:9px;cursor: pointer; background-color: rgb(248, 249, 250); border: 1px solid rgb(225, 225, 225);box-shadow: rgba(0, 0, 0, 0.075) 0px 0.125rem 0.25rem !important;">
+									<img src="assets/img/user_image.png" style='width:45px;height:38px;' id="userimg">
+									<span id="username"
+										style="font-size:18px;text-transform:capitalize;;color: #007bff; font-style: normal; font-weight: 400; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;">Shakti</span>
+								</a>
+								<a href="drive.html" class="float-right btn btn-primary float-right btn-rounded" title="back to drive"
+								style="width:42px;height:42px;margin-top:9px;margin-left:10px;float:right !important;">
+									<i class="fa fa-home" aria-hidden="true" style="color:#fff;padding-top:6px;font-size:18px;"></i>
+								</a>
+								<a href="javascript:void(0);" class="float-right btn btn-primary float-right btn-rounded"
+									title="Refresh" id="btn_refresh"
+									style="width:42px;height:42px;margin-top:9px;margin-left:10px;float:right !important;float:right !important;">
+									<i class="fa fa-refresh" aria-hidden="true" style="color:#fff;padding-top:6px;font-size:18px;"></i>
+								</a>
+								<a href="javascript:void(0);" class="float-right btn btn-primary btn-rounded" data-toggle="dropdown"
+									style="width:42px;height:42px;margin-top:9px;margin-left:10px;float:right !important; float:right !important;" id="btnaddnewpoll"
+									title="Create New Poll">
+									<i class="fa fa-plus" aria-hidden="true"style="color:#fff;padding-top:6px;font-size:18px;"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="page-wrapper " style="margin-left:0px;height:100%;width:100%;margin-top:57px;overflow:hidden;padding:0px;">
+			<!-- content -->
+			<div class="content container-fluid" style="background:none;margin-top:0px;width:100%;padding:0px;">
+				<!-- left div starts -->
+				<div style="width:50%;float:left;padding:0px;overflow:none;" id="divforumleft">
+					<div class="inner-main-header" style="width:100%;padding-top:2%;">
+						<select class="custom-select custom-select-sm w-auto mr-1" id="selectpollsfilter" style="font-size:14px;color:#6c757d!important;width:30% !important;">
+							<option selected value="0">All Polls</option>
+							<option value="1">Polls in Preview State</option>
+							<option value="2">Polls in Running State</option>
+							<option value="3">Polls in Closed State</option>
+						</select>
+						<span class="input-icon input-icon-sm ml-auto w-auto fake-input" style="width:60% !important;margin-left:0px !important;">
+							<input type="text" id="txtsearch" class="form-control form-control-sm bg-gray-200 border-gray-200 shadow-none mb-4 mt-4"
+							placeholder="search poll by title" style="border:1px solid #ccc;border-radius:6px;padding-right:17px;">
+							<img src="assets/img/search.png" style="width:20px;cursor:pointer;margin-top:27px;" id="img_search"/>
+						</span>
+					</div>
+					<div class="inner-main-header" style="width:100%;">
+						<span class="input-icon input-icon-sm ml-auto w-auto fake-input" style="width:40% !important;margin-left:5px !important;">
+							<input type="text" id="startdaterange" value="" style="border:1px solid #ccc;border-radius:6px;padding:4px;" placeholder="Poll Start Date Range"/>
+						</span>
+						<span class="input-icon input-icon-sm ml-auto w-auto fake-input" style="width:40% !important;margin-left:5px !important;">
+							<input type="text" id="enddaterange" value="" style="border:1px solid #ccc;border-radius:6px;padding:4px;" placeholder="Poll End Date Range"/>
+						</span>
+						<span class="input-icon input-icon-sm" title="Reset Search" style="margin-left:5px;">
+							<button class="btn btn-primary btn-rounded float-right" style='cursor:pointer;background:#3bc4c6;color:white;border-radius:23px;border:0px;padding: 2px 15px 2px 15px;' id="btn_search_reset">Reset</button>
+						</span>
+						<span class="input-icon input-icon-sm" title="Sort Order" style="margin-left:5px;">
+							<button class="btn btn-primary btn-rounded float-right" style='cursor:pointer;background:#3bc4c6;color:white;border-radius:23px;border:0px;padding: 2px 15px 2px 15px;' id="btn_sort">
+								Sort&nbsp;
+								<img src="assets/img/sort_desc_white.png" style="width:21px;cursor:pointer;" id="img_sort" data-sort="DESC">
+							</button>
+						</span>
+					</div>
+					<div class="inner-main-body p-2 p-sm-3 collapse forum-content show" style="padding:10px !important;margin-top: 0px;overflow-y:auto;" id="card-mb-2">
+
+					</div>
+				</div>
+				<!-- left div ends -->
+				<!-- right div starts -->
+				<div style="width:50%;float:left;border-left: 5px solid #ccc;padding:0px;overflow-y:auto;" id="divforumright">
+					<div class="inner-main-body p-2 collapse forum-content show" id="div_single_poll">
+
+					</div>
+					<div class="mb-3 has-icon" style="font-weight:bold;text-align:center;width:100%;border-bottom:2px solid #000;margin-bottom:5px !important;">Agendas</div>
+					<div class="card mb-2" id="div_poll_agenda_list" style="width:98%;margin-left:1%;background:#edf4ff;border:0px;box-shadow:none;">
+
+					</div>
+				</div>
+				<!-- right div ends -->
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fad mymodal" role="dialog" id="divpollchangedate">
+		<div class="modal-dialog modal-lg" style="width:35%;max-width:90%;overflow:hidden;border-top-left-radius:36px;border-top-right-radius:36px;">
+			<div class="modal-content">
+				<div class="modal-header" style="display:block;background-color:#23bbf3;border-top-left-radius:36px;border-top-right-radius:36px;padding:0px;">
+					<h4 style="color:#fff;margin-top:20px;margin-left:20px;width:75%;float:left;" id="divchangepolldatetitle">Change start date and end date</h4>
+					<button type="button" class="close" style="margin:0;width:8%;float:right;position:absolute;margin-top:5px;margin-left: 10.25%;opacity:1;"
+									id="btn_poll_date_change_close_icon">
+						<i class='fa fa-times cross_btn'></i>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;display:none;" id="divstartdate">
+						<span style="color:#0D246E;">Start Date<span style="color:red;">*</span></span>
+						<input type="datetime-local" id="txt_poll_start_date" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+						<i class="bar"></i>
+					</div>
+					<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+						<span style="color:#0D246E;">End Date<span style="color:red;">*</span></span>
+						<input type="datetime-local" id="txt_poll_end_date" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+						<i class="bar"></i>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary btn-rounded navigate-ref-exp-btn text-*-center font-weight-bold" id="btn_poll_date_change_close">Close</button>
+					<button class="btn btn-primary btn-rounded navigate-ref-exp-btn text-*-center font-weight-bold" id="btn_poll_date_change_update">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade ui-resizable" tabindex="-1" role="dialog" id="div_poll_voter_add" aria-labelledby="addvoterLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color:#23bbf3; border-top-left-radius:36px; border-top-right-radius:36px; padding: 5px 15px;">
+					<h4 class="modal-title text-white" id="addvoterLabel">Add Voter</h4>
+					<button id="btn_poll_voter_add_close_icon" type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+						<span class="text-white" aria-hidden="true"><h3>&times;</h3></span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+						<span style="color:#0D246E;">Voter Login Id<span style="color:red;">*</span></span>
+						<input type="email" id="txt_poll_voter_email_id" autocomplete="off" autocorrect="off" autocapitalize="off"
+							spellcheck="false" required />
+						<i class="bar"></i>
+					</div>
+					<div id="poll_password" class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+						<span style="color:#0D246E;">Password<span style="color:red;">*</span></span>
+						<div class="row">
+							<div class="col-md-10">
+								<input type="password" id="txt_poll_voter_pssword" autocomplete="off" autocorrect="off" autocapitalize="off"
+									spellcheck="false" required maxlength="100"/>
+							</div>
+							<div class="col-md-2"><span id="password-field" toggle="#txt_poll_voter_pssword"
+									class="fa fa-fw fa-eye field_icon toggle-password ml-4"></span></div>
+						</div>
+						<i class="bar"></i>
+					</div>
+					<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+						<span style="color:#0D246E;">Voter Mobile Number<span style="color:red;"></span></span>
+						<input type="text" id="txt_poll_voter_mobile" autocomplete="off" autocorrect="off" autocapitalize="off"
+							spellcheck="false" maxlength=15 />
+						<i class="bar"></i>
+					</div>
+					<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;display:none;"
+						id="div_voter_percentage">
+						<span style="color:#0D246E;">Vote Percentage<span style="color:red;"
+								id="span_poll_voter_percentage_required"></span></span>
+						<input type="number" id="txt_poll_voter_percentage" value="0" autocomplete="off" autocorrect="off"
+							autocapitalize="off" spellcheck="false" required maxlength=2 />
+						<i class="bar"></i>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary btn-rounded navigate-ref-exp-btn text-*-center font-weight-bold" id="btn_poll_voter_add_close" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary btn-rounded navigate-ref-exp-btn text-*-center font-weight-bold" id="btn_poll_voter_add_save">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fad ui-resizable" tabindex="-1" role="dialog" aria-labelledby="voterlistLabel" aria-hidden="true"
+		id="div_voter_list">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header"
+					style="background-color:#23bbf3; border-top-left-radius:36px; border-top-right-radius:36px; padding: 10px 15px;">
+					<div class="col-md-10">
+						<h4 class="modal-title text-white" id="voterlistLabel">Voters List</h4>
+					</div>
+					<div class="col-md-2">
+						<div class="row">
+							<div class="col-md-8">
+								<button class="btn btn-link text-white" id="search_sec" style="padding: 0.2rem 1.1rem; margin-left: 1.5em;"><i class="fa fa-search"></i></button>
+							</div>
+							<div class="col-md-4">
+								<button id="btn_voter_list_close_icon" type="button" class="close text-white" data-dismiss="modal"
+									aria-label="Close">
+									<span class="text-white" aria-hidden="true">
+										<h3>&times;</h3>
+									</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="search_div" class="row">
+					<div class="col-md-9">
+						<div class="form-group has-search" style="padding-left: 15px;">
+							<span class="fa fa-search form-control-feedback"></span>
+							<input type="text" class="form-control" placeholder="Search for existing voters" id="txt_voter_search">
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="row">
+							<div class="col-md-6">
+								<button class="modal_voter_list_btn" id="voter_search" style="margin-left: 1.4em;">Search</button>
+							</div>
+							<div class="col-md-6">
+								<button class="modal_voter_list_btn" id="voter_search_cancle">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="tr_voter_select_delete" style="margin-bottom: 15px;margin-left: 10px;">
+					<div>
+						<button class="modal_voter_list_btn"  id="btn_poll_voter_select_all">Select All</button>
+						<button class="modal_voter_list_btn"  id="btn_poll_voter_resend_invite_not_voted">Select Not Voted</button>
+						<button class="modal_voter_list_btn"  onclick="pollPrepareResendInviteJSON();" id="btn_poll_voter_resend_invite_all">Resend Invite</button>
+						<button class="modal_voter_list_btn"  id="btn_poll_voter_delete_all">Delete</button>
+					</div>
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12 white-bg" id="tableHeadPages" style="border: 1px solid #D3D3D3; padding-left: 0px !important; padding-right: 0px !important;">
+					<div class='col-md-12 col-sm-12 heading'>
+						<center style="font-weight:bold;">Pages</center>
+					</div>
+					<div class='col-md-12 col-sm-12 scrollsec' id="divpages_poll" style="overflow-y: auto;">&nbsp;</div>
+				</div>
+				<div class="modal-body">
+					<div class="" style="max-height:450px;width:100%;overflow-y:auto;overflow-x:hidden;">
+						<table class="table table-sm" id="table_voter_list">
+						<tbody>
+							<tr class="tsclspermnouser" style="display:none;">
+								<td scope="row" style="word-break:break-word;font-weight:bold;font-size:18px;">None of the users have permission on the folder</td>
+							</tr>
+							<tr id="no_record_found" class="norecord text-secondary" style="display:none;">
+								<td scope="row">No Records Found</td>
+							</tr>
+							
+						</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<input type="file" id="btnvoterfilechoose" accept=".csv" style="display: none;">
+					<button class="modal_voter_list_btn"  id="btn_voter_export_pdf">PDF Export</button>
+					<button class="modal_voter_list_btn"  id="btn_voter_export_excel">Excel Export</button>
+					<button class="modal_voter_list_btn"  id="btn_voter_download_template">Download Template</button>
+					<button class="modal_voter_list_btn"  id="btn_voter_import">Import Voter CSV</button>
+					<button class="modal_voter_list_btn"  id="btn_voter_list_add">Add New</button>
+					<button class="modal_voter_list_btn"  id="btn_voter_list_close">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--New workflow modal-->
+	<div class="modal fad" id="divNewPoll">
+		<div class="modal-dialog modal-lg" style="max-width:70%;width:100%;">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color:#23bbf3;border-top-left-radius:36px;border-top-right-radius:36px;padding:0px;">
+					<h4 style="color:#fff;margin-top:20px;margin-left:20px;width:92%;float:left;" id="divpostmodalheader">Create New Poll</h4>
+					<button type="button" class="btn" id="btnnewpollmodalcloseicon" style="background:none;color:white;font-size:26px;opacity:0.7;font-weight:bold;margin-right:4px;">
+						<span aria-hidden="true">&times;</span>
+        			</button>
+
+				</div>
+				<div class="modal-body" style="max-height:550px;overflow-y:auto;">
+					<div class="form-group custom-mt-form-group">
+						<span style="color:red;">* </span>Poll Title : <input type="text" id="txtPollTitle" maxlength="250" />
+						<i class="bar"></i>
+					</div>
+					<div class="form-group custom-mt-form-group">
+						<table style="width:100%;">
+						<tr>
+						<td>
+						<span style="color:red;">* </span>Start Date : <input type="datetime-local" id="txtstartdate" style="width:40%;"/>
+						</td>
+						<td>
+						<span style="color:red;">* </span>End Date : <input type="datetime-local" id="txtenddate" style="width:40%;margin-left:20px;"/>
+						</td>
+						</tr>
+						</table>
+						<i class="bar"></i>
+					</div>
+					<div class="form-group custom-mt-form-group">
+						<span style="color:red;">* </span>Allow Vote Change :
+						<label style="margin-bottom:-6px;" class="switchpoll"><input type="checkbox" id="chkallowvotechange"><span class="sliderpoll round"></span></label>
+						<span style="color:red;margin-left:20px;">* </span>Voter Receipt Email :
+						<label style="margin-bottom:-6px;" class="switchpoll"><input onclick="checkBoxEvent()" type="checkbox" id="chkvoterreceipt" checked><span class="sliderpoll round"></span></label>
+						<span style="color:red;margin-left:20px;">* </span>Weighed Votes :
+						<label style="margin-bottom:-6px;" class="switchpoll"><input type="checkbox" id="chkweighedvotes" checked><span class="sliderpoll round"></span></label>
+						<span style="color:red;margin-left:20px;">* </span>Email Notification :
+						<label style="margin-bottom:-6px;" class="switchpoll"><input onclick="checkBoxEvent()" type="checkbox" id="emailNotif" checked><span class="sliderpoll round"></span></label>
+						<span style="color:red;margin-left:20px;">* </span>Password Protect :
+						<label style="margin-bottom:-6px;" class="switchpoll"><input onclick="checkBoxEvent()" type="checkbox" id="chkpassprotect" checked><span class="sliderpoll round"></span></label>
+						<i class="bar" style="margin-top:5px;"></i>
+					</div>
+					<div class="form-group custom-mt-form-group">
+						<span>Enter notes to show to the voter in login screen (if any) : </span><input type="text" id="txtPollNote" maxlength="250" />
+						<i class="bar"></i>
+					</div>
+					<div id="pass_label_div" class="form-group custom-mt-form-group" style="display: none;">
+						<span>Enter label for login id field which indicates voter what to enter as login id to access poll : </span><input type="text" id="txtPollPassLabelId" maxlength="250" />
+						<i style="margin-bottom: 15px;" class="bar"></i>
+						<span>Enter label for password field which indicates voter what to enter as password to access poll : </span><input type="text" id="txtPollPassLabel" maxlength="250" />
+						<i class="bar"></i>
+					</div>
+					<div class="form-group custom-mt-form-group" id="div_poll_clone_new" style="display:none;">
+						<span id="clone_voter_span">Clone All Voters : </span>
+						<label id="clone_voter_label" style="margin-bottom:-6px;" class="switchpoll"><input onclick="checkBoxEvent()" type="checkbox" id="chk_poll_clone_voters"><span class="sliderpoll round"></span></label>
+						<span id="poll_clone_view_voter_span" style="display: none;"><button id='div_poll_clone_voter_list"'
+							style='cursor:pointer;background:#3bc4c6;color:white;border-radius:23px;border:0px;padding: 2px 15px 2px 15px;'
+							onclick="pollCloneVoterListOpen();">View Voters List</button>
+						</span>
+						<span>Clone All Agendas : </span>
+						<label style="margin-bottom:-6px;" class="switchpoll"><input type="checkbox" id="chk_poll_clone_agenda" checked><span class="sliderpoll round"></span></label>
+						<i class="bar" style="margin-top:5px;"></i>
+					</div>
+				</div>
+				<input type="file" id="btnworkflowfilechoose" accept=".xlsx,.csv" style="display: none;">
+				<div class="modal-footer" style="display:block;">
+					<button class="btn btn-primary btn-rounded float-right" style="cursor:pointer; width: 85px;" id="btnnewpollsave">Save</button>
+					<button class="btn btn-primary btn-rounded float-right" style="cursor:pointer; width: 85px;margin-right: 4px;" id="btnnewpollwmodalclose">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fad mymodal" role="dialog" id="div_poll_agenda_add">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header" style="display:block;background-color:#23bbf3;border-top-left-radius:36px;border-top-right-radius:36px;padding:0px;">
+					<h4 style="color:#fff;margin-top:10px;margin-left:20px;width:75%;float:left; margin-bottom: 10px;">Add Agenda</h4>
+					<button type="button" class="close"
+						style="margin:0;width:5%;float:right;position:absolute;margin-top: -5px;margin-left:15%;opacity:1;"
+						id="btn_poll_agenda_add_close_icon">
+						<i class='fa fa-times' style='color:#fff;font-size:17px; font-style:normal; font-weight: 400;'></i>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+						<textarea id="txt_poll_agenda" style="border:1px solid #cccccc; padding:10px 10px 10px 10px;" rows="5" cols="210"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary btn-rounded navigate-ref-exp-btn text-*-center font-weight-bold" id="btn_poll_agenda_add_close">Close</button>
+					<button class="btn btn-primary btn-rounded navigate-ref-exp-btn text-*-center font-weight-bold" id="btn_poll_agenda_add_save">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--copy popup modal-->
+	<div class="modal fad" id="drivemodal">
+		<div class="modal-dialog modal-lg" style="max-width:100%;width:80%;">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color:#23bbf3;border-top-left-radius:36px;border-top-right-radius:36px;padding:0px;">
+					<h4 style="color:#fff;margin-top:20px;margin-left:20px;">File List</h4>
+					<button type="button" class="btn" data-dismiss="modal" aria-label="Close" style="background:none;color:white;font-size:26px;opacity:0.7;font-weight:bold;margin-right:4px;">
+						<span aria-hidden="true">&times;</span>
+        			</button>
+				</div>
+				<div class="modal-body">
+					<div style="width:50%;float:left;border-right:1px solid #ccc;">
+						<div class="ssneha" id="admcopyfolderheader">&nbsp;</div>
+						<div id="tblfolderrows" style="max-height:400px;overflow-y:auto;overflow-x:hidden;"></div>
+					</div>
+					<div style="width:50%;float:left;border-left:1px solid #ccc;">
+						<div style="width:100%;margin-top:10px;border-bottom:2px solid #ccc;font-weight:bold;margin-left:3px;">Files Attached</div>
+						<div id="tblselectedrows" style="max-height:390px;overflow-y:auto;overflow-x:hidden;margin-left:3px;"></div>
+					</div>
+				</div>
+				<div class="modal-footer" id="admcopyfooter">
+					<button class="btn btn-primary btn-rounded float-right" style="cursor:pointer; width: 85px;" data-dismiss="modal" aria-label="Close">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Profile popup modal-->
+	<div class="modal fad" id="userprofilemodal">
+		<div class="modal-dialog modal-lg" style="width:60%;max-width:90%;">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color:#23bbf3;border-top-left-radius:36px;border-top-right-radius:36px;padding:0px;">
+					<h4 style="color:#fff;margin-top:20px;margin-left:20px;">User Profile</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-5 col-md-12 col-sm-12 col-12">
+							<div class="aboutprofile">
+								<div class="card" style="background-color: #23bbf3; color: #fff; height:420px;padding:0px;">
+									<div class="card-body" style="padding:0px;">
+										<div class="row">
+											<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+												<div class="aboutprofile-pic img-circle" style="width:80px;height:80px;">
+													<img class="card-img-top img-circle" id="muserimg" style="width:80px;height:80px;" src="assets/img/user_image.png" alt="Card image">
+												</div>
+												<div class="aboutprofile-name">
+													<h5 class="text-center mt-2" id="musername">Michael V. Buttars</h5>
+													<p class="text-center" id="museremail">info@dcurris.com</p>
+													<p class="text-center" id="musercorp">0020170</p>
+													<hr>
+												</div>
+												<div class="aboutprofile-name" >
+													<p class="text-center mt-2" id="mallocatedspacepersonal" style="display:none;">&nbsp;</p>
+													<p class="text-center mt-2" id="mallocatedspacedataroom" style="display:none;">&nbsp;</p>
+													<p class="text-center mt-2" id="mallocatedspace">&nbsp;</p>
+												</div>
+												<div class="aboutprofile-name" id="storageused" style="width:100%;text-align:center;">
+													<div class="counter" data-cp-percentage="25" data-cp-color="#00bfeb"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-7 col-md-12 col-sm-12 col-12" style="height: 350px;max-height: 350px;overflow-y: auto;">
+							<div class="profile-content" style="border: none;">
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="card" style="border: none;padding:15px;">
+											<!-- Nav tabs -->
+											<ul class="nav customtab" style="padding-bottom:0px;">
+												<li class="nav-item" style="padding-bottom:0px;"><a href="javascript:void(0);" class="nav-link active show" style="color:#06b4c2; margin-left: -14px;">Edit Profile</a></li>
+											</ul>
+											<!-- Tab panes -->
+											<div class="tab-content" style="padding-bottom:0px;padding-top:20px;">
+												<div class="tab-pane active show" id="tab1">
+													<div id="biography" class="sidebar-menu">
+														<p>
+															<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+																<span style="color:#0D246E;"> First Name</span>
+																<input type="text" id="mfirstname" class="fs_15" readonly style="color:black;"/>
+																<i class="bar"></i>
+															</div>
+														</p>
+
+														<p>
+															<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+																<span style="color:#0D246E;"> Middle Name</span>
+																<input type="text" id="mmiddlename" class="fs_15" readonly style="color:black;"/>
+																<i class="bar"></i>
+															</div>
+														</p>
+
+														<p>
+															<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+																<span style="color:#0D246E;"> Last Name</span>
+																<input type="text" id="mlastname" class="fs_15" readonly style="color:black;"/>
+																<i class="bar"></i>
+															</div>
+														</p>
+
+														<p>
+															<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+																<div><span style="color:#0D246E;"> Mobile Number</span></div>
+																<div style="width:100%;">
+																<input type="text" id="mmobilenumber" maxlength="15" class='inputClass inputuser disablepasteonly'
+																onkeypress="return isNumberKeyOnly(event)" autocomplete="off" style="font-size:15px;color:black;" readonly/>
+																</div>
+																<i class="bar"></i>
+															</div>
+														</p>
+
+														<p>
+															<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+																<span style="color:#0D246E;"> User Type</span>
+																<input type="text" id="muserType" readonly style="color:black;" class="fs_15" readonly/>
+																<i class="bar"></i>
+															</div>
+														</p>
+
+														<p style="display:none;">
+															<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;display:none;">
+																<span style="color:#0D246E;"> Sync Type</span>
+																<input type="text" id="msynctype" readonly style="color:black;" class="fs_15" readonly/>
+																<i class="bar"></i>
+															</div>
+														</p>
+
+														<p>
+															<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+																<span style="color:#0D246E;"> Fax Number</span>
+																<input type="text" id="mfaxnumber" maxlength="15" onkeypress="return isNumberKeyForPhone(event)" class="fs_15" readonly
+																style="color:black;"/>
+																<i class="bar"></i>
+															</div>
+														</p>
+
+														<p>
+															<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;" id="pcompany">
+																<span style="color:#0D246E;"> Company</span>
+																<input type="text" id="mcompany" class="fs_15" style="border: none;color:black;" readonly/>
+																<i class="bar"></i>
+															</div>
+														</p>
+
+														<p>
+															<div class="form-group custom-mt-form-group" style="margin-bottom: 20px; padding: 0px;display:none;" id="padvsecurity">
+																<div style="width:100%;margin-bottom: 2%;">
+																	<span style="color:#007bff;font-weight:bold;"> Advanced Security </span>
+																</div>
+
+																<!-- 16 NOV 2020-->
+																<div class="row" style="margin: 0px auto; padding: 0px;">
+																	<div class=" col-md-12 custom-control custom-checkbox" >
+																		<div class="col-md-2" style="margin-left: -31px;">
+																			<input type="checkbox" class="custom-control-input" id="adm_2_fact_enabled" checked="" readonly="" disabled="">
+																		</div>
+																		<div class="col-md-10" style="margin-left: -38px; margin-top: 9px;">
+																			<label class="custom-control-label" for="adm_2_fact_enabled" style="font-style: normal; font-weight: 400;">Enable 2 Factor Authentication</label>
+																		</div>
+																	</div>
+																</div>
+																<!-- 16 NOV 2020-->
+
+																<div id="div_otpcontaineradmin" style="width:100%;display: flex;margin-top: 0%;padding-top: 1%;">
+																	<span style="color:#0D246E;width: 25%;margin-top:5px;" id="adm_user_security_name">&nbsp;</span>
+																	<input type="text" id="adm_user_security_carrier" class="inputClass inputuser disablepasteonly" readonly style="width:75%;color:black;font-size:13px;margin-left: -48px;">
+																</div>
+																<em class="bar"></em>
+															</div>
+														</p>
+
+
+														<input type="file" id="pickuserimg" style="display:none;" accept="image/x-png,image/jpeg,image/png" />
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary btn-rounded float-right" style="cursor:pointer; width: 85px;" data-dismiss="modal" aria-label="Close">Close</button>
+					<!--<button class="btn btn-primary btn-rounded float-right" style="background-color: #2abfc1;cursor: pointer;border-radius: 50px;border: 1px solid #2abfc1;outline: none;padding: 7px 16px;" id="btn_save_profile">Save</button>-->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="main-wrapper" style="overflow-y: scroll;display:none;" id="divmainprint">
+	</div>
+
+	<div class="modal fad" id="divtimeout" role="dialog"></div>
+
+	<script type="text/javascript" src="assets/js/poll/tiny.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/jquery.min.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/jquery-migrate-1.4.1.min.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/intlTelInput-jquery.min.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/jquery-ui-1.12.0.min.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/popper.min.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/bootstrap.min.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/jquery.dataTables.min.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/dataTables.bootstrap4.min.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/jquery.slimscroll.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/select2.min.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/moment.min.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/jstz-1.0.4.min.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/bootstrap-datetimepicker.min.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/top-alertjs.js?v=1.30071"></script>
+
+	<script type="text/javascript" src="assets/js/app.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/variables.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/validations.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/CustomAuthenticatorRealmChallengeHandler.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/tree/tree.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/aes.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/global_messages.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/jquery.scrollTo.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/mousedetect.js?v=4.53"></script>
+
+	<script type="text/javascript" src="assets/js/firebase_app.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/firebase_messaging.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/firebase_config.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/load_lash.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/daterangepicker.js?v=1.30071"></script>
+
+	<script type="text/javascript" src="assets/js/poll/pollmessages.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/poll/pollservice.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/poll/polldetails.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/poll/pollvariables.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/poll/pollcommon.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/js/poll/pollevent.js?v=1.30071"></script>
+	<script type="text/javascript" src="assets/plugins/summernote/dist/summernote_poll.js?v=1.30071"></script>
+</body>
+
+</html>

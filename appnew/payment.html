@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="robots" content="noindex,nofollow" />
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=.5, maximum-scale=1.0, user-scalable=yes" name="viewport" />
+	<meta http-equiv="X-UA-Compatible" content="IE=10" />
+	<meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png?v=1.50">
+	<title>DCirrus Payment</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="assets/css/payment/bootstrap.min.css?v=1.50">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css?v=1.50">
+	<link rel="stylesheet" type="text/css" href="assets/css/select2.min.css?v=1.50">
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css?v=1.50">
+	<link rel="stylesheet" type="text/css" href="assets/css/payment/style.css?v=1.50">
+	<link rel="stylesheet" type="text/css" href="assets/css/custom.css?v=1.50">
+	<link rel="stylesheet" type="text/css" href="assets/css/top-alertjs.css?v=1.50">
+    <link rel="stylesheet" type="text/css" href="assets/plugins/summernote/dist/summernote-bs4.css?v=1.50">
+	</head>
+	<body style="background-color: #eaeef3;" onload="DashboardCommonEvents();">
+		<div class="main-wrapper">
+			<div class="header_pay">
+				<div class="header-left"></div>
+				<div class="row menu-header row_flex">
+					<div class="col-md-12">
+						<p style="text-align: center; font-size: 35px; color: #01acb2; font-weight: bold; padding-top: 7px;">Choose Your Plan</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="sidebar_pay" id="" style="width:150px; background-color: #fff;"> <!-- sidebar -->
+			<a href="#">
+					
+				<img src="assets/img/logo1.png"  id="clogoimg" width="62px" height="78px"alt="" style="margin-left:40px;margin-top:9px;">
+			
+			</a>
+         	<p style="margin-left: 5%;" id="ltext">Powered by Dcirrus</p>
+			<div class="sidebar-wrapper" style="padding-top:60%">
+				<ul class="nav" style="text-align: center;">
+					<li  class="cur_p" id="btn_makepay" style="margin-top: 20%; padding-top: 5px; padding-bottom: 5px; background-color: #edf4ff;">
+						<p>
+							<a href="#"><img id="#" src="assets/icons/payment_active.png" style="width:55px;">
+							<br>
+							Make Payment
+							</a>
+						</p>
+					</li>
+					<li class="cur_p" id="btn_payhistory" style="margin-top: 30%; padding-top: 5px; padding-bottom: 5px; background-color: #fff;">
+						<p>
+							<a href="#"><img id="#" src="assets/icons/wallet.png" style="width:60px;">
+							<br>
+							Payment History
+							</a>
+						</p>
+					</li>
+					<li class="cur_p" id="" style="display: none; margin-top: 30%; padding-top: 5px; padding-bottom: 5px; background-color: #fff;">
+						<p>
+							<a href="#"><img id="#" src="assets/icons/storage.png" style="width:50px;">
+							<br>
+							Add Storage
+							</a>
+						</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="page-wrapper">
+			<div class="container-fluid">
+				<div class="" id="cont_box" style="margin-top: 10px; border: 1px solid #D3D3D3; background-color:#fff;width: 100%; min-height: 645px; overflow-x: hidden;">
+					<!-- start -->
+					<div class="row" style="margin-left: 20%; margin-top: 6%;" id="chooseplan_cont">
+						<div class="col-md-6 box_shadow" style="border: 1px solid rgba(0,0,0,0.3); border-radius: 20px;display:none;" id="div_individual_first">
+							<div style="text-align: center; padding-top: 10px;">
+								<input type="radio" name="radioselectmode" id="ind_annual" checked="checked" value="2">
+								<label style="font-weight: normal;">ANNUAL</label>
+								<input type="radio" name="radioselectmode" id="ind_monthly" style="margin-left: 10%;" value="1">
+								<label style="font-weight: normal;">MONTHLY</label>
+							</div>
+							<h3 style="text-align: center;">Individuals</h3>
+							<div style="text-align: center;">
+								<div id="ind_price_year">
+									Nimbo/<span id="currency1">RS.</span><span id="span_price_year">20306</span> <br><span id="span_storage">1 TB</span> Storage
+								</div>
+								<div id="ind_price_month" style="display: none;">
+									Nimbo/<span id="currency2">RS.</span><span id="span_price_month">1846</span> <br><span id="span_storage">1 TB</span> Storage
+								</div>
+							</div>
+							<div style="padding-top: 10px;">
+								<p><span>&#10004;</span> Backup all your personal images</p>
+								<p><span>&#10004;</span> Keep your data in sync across multiple devices</p>
+								<p><span>&#10004;</span> Share files and folders with family and friends</p>
+								<p><span>&#10004;</span> Store multiple versions of the same file</p>
+							</div>
+							<div style="padding-left: 34%; padding-top: 10px; padding-bottom: 30px;">
+								<a href="#" style="font-size:18px;font-weight: bold; padding: 11px 40px 11px 40px; color: #fff; background-color: #01acb2; border-radius: 40px;" id="select_plan">SELECT</a>
+							</div>
+						</div>
+						<div class="col-md-6 box_shadow" style="margin-left: 6%; border: 1px solid rgba(0,0,0,0.3); border-radius: 20px;display:none;" id="div_business_first">
+							<div style="text-align: center; padding-top: 10px;">
+								<input type="radio" id="bus_annual" name="radioselectmode" checked="checked" value="2">
+								<label style="font-weight: normal;">ANNUAL</label>
+								<input type="radio" id="bus_monthly" name="radioselectmode" style="margin-left: 10%;" value="1">
+								<label style="font-weight: normal;">MONTHLY</label>
+							</div>
+								<h3 style="text-align: center;">Business</h3>
+							<div style="text-align: center;">
+								<div id="bus_price_year">
+									Strato /<span id="currency1">RS.</span><span id="span_price_year">37559</span> <br><span id="span_storage">3 TB</span> Storage
+								</div>
+								<div id="bus_price_month" style="display: none;">
+									Nimbo/<span id="currency1">RS.</span><span id="span_price_month">3266</span> <br><span id="span_storage">3 TB</span> Storage
+								</div>
+							</div>
+							<div style="padding-top: 10px;">
+								<p><span>&#10004;</span> Full Virtual Data Room Access</p>
+								<p><span>&#10004;</span> Geo-localized data storage as per your region requirements</p>
+								<p><span>&#10004;</span> Permission based access to your files and folders</p>
+								<p><span>&#10004;</span> Data level access security</p>
+							</div>
+							<div style="padding-left: 35%; padding-top: 10px; padding-bottom: 30px;">
+								<a href="#" style="font-size:18px;font-weight: bold; padding: 11px 40px 11px 40px; color: #fff; background-color: #01acb2; border-radius: 40px;" id="select_plan">SELECT</a>
+							</div>
+						</div>
+					</div>
+					<!-- End -->
+					<!-- payment details view mode -->
+					<div class="row" style="margin-left: 1%; padding-top: 3%; display: none;" id="payment_data_view">
+						<div class="col-md-6">
+							<div class="col-md-12 box_shadow" style="border: 1px solid #ccc; border-radius: 10px;">
+								<h3>Plan Details</h3>
+								<div class="col-md-4">
+									<label class="fs_m" style="font-weight: normal;">Price :</label>
+									<span>
+										<input type="text" class="form-control" value="RS.37559" readonly style="width:100%;" id="txtpriceview">
+									</span>
+								</div>
+								<div class="col-md-4">
+									<label class="fs_m" style="font-weight: normal;">Storage :</label>
+									<span>
+										<input type="text" class="form-control" value="3TB" readonly style="width: 100%;" id="txtstorageview">
+									<!--<select class="form-control" onchange="t1(this);" readonly>
+											<option>1 TB</option>
+											<option>2 TB</option>
+											<option selected>3 TB</option>
+										</select>-->
+									</span>
+								</div>
+								<div class="col-md-4" style="padding-bottom: 30px;">
+									<label class="fs_m" style="font-weight: normal;">Mode :</label>
+									<span>
+										<input type="text" class="form-control" value="ANNUAL" readonly style="width: 100%;" id="txtmodeview">
+										<!--<select class="form-control" onchange="t2(this);">
+											<option selected>ANNUAL</option>
+											<option>MONTHLY</option>
+										</select>-->
+									</span>
+								</div>
+								<!-- <div class="col-md-6">
+									<label class="fs_m" style="font-weight: normal; margin-top: 10px;">Discount Coupon :</label>
+									<span>
+										<input type="text" class="form-control"  style="width:100%;">
+									</span>
+								</div> -->
+							</div>
+							<div class="col-md-12 box_shadow" style="margin-top: 5%; border: 1px solid rgba(0,0,0,0.3); border-radius: 10px;">
+								<h3>Invoice Details</h3>
+								<div class="col-md-6" style="padding-top: 3%;">
+									<label class="fs_m" style="font-weight: normal; font-size: 15px;">First Name</label>
+									<input type="text" class="form-control" value="Tanmay" style="" readonly id="txtfirstnameview">
+								</div>
+								<div class="col-md-6" style="padding-top: 3%;">
+									<label class="fs_m" style="font-weight: normal; font-size: 15px;">Last Name</label>
+									<input type="text" class="form-control" value="Senapati" style="" readonly id="txtlastnameview">
+								</div>
+								<div class="col-md-6" style="padding-top: 2%;">
+									<label class="fs_m" style="font-weight: normal; font-size: 15px;">Email</label>
+									<input type="email" class="form-control" value="tanmay@dcirrus.com" style="" readonly id="txtemailview">
+								</div>
+								<div class="col-md-6" style="padding-top: 2%;">
+									<label class="fs_m" style="font-weight: normal; font-size: 15px;">Phone Number</label>
+									<input type="text" class="form-control" value="8249635106" style="" readonly id="txtpnoview">
+								</div>
+								<div class="col-md-12" style="padding-top: 2%;">
+									<label class="fs_m" style="font-weight: normal; font-size: 15px;">Address</label>
+									<textarea class="form-control" class="form-control" style="margin: 0px -241.625px 0px 0px; width: 451px; height: 105px;" readonly id="txtaddressview"></textarea>
+								</div>
+								<div class="col-md-6" style="padding-top: 2%;">
+									<label class="fs_m" style="font-weight: normal; font-size: 15px;">Next Due Date</label>
+									<input type="text" class="form-control" value="28/02/2021" style="" readonly id="txtnextduedate">
+								</div>
+								<div class="col-md-12" style="padding-top: 10px; padding-bottom: 10px; ">
+									<button class='btn btn-primary' style="width: 150px; height: 45px; float: right; border: #01acb2; background-color: #01acb2;">
+										Download Invoice
+									</button>
+
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="col-md-12">
+								<div class="col-md-10 box_shadow" style="margin-left: 2%;  border: 1px solid #ccc; border-radius: 10px;">
+									<h3>Package Details</h3>
+									<div style="padding-top:10px;padding-bottom:10px;display:none;" id="div_bus_feature">
+										<p class="fs_17"><span>&#10004;</span> Full Virtual Data Room Access</p>
+										<p class="fs_17"><span>&#10004;</span> Geo-localized data storage as per your region requirements</p>
+										<p class="fs_17"><span>&#10004;</span> Permission based access to your files and folders</p>
+										<p class="fs_17"><span>&#10004;</span> Data level access security</p>
+									</div>
+									<div style="padding-top:10px;padding-bottom:10px;display:none;" id="div_ind_feature">
+										<p class="fs_17"><span>&#10004;</span> Backup all your personal images</p>
+										<p class="fs_17"><span>&#10004;</span> Keep your data in sync across multiple devices</p>
+										<p class="fs_17"><span>&#10004;</span> Share files and folders with family and friends</p>
+										<p class="fs_17"><span>&#10004;</span> Store multiple versions of the same file</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-12" >
+								<div class="col-md-6 box_shadow" style="margin-top: 4%; margin-left: 2%; border: 1px solid #ccc; border-radius: 10px;">
+									<h4>Order Summary</h4>
+									<div class="col-md-6 fs_17" style="padding-left: 0px;">Price</div>
+									<div class="col-md-6 fs_17" style="padding-left: 0px;" id="p1view">37559</div>
+									<div class="col-md-6 fs_17" style="padding-left: 0px;">Discount</div>
+									<div class="col-md-6 fs_17" style="padding-left: 0px;" id="p2view">0</div>
+									<div class="col-md-6 fs_17" style="padding-left: 0px;">Storage</div>
+									<div class="col-md-6 fs_17" style="padding-left: 0px;" id="p3view">3 TB</div>
+									<div class="col-md-6 fs_17" style="padding-left: 0px;">User</div>
+									<div class="col-md-6 fs_17" style="padding-left: 0px;" id="p4view">20</div>
+									<div class="col-md-6 fs_17" style="padding-left: 0px;">Duration</div>
+									<div class="col-md-6 fs_17" style="padding-left: 0px;" id="p5view">1 Year</div>
+									<div class="col-md-12 fs_17" style="border-bottom: 1px solid #ccc; padding-top: 2px;"></div>
+									<div class="col-md-6 fs_17" style="padding-left: 0px; padding-top: 2px;">Total Cost</div>
+									<div class="col-md-6 fs_17" style="padding-left: 0px; padding-top: 2px;" id="p6view">37559</div>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="col-md-5 box_shadow" style="Padding-bottom: 0%; padding-top: 2%; margin-left: 2%; margin-top: 4%; Padding-bottom: 4%;  border: 1px solid #ccc; border-radius: 10px;">
+									<label class="fs_m" style="font-weight: normal; font-size: 15px;">Discount Coupon</label>
+									<input type="text" class="form-control" value="" style="" readonly id="txtdiscountcouponview">
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- payment details view mode -->
+					<!-- payment-->
+						<div class="row" id="complete_payment" style="display:none; margin-left: 1%; padding-top: 3%;">
+							<div class="col-md-6">
+								<div class="col-md-12 box_shadow" style="border: 1px solid #ccc; border-radius: 10px;">
+									<h3>Plan Details</h3>
+									<div class="col-md-4">
+										<label class="fs_m" style="font-weight: normal;">Price :</label>
+										<span>
+											<input type="text" class="form-control" value="RS.37559" readonly style="width:100%;" id="txtprice">
+										</span>
+									</div>
+									<div class="col-md-4">
+										<label class="fs_m" style="font-weight: normal;">Storage :</label>
+										<span>
+											<input type="text" class="form-control" value="3TB" readonly style="width: 100%;" id="txtstorage">
+										<!--<select class="form-control" onchange="t1(this);" readonly>
+												<option>1 TB</option>
+												<option>2 TB</option>
+												<option selected>3 TB</option>
+											</select>-->
+										</span>
+									</div>
+									<div class="col-md-4" style="padding-bottom: 30px;">
+										<label class="fs_m" style="font-weight: normal;">Mode :</label>
+										<span>
+											<input type="text" class="form-control" value="ANNUAL" readonly style="width: 100%;" id="txtmode">
+											<!--<select class="form-control" onchange="t2(this);">
+												<option selected>ANNUAL</option>
+												<option>MONTHLY</option>
+											</select>-->
+										</span>
+									</div>
+								</div>
+								<div class="col-md-12 box_shadow" style="margin-top: 5%; border: 1px solid rgba(0,0,0,0.3); border-radius: 10px;">
+									<h3>Invoice Details</h3>
+									<div class="col-md-6" style="padding-top: 3%;">
+										<label class="fs_m" style="font-weight: normal; font-size: 15px;">First Name*</label>
+										<input type="text" id="pay_fname" class="form-control" style="" maxlength="50" onkeypress="return !allowAlphaNumeric(event);">
+									</div>
+									<div class="col-md-6" style="padding-top: 3%;">
+										<label class="fs_m" style="font-weight: normal; font-size: 15px;">Last Name*</label>
+										<input  type="text" id="pay_lname" class="form-control" style="" maxlength="50" onkeypress="return !allowAlphaNumeric(event);">
+									</div>
+									<div class="col-md-6" style="padding-top: 2%;">
+										<label class="fs_m" style="font-weight: normal; font-size: 15px;">Email*</label>
+										<input type="email" id="pay_mail" class="form-control" style="" maxlength="100">
+									</div>
+									<div class="col-md-6" style="padding-top: 2%;">
+										<label class="fs_m" style="font-weight: normal; font-size: 15px;">Phone Number*</label>
+										<input type="text" id="pay_pno" class="form-control" style="" maxlength="15" onkeypress="return isNumberKeyForPhone(event)">
+									</div>
+									<div class="col-md-6" style="padding-top: 2%;">
+										<label class="fs_m" style="font-weight: normal; font-size: 15px;">Address*</label>
+										<textarea id="pay_address" class="form-control" style="margin: 0px -241.625px 0px 0px; width: 451px; height: 105px;"></textarea>
+									</div>
+									<div class="col-md-12" style="padding-top: 10px; padding-bottom: 10px; ">
+										<button class='btn btn-primary' style="width: 150px; height: 45px; float: right; border: #01acb2; background-color: #01acb2;" id="btn_paysuccess">
+											Pay Now
+										</button>
+										<div  class="col-md-12">
+											<img src="icons/powered_by_razorpay.png" alt="" style="margin-right: -3.5%; height: 22px; width: 28%; float: right;">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="col-md-12">
+									<div class="col-md-10 box_shadow" style="margin-left: 2%;  border: 1px solid #ccc; border-radius: 10px;">
+										<h3>Package Details</h3>
+										<div style="padding-top:10px;padding-bottom:10px;display:none;" id="div_bus_feature_edit">
+											<p class="fs_17"><span>&#10004;</span> Full Virtual Data Room Access</p>
+											<p class="fs_17"><span>&#10004;</span> Geo-localized data storage as per your region requirements</p>
+											<p class="fs_17"><span>&#10004;</span> Permission based access to your files and folders</p>
+											<p class="fs_17"><span>&#10004;</span> Data level access security</p>
+										</div>
+										<div style="padding-top:10px;padding-bottom:10px;display:none;" id="div_ind_feature_edit">
+											<p class="fs_17"><span>&#10004;</span> Backup all your personal images</p>
+											<p class="fs_17"><span>&#10004;</span> Keep your data in sync across multiple devices</p>
+											<p class="fs_17"><span>&#10004;</span> Share files and folders with family and friends</p>
+											<p class="fs_17"><span>&#10004;</span> Store multiple versions of the same file</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-12" >
+									<div class="col-md-10 box_shadow" style="margin-top: 4%; margin-left: 2%; border: 1px solid #ccc; border-radius: 10px;">
+										<h4>Order Summary</h4>
+										<div class="col-md-6 fs_17" style="padding-left: 0px;">Price</div>
+										<div class="col-md-6 fs_17" style="padding-left: 0px;" id="p1">37559</div>
+										<div class="col-md-6 fs_17" style="padding-left: 0px;">Discount</div>
+										<div class="col-md-6 fs_17" style="padding-left: 0px;" id="p2">0</div>
+										<div class="col-md-6 fs_17" style="padding-left: 0px;">Storage</div>
+										<div class="col-md-6 fs_17" style="padding-left: 0px;" id="p3">3 TB</div>
+										<div class="col-md-6 fs_17" style="padding-left: 0px;">User</div>
+										<div class="col-md-6 fs_17" style="padding-left: 0px;" id="p4">20</div>
+										<div class="col-md-6 fs_17" style="padding-left: 0px;">Duration</div>
+										<div class="col-md-6 fs_17" style="padding-left: 0px;" id="p5">1 Year</div>
+										<div class="col-md-12 fs_17" style="border-bottom: 1px solid #ccc; padding-top: 2px;"></div>
+										<div class="col-md-6 fs_17" style="padding-left: 0px; padding-top: 2px;">Total Cost</div>
+										<div class="col-md-6 fs_17" style="padding-left: 0px; padding-top: 2px;" id="p6">37559</div>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="col-md-6 box_shadow" style="Padding-bottom: 0%; padding-top: 2%; margin-left: 2%; margin-top: 4%; Padding-bottom: 4%;  border: 1px solid #ccc; border-radius: 10px;">
+										<label class="fs_m" style="font-weight: normal; font-size: 15px;">Discount Coupon</label>
+										<input type="text" class="form-control"  style="" id="txtdiscountcoupon">
+										<a href="#" id="btn_checkdiscount">Check Discount</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					<!-- payment-->
+				</div>
+				<!-- payment history start -->
+				<div id="pay_history" style="display:none">
+					<div class="row" style="margin-top: 10px; margin-left: 0px; padding-top:20px; border: 1px solid #D3D3D3; background-color:#fff; padding-top:15px; padding-bottom:15px; width: 100%;">
+						<div class="col-md-3" style="font-size: 14px; font-weight:bold;">Transaction id</div>
+						<div class="col-md-2" style="font-size: 14px; font-weight:bold;">Plan</div>
+						<div class="col-md-2" style="font-size: 14px; font-weight:bold;">Mode</div>
+						<div class="col-md-2" style="font-size: 14px; font-weight:bold;">Price</div>
+						<div class="col-md-2" style="font-size: 14px; font-weight:bold;">Payment Date</div>
+						<div class="col-md-1" style="font-size: 14px; font-weight:bold;display: flex !important;justify-content: center;">Storage</div>
+					</div>
+					<div class="" id="divpayhistory" style="margin-top: 10px; border: 1px solid #D3D3D3; background-color:#fff;width: 100%; height: 585px; overflow-x: hidden;">
+						<!--<div class="row cur_p pay_view" style="padding-top: 15px; padding-bottom: 10px; padding-left: 14px;">
+							<div class="col-md-3" style="font-size: 14px;">LCN0000100NDHH</div>
+							<div class="col-md-2" style="font-size: 14px;">Individual</div>
+							<div class="col-md-2" style="font-size: 14px;">Annual</div>
+							<div class="col-md-2" style="font-size: 14px;">70000</div>
+							<div class="col-md-2" style="font-size: 14px;">28/02/2020</div>
+							<div class="col-md-1" style="font-size: 14px;">1TB</div>
+						</div>
+						<hr style="border-top: 1px solid rgba(0,0,0,.1);margin-top: 5px;margin-bottom: 0px;">
+						<div class="row cur_p pay_view" style="padding-top: 15px; padding-bottom: 10px; padding-left: 14px;">
+							<div class="col-md-3" style="font-size: 14px;">LCN0000100NDHH</div>
+							<div class="col-md-2" style="font-size: 14px;">Business</div>
+							<div class="col-md-2" style="font-size: 14px;">Annual</div>
+							<div class="col-md-2" style="font-size: 14px;">70000</div>
+							<div class="col-md-2" style="font-size: 14px;">28/02/2020</div>
+							<div class="col-md-1" style="font-size: 14px;">1TB</div>
+						</div>
+						<hr style="border-top: 1px solid rgba(0,0,0,.1);margin-top: 5px;margin-bottom: 0px;">
+						<div class="row cur_p pay_view"style="padding-top: 15px; padding-bottom: 10px; padding-left: 14px;">
+							<div class="col-md-3" style="font-size: 14px;">LCN0000100NDHH</div>
+							<div class="col-md-2" style="font-size: 14px;">Individual</div>
+							<div class="col-md-2" style="font-size: 14px;">Monthly</div>
+							<div class="col-md-2" style="font-size: 14px;">70000</div>
+							<div class="col-md-2" style="font-size: 14px;">28/02/2020</div>
+							<div class="col-md-1" style="font-size: 14px;">1TB</div>
+						</div>
+						<hr style="border-top: 1px solid rgba(0,0,0,.1);margin-top: 5px;margin-bottom: 0px;">
+						<div class="row cur_p pay_view" style="padding-top: 15px; padding-bottom: 10px; padding-left: 14px;">
+							<div class="col-md-3" style="font-size: 14px;">LCN0000100NDHH</div>
+							<div class="col-md-2" style="font-size: 14px;">Business</div>
+							<div class="col-md-2" style="font-size: 14px;">Annual</div>
+							<div class="col-md-2" style="font-size: 14px;">70000</div>
+							<div class="col-md-2" style="font-size: 14px;">28/02/2020</div>
+							<div class="col-md-1" style="font-size: 14px;">1TB</div>
+						</div>
+						<hr style="border-top: 1px solid rgba(0,0,0,.1);margin-top: 5px;margin-bottom: 0px;">
+						<div class="row cur_p pay_view" style="padding-top: 15px; padding-bottom: 10px; padding-left: 14px;">
+							<div class="col-md-3" style="font-size: 14px;">LCN0000100NDHH</div>
+							<div class="col-md-2" style="font-size: 14px;">Business</div>
+							<div class="col-md-2" style="font-size: 14px;">Annual</div>
+							<div class="col-md-2" style="font-size: 14px;">70000</div>
+							<div class="col-md-2" style="font-size: 14px;">28/02/2020</div>
+							<div class="col-md-1" style="font-size: 14px;">1TB</div>
+						</div>
+						<hr style="border-top: 1px solid rgba(0,0,0,.1);margin-top: 5px;margin-bottom: 0px;">
+						<div class="row cur_p pay_view"  style="padding-top: 15px; padding-bottom: 10px; padding-left: 14px;">
+							<div class="col-md-3" style="font-size: 14px;">LCN0000100NDHH</div>
+							<div class="col-md-2" style="font-size: 14px;">Individual</div>
+							<div class="col-md-2" style="font-size: 14px;">Monthly</div>
+							<div class="col-md-2" style="font-size: 14px;">70000</div>
+							<div class="col-md-2" style="font-size: 14px;">28/02/2020</div>
+							<div class="col-md-1" style="font-size: 14px;">1TB</div>
+						</div>
+						<hr style="border-top: 1px solid rgba(0,0,0,.1);margin-top: 5px;margin-bottom: 0px;">-->
+					</div>
+				</div>
+				<!-- payment history End -->
+			</div>
+		</div>
+
+		<div class="sidebar-overlay" data-reff=""></div>
+		<div id="admdownloaddiv" style="display:none;"></div>
+		<!-- <script type="text/javascript" src="assets/js/jquery-3.5.0.min.js?v=1.50"></script> -->
+		<script type="text/javascript" src="assets/js/jquery.min.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/jquery-ui-1.12.0.min.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/popper.min.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/bootstrap.min.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/jquery.dataTables.min.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/dataTables.bootstrap4.min.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/jquery.slimscroll.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/select2.min.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/moment.min.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/jstz-1.0.4.min.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/bootstrap-datetimepicker.min.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/top-alertjs.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/plugins/summernote/dist/summernote-bs4.min.js?v=1.50"></script>
+
+		<!-- razor pay -->
+		<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+		<script type="text/javascript" src="assets/js/app.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/variables.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/validations.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/CustomAuthenticatorRealmChallengeHandler.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/payment/pay_variable.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/payment/pay_event.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/payment/pay_common.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/payment/pay_service.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/payment/pay_messages.js?v=1.50"></script>
+		<script type="text/javascript" src="assets/js/payment/pay_details.js?v=1.50"></script>
+
+	</body>
+
+	</html>

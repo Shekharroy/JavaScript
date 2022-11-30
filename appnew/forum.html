@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta name="robots" content="noindex,nofollow" />
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=.5, maximum-scale=1.0, user-scalable=yes" name="viewport" />
+	<meta http-equiv="X-UA-Compatible" content="IE=10" />
+	<meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+	<META HTTP-EQUIV="EXPIRES" CONTENT="Mon, 22 Jul 2002 11:12:01 GMT">
+	<meta http-equiv="pragma" content="no-cache" />
+	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png?v=2.18">
+	<title>DCirrus Forum</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css?v=2.18">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css?v=2.18">
+    <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css?v=2.18">
+    <link rel="stylesheet" type="text/css" href="assets/css/select2.min.css?v=2.18">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css?v=2.18">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css?v=2.18">
+    <link rel="stylesheet" type="text/css" href="assets/css/custom.css?v=2.18">
+    <link rel="stylesheet" type="text/css" href="assets/css/top-alertjs.css?v=2.18">
+    <link rel="stylesheet" type="text/css" href="assets/plugins/summernote/dist/summernote-bs4.css?v=2.18">
+    <link rel="stylesheet" type="text/css" href="assets/css/tree/tree.css?v=2.18">
+    <link rel="stylesheet" type="text/css" href="assets/css/adm/adm.css?v=2.18">
+	<link rel="stylesheet" type="text/css" href="assets/css/intlTelInput.css?v=2.18"/>
+	<link rel='stylesheet' type="text/css" href='assets/css/typehead.css?v=2.18'>
+	<link rel='stylesheet' type="text/css" href='assets/css/forum.css?v=2.18'>
+
+
+<script>
+	document.onkeydown = function (e) {
+	    e = e || window.event;//Get event
+		var code = e.which || e.keyCode;//Get key code
+	    if (e.ctrlKey) {
+	    	if(code == 80){
+	    		e.preventDefault();
+	            e.stopPropagation();
+			}
+	    }
+	};
+</script>
+
+</head>
+
+<body ondragstart="return false;" onload="forumCommonEvents();" >
+	<div class="paymentwarningclass" id="paymentwarningid"
+		style="display: none; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+		<p><i id="warning" class="fa fa-exclamation-triangle warningclass"></i><span id="billnotpaid"
+				class="billnotpaidclass"></span></p>
+	</div>
+    <div class="main-wrapper" style="overflow-y: scroll;" id="divmain">
+		<div class="header todolistid" id="divforum" style="height:56px;"> <!-- Drive start -->
+			<div class="row">
+				<div class="col-sm-1 col-1" style="padding-left: 0%;">
+					<div class="header-left" style="height:56px;">
+						<span class="logo" style="margin-top: -10%;">
+							<img src="assets/img/logo1.png" id="clogoimg" alt="" style="width:60px;height:50px;margin-top:13px;display:none;">
+
+						</span>
+						<!--<p id="ltext" style="font-size: 12px; margin-top: -12% !important;">Powered by Dcirrus</p>-->
+					</div>
+				</div>
+				<div class="col-sm-11 col-11">
+					<div class="row nav user-menu ">
+						<div class="col-sm-5 col-5" style="padding-right:5% !important;">
+								<h1 style="color:#01c0c8;margin-left:7%;">Discussion Forum</h1>
+						</div>
+						<div class="col-sm-2 col-2">
+						</div>
+						<div class="col-sm-5 col-5" style="margin-bottom:7px !important; margin-left: 0px auto; padding-left: 0px;">
+							<div class="flor">
+								<a class='profIm' id="profIm"
+									style="display:none;margin-top:9px;cursor: pointer; background-color: rgb(248, 249, 250); border: 1px solid rgb(225, 225, 225); box-shadow: rgba(0, 0, 0, 0.075) 0px 0.125rem 0.25rem !important;">
+									<img src="assets/img/user_image.png" style='width:45px;height:38px;' id="userimg">
+									<span id="username"
+										style="font-size:18px;text-transform:capitalize;;color: #007bff; font-style: normal; font-weight: 400; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;">Alexsandro</span>
+								</a>
+								<a href="drive.html" class="float-right btn btn-primary float-right btn-rounded"
+									title="back to drive"
+									style="width:42px;height:42px;margin-top:9px;margin-left:10px;float:right !important;">
+									<i class="fa fa-home" aria-hidden="true" style="color:#fff;padding-top:6px;font-size:18px;"></i>
+								</a>
+								<a href="javascript:void(0);" class="float-right btn btn-primary float-right btn-rounded"
+									title="Refresh" id="btn_refresh"
+									style="width:42px;height:42px;margin-top:9px;margin-left:10px;float:right !important;">
+									<i class="fa fa-refresh" aria-hidden="true"
+										style="color:#fff;padding-top:6px;font-size:18px;"></i>
+								</a>
+								<a href="javascript:void(0);" class="float-right btn btn-primary btn-rounded" data-toggle="dropdown"
+									style="width:42px;height:42px;margin-top:9px;" id="btnopennewpostmodal"
+									title="Start a new discussion thread">
+									<i class="fa fa-comment" aria-hidden="true"
+										style="color:#fff;padding-top:6px;font-size:18px;"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div id="paymentwarningid">
+						<p style="text-align: center; font-size: 12px;"><span id="billnotpaid"></span></p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="page-wrapper" style="margin-left:0px;height:100%;width:100%;margin-top:57px;overflow:hidden;padding:0px;">
+			<!-- content -->
+			<div class="content container-fluid" style="background:none;margin-top:0px;width:100%;padding:0px;">
+				<!-- left div starts -->
+				<div style="width:50%;float:left;padding:0px;overflow:none;" id="divforumleft">
+					<div class="inner-main-header" style="width:100%;padding-top:2%;">
+						<select class="custom-select custom-select-sm w-auto mr-1" id="seleforumfilter" style="font-size:14px;color:#6c757d!important;width:30% !important;">
+							<option selected value="0">Latest Threads</option>
+							<option value="1">Closed Threads</option>
+							<option value="2">Active Threads</option>
+							<!--<option value="3">Public Threads</option>-->
+							<option value="4">No Replies Yet</option>
+							<option value="5">Most Replied Threads</option>
+						</select>
+						<span class="input-icon input-icon-sm ml-auto w-auto fake-input" style="width:68% !important;">
+							    <input type="text" id="txtsearch" class="form-control form-control-sm bg-gray-200 border-gray-200 shadow-none mb-4 mt-4"
+								placeholder="search with subject and tags" style="border:1px solid #ccc;border-radius:6px;padding-right:35px;">
+							    <img src="assets/img/search.png" style="width:20px;cursor:pointer;margin-top:27px;" id="img_search"/>
+						</span>
+					</div>
+					<div class="inner-main-body p-2 p-sm-3 collapse forum-content show" style="padding:10px !important;margin-top: 0px;overflow-y:auto;" id="card-mb-2"></div>
+				</div>
+				<!-- left div ends -->
+				<!-- right div starts -->
+				<div style="width:50%;float:left;border-left: 5px solid #ccc;padding:0px;overflow-y:auto;" id="divforumright">
+					<!-- Forum Detail -->
+					<div class="inner-main-body p-2 p-sm-3 collapse forum-content show" id="div_single_thread">
+						<!--<a href="#" class="btn btn-light btn-sm mb-3 has-icon"><i class="fa fa-arrow-left mr-2"></i>Back</a>-->
+					</div>
+           			 <!-- /Forum Detail -->
+				</div>
+				<!-- right div ends -->
+			</div>
+		</div>
+
+		<!--New Post popup modal-->
+		<div class="modal fad" id="divpostmodal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header" style="background-color:#23bbf3;border-top-left-radius:36px;border-top-right-radius:36px;padding:0px;">
+						<h4 style="color:#fff;margin-top:20px;margin-left:20px;" id="divpostmodalheader">Post your query</h4>
+						<button type="button" class="btn" data-dismiss="modal" aria-label="Close" style="background:none;color:white;font-size:26px;opacity:0.7;font-weight:bold;margin-right:4px;">
+							<span aria-hidden="true">&times;</span>
+        				</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group custom-mt-form-group">
+							<input type="text" id="txtpostusers" class="form-control" placeholder="Add email" onkeydown="keyPressed(event)"/>
+							<i class="bar"></i>
+						</div>
+						<div class="form-group custom-mt-form-group">
+							<input type="text" id="txtpostsubject" maxlength="150" placeholder="Enter subject"/>
+							<i class="bar"></i>
+						</div>
+						<div class="form-group custom-mt-form-group">
+							<textarea id="txtcontent" class="form-control" placeholder="Enter content" rows="5"></textarea>
+							<i class="bar"></i>
+						</div>
+						<div class="form-group custom-mt-form-group">
+							<input type="text" id="txtposttags" placeholder="Enter tags comma separated" data-role="tagsinput" onkeydown="keyPressed(event)" size="100"/>
+							<i class="bar"></i>
+						</div>
+					</div>
+					<div class="modal-footer" id="admsharefooter">
+						<button class="btn btn-primary btn-rounded float-right" style="cursor:pointer; width: 85px;" data-dismiss="modal" aria-label="Close">Cancel</button>
+						<button class="btn btn-primary btn-rounded float-right" style="cursor:pointer; width: 85px;" id="btnnewpostsave">Post</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--Reply popup modal-->
+		<div class="modal fad" id="divreplymodal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header" style="background-color:#23bbf3;border-top-left-radius:36px;border-top-right-radius:36px;padding:0px;">
+						<h4 style="color:#fff;margin-top:20px;margin-left:20px;" id="divpostmodalheader">Post your reply</h4>
+						<button type="button" class="btn" data-dismiss="modal" aria-label="Close" style="background:none;color:white;font-size:26px;opacity:0.7;font-weight:bold;margin-right:4px;">
+							<span aria-hidden="true">&times;</span>
+        				</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group custom-mt-form-group">
+							<textarea id="txtreplycontent" class="form-control" placeholder="Enter content" rows="5"></textarea>
+							<i class="bar"></i>
+						</div>
+					</div>
+					<div class="modal-footer" id="admsharefooter">
+						<button class="btn btn-primary btn-rounded float-right" style="cursor:pointer; width: 85px;" data-dismiss="modal" aria-label="Close">Cancel</button>
+						<button class="btn btn-primary btn-rounded float-right" style="cursor:pointer; width: 85px;" id="btnnewreplysave">Post</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Profile popup modal-->
+	<div class="modal fad" id="userprofilemodal">
+		<div class="modal-dialog modal-lg" style="width:60%;max-width:90%;">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color:#23bbf3;border-top-left-radius:36px;border-top-right-radius:36px;padding:0px;">
+					<h4 style="color:#fff;margin-top:20px;margin-left:20px;">User Profile</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-5 col-md-12 col-sm-12 col-12">
+							<div class="aboutprofile">
+								<div class="card" style="background-color: #23bbf3; color: #fff; height:420px;padding:0px;">
+									<div class="card-body" style="padding:0px;">
+										<div class="row">
+											<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+												<div class="aboutprofile-pic img-circle" style="width:80px;height:80px;">
+													<img class="card-img-top img-circle" id="muserimg" style="width:80px;height:80px;" src="assets/img/user_image.png" alt="Card image">
+												</div>
+												<div class="aboutprofile-name">
+													<h5 class="text-center mt-2" id="musername">Michael V. Buttars</h5>
+													<p class="text-center" id="museremail">info@dcurris.com</p>
+													<p class="text-center" id="musercorp">0020170</p>
+													<hr>
+												</div>
+												<div class="aboutprofile-name" >
+													<p class="text-center mt-2" id="mallocatedspacepersonal" style="display:none;">&nbsp;</p>
+													<p class="text-center mt-2" id="mallocatedspacedataroom" style="display:none;">&nbsp;</p>
+													<p class="text-center mt-2" id="mallocatedspace">&nbsp;</p>
+												</div>
+												<div class="aboutprofile-name" id="storageused" style="width:100%;text-align:center;">
+													<div class="counter" data-cp-percentage="25" data-cp-color="#00bfeb"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-7 col-md-12 col-sm-12 col-12" style="height: 350px;max-height: 350px;overflow-y: auto;">
+							<div class="profile-content" style="border: none;">
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="card" style="border: none;padding:15px;">
+											<!-- Nav tabs -->
+											<ul class="nav customtab" style="padding-bottom:0px;">
+												<li class="nav-item" style="padding-bottom:0px;"><a href="javascript:void(0);" class="nav-link active show" style="color:#06b4c2; margin-left: -14px;">Edit Profile</a></li>
+											</ul>
+											<!-- Tab panes -->
+											<div class="tab-content" style="padding-bottom:0px;padding-top:20px;">
+												<div class="tab-pane active show" id="tab1">
+													<div id="biography" class="sidebar-menu">
+														<p>
+															<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+																<span style="color:#0D246E;"> First Name</span>
+																<input type="text" id="mfirstname" class="fs_15"/>
+																<i class="bar"></i>
+															</div>
+														</p>
+
+														<p>
+															<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+																<span style="color:#0D246E;"> Middle Name</span>
+																<input type="text" id="mmiddlename" class="fs_15" />
+																<i class="bar"></i>
+															</div>
+														</p>
+
+														<p>
+															<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+																<span style="color:#0D246E;"> Last Name</span>
+																<input type="text" id="mlastname" class="fs_15" />
+																<i class="bar"></i>
+															</div>
+														</p>
+
+														<p>
+															<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+																<div><span style="color:#0D246E;"> Mobile Number</span></div>
+																<div style="width:100%;">
+																<input type="text" id="mmobilenumber" maxlength="15" class='inputClass inputuser disablepasteonly' onkeypress="return isNumberKeyOnly(event)" autocomplete="off"
+																style="font-size:15px;"/>
+																</div>
+																<i class="bar"></i>
+															</div>
+														</p>
+
+														<p>
+															<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+																<span style="color:#0D246E;"> User Type</span>
+																<input type="text" id="muserType" readonly style="color:black;" class="fs_15"/>
+																<i class="bar"></i>
+															</div>
+														</p>
+
+														<p style="display:none;">
+															<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;display:none;">
+																<span style="color:#0D246E;"> Sync Type</span>
+																<input type="text" id="msynctype" readonly style="color:black;" class="fs_15"/>
+																<i class="bar"></i>
+															</div>
+														</p>
+
+														<p>
+															<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+																<span style="color:#0D246E;"> Fax Number</span>
+																<input type="text" id="mfaxnumber" maxlength="15" onkeypress="return isNumberKeyForPhone(event)" class="fs_15" />
+																<i class="bar"></i>
+															</div>
+														</p>
+
+														<p>
+															<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;" id="pcompany">
+																<span style="color:#0D246E;"> Company</span>
+																<input type="text" id="mcompany" class="fs_15" style="border: none;" />
+																<i class="bar"></i>
+															</div>
+														</p>
+
+														<p>
+															<div class="form-group custom-mt-form-group" style="margin-bottom: 20px; padding: 0px;display:none;" id="padvsecurity">
+																<div style="width:100%;margin-bottom: 2%;">
+																	<span style="color:#007bff;font-weight:bold;"> Advanced Security </span>
+																</div>
+
+																<!-- 16 NOV 2020-->
+																<div class="row" style="margin: 0px auto; padding: 0px;">
+																	<div class=" col-md-12 custom-control custom-checkbox" >
+																		<div class="col-md-2" style="margin-left: -31px;">
+																			<input type="checkbox" class="custom-control-input" id="adm_2_fact_enabled" checked="" readonly="" disabled="">
+																		</div>
+																		<div class="col-md-10" style="margin-left: -38px; margin-top: 9px;">
+																			<label class="custom-control-label" for="adm_2_fact_enabled" style="font-style: normal; font-weight: 400;">Enable 2 Factor Authentication</label>
+																		</div>
+																	</div>
+																</div>
+																<!-- 16 NOV 2020-->
+
+																<div id="div_otpcontaineradmin" style="width:100%;display: flex;margin-top: 0%;padding-top: 1%;">
+																	<span style="color:#0D246E;width: 25%;margin-top:5px;" id="adm_user_security_name">&nbsp;</span>
+																	<input type="text" id="adm_user_security_carrier" class="inputClass inputuser disablepasteonly" readonly style="width:75%;color:black;font-size:13px;margin-left: -48px;">
+																</div>
+																<em class="bar"></em>
+															</div>
+														</p>
+
+
+														<input type="file" id="pickuserimg" style="display:none;" accept="image/x-png,image/jpeg,image/png" />
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<a data-dismiss="modal" style="color:#2abfc1;font-size:15px;margin-top:1px;text-align:center;cursor:pointer;padding-right:10px;" id="btn_admin_close_profile">Close</a>
+					<button class="btn btn-primary btn-rounded float-right" style="background-color: #2abfc1;cursor: pointer;border-radius: 50px;border: 1px solid #2abfc1;outline: none;padding: 7px 16px;" id="btn_save_profile">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="main-wrapper" style="overflow-y: scroll;display:none;" id="divmainprint">
+	</div>
+
+	<div class="modal fad" id="divtimeout" role="dialog"></div>
+
+	<script type="text/javascript" src="assets/js/jquery.min.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/jquery-migrate-1.4.1.min.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/intlTelInput-jquery.min.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/jquery-ui-1.12.0.min.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/popper.min.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/bootstrap.min.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/jquery.dataTables.min.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/dataTables.bootstrap4.min.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/jquery.slimscroll.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/select2.min.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/moment.min.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/jstz-1.0.4.min.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/bootstrap-datetimepicker.min.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/top-alertjs.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/plugins/summernote/dist/summernote-bs4.min.js?v=2.18"></script>
+
+	<script type="text/javascript" src="assets/js/app.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/variables.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/validations.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/CustomAuthenticatorRealmChallengeHandler.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/tree/tree.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/download.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/aes.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/global_messages.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/mousedetect.js?v=2.18"></script>
+
+	<script type="text/javascript" src="assets/js/firebase_app.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/firebase_messaging.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/firebase_config.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/load_lash.js?v=2.18"></script>
+
+	<script type="text/javascript" src="assets/js/forum/bootstrap-tagsinput.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/forum/typeahead.js?v=2.18"></script>
+
+	<script type="text/javascript" src="assets/js/forum/forum_message.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/forum/forum_service.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/forum/forum_details.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/forum/forum_variables.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/forum/forum_common.js?v=2.18"></script>
+	<script type="text/javascript" src="assets/js/forum/forum_event.js?v=2.18"></script>
+</body>
+
+</html>

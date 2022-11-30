@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="robots" content="noindex,nofollow" />
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=.5, maximum-scale=1.0, user-scalable=yes" name="viewport" />
+	<meta http-equiv="X-UA-Compatible" content="IE=10" />
+	<meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+	<title>Dcirrus Drive</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css?v=1.030">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css?v=1.030">
+    <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css?v=1.030">
+    <link rel="stylesheet" type="text/css" href="assets/css/select2.min.css?v=1.030">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css?v=1.030">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css?v=1.030">
+    <link rel="stylesheet" type="text/css" href="assets/css/custom.css?v=1.030">
+    <link rel="stylesheet" type="text/css" href="assets/css/top-alertjs.css?v=1.030">
+    <link rel="stylesheet" type="text/css" href="assets/plugins/summernote/dist/summernote-bs4.css?v=1.030">
+    <style type="text/css">
+		.dropdown-item:focus, .dropdown-item:hover {
+		color: blue;
+		text-decoration: none;
+		background-color: #fff;}
+		.up h2{ display: inline-flex; }
+		/*.up{padding-bottom: 12px;}*/
+		.sneha{font-size: 14px;}
+		.snehaheader{font-size:14px;font-weight:bold;color:black;}
+		.my-custom-scrollbar {
+		position: relative;
+		height: 450px;
+		overflow: auto;
+		}
+		.table-wrapper-scroll-y {
+		display: block;
+		}
+	</style>
+    <body>
+        <div class="div">
+        	<div style="margin-top:5px;width:100%;">
+            	<label class="leb">From Date:</label>
+            	<input type="date" name="" class="dt" id="fromdt">
+            	<label class="leb">To Date:</label>
+            	<input type="date" name="" class="dt" id="todt">
+        	</div>
+			<div style="margin-top:5px;width:100%;">
+				<input type="button" value="Total No Of Users" class="btn" id="btntotaluser">
+				<input type="text" readonly value="" id="txttotaluser">
+			</div>
+			<div style="margin-top:5px;width:100%;">
+				<input type="button" value="No of Active session" class="btn" id="btnactivesession">
+				<input type="text" readonly value="" id="txttotalactivesession">
+			</div>
+			<div style="margin-top:5px;width:100%;">
+				<select class="btn ml" id="selcorporatelist">
+					<option value="-1">Select Corporate</option>
+
+				</select>
+			</div>
+			<div style="margin-top:5px;width:100%;" class="table-wrapper-scroll-y my-custom-scrollbar">
+				<table class="table table-bordered table-striped mb-0" style="width:100%;" border="1" id="tbluser">
+					<tr>
+					  <th scope="col">User Name</th>
+					  <th scope="col">Device Name</th>
+					  <th scope="col">User Browser</th>
+					  <th scope="col">Storage Used</th>
+					  <th scope="col">IpAddressV4</th>
+					  <th scope="col">GEO Location</th>
+					  <th scope="col">Loggedin Date</th>
+					</tr>
+				 </table>
+			</div>
+
+			<!-- <script type="text/javascript" src="assets/js/jquery-3.5.0.min.js?v=1.030"></script> -->
+			<script type="text/javascript" src="assets/js/jquery.min.js?v=1.030"></script>
+			<script type="text/javascript" src="assets/js/jquery-ui-1.12.0.min.js?v=1.030"></script>
+			<script type="text/javascript" src="assets/js/popper.min.js?v=1.030"></script>
+			<script type="text/javascript" src="assets/js/bootstrap.min.js?v=1.030"></script>
+			<script type="text/javascript" src="assets/js/jquery.dataTables.min.js?v=1.030"></script>
+			<script type="text/javascript" src="assets/js/dataTables.bootstrap4.min.js?v=1.030"></script>
+			<script type="text/javascript" src="assets/js/jquery.slimscroll.js?v=1.030"></script>
+			<script type="text/javascript" src="assets/js/select2.min.js?v=1.030"></script>
+			<script type="text/javascript" src="assets/js/moment.min.js?v=1.030"></script>
+			<script type="text/javascript" src="assets/js/jstz-1.0.4.min.js?v=1.030"></script>
+			<script type="text/javascript" src="assets/js/bootstrap-datetimepicker.min.js?v=1.030"></script>
+			<script type="text/javascript" src="assets/js/top-alertjs.js?v=1.030"></script>
+			<script type="text/javascript" src="assets/plugins/summernote/dist/summernote-bs4.min.js?v=1.030"></script>
+
+			<script type="text/javascript" src="assets/js/app.js?v=1.030"></script>
+			<script type="text/javascript" src="assets/js/variables.js?v=1.030"></script>
+			<script type="text/javascript" src="assets/js/validations.js?v=1.030"></script>
+			<script type="text/javascript" src="assets/js/CustomAuthenticatorRealmChallengeHandler.js?v=1.030"></script>
+			<script type="text/javascript" src="assets/js/userstat/userstat.js?v=1.030"></script>
+
+		</div>
+    </body>
+</html>
