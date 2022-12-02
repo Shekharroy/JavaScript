@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="robots" content="noindex,nofollow" />
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=.5, maximum-scale=1.0, user-scalable=yes" name="viewport" />
+	<meta http-equiv="X-UA-Compatible" content="IE=10" />
+	<meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+	<META HTTP-EQUIV="EXPIRES" CONTENT="Mon, 22 Jul 2002 11:12:01 GMT">
+	<meta http-equiv="pragma" content="no-cache" />
+	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png?v=1.30047">
+	<title>DCirrus E-Voting</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css?v=1.30047">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css?v=1.30047">
+    <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css?v=1.30047">
+    <link rel="stylesheet" type="text/css" href="assets/css/select2.min.css?v=1.30047">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css?v=1.30047">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css?v=1.30047">
+    <link rel="stylesheet" type="text/css" href="assets/css/custom.css?v=1.30047">
+    <link rel="stylesheet" type="text/css" href="assets/css/top-alertjs.css?v=1.30047">
+    <link rel="stylesheet" type="text/css" href="assets/plugins/summernote/dist/summernote-bs4.css?v=1.30047">
+    <link rel="stylesheet" type="text/css" href="assets/css/tree/tree.css?v=1.30047">
+    <link rel="stylesheet" type="text/css" href="assets/css/adm/adm.css?v=1.30047">
+	<link rel="stylesheet" type="text/css" href="assets/css/intlTelInput.css?v=1.30047"/>
+	<link rel='stylesheet' type="text/css" href='assets/css/typehead.css?v=1.30047'>
+	<link rel='stylesheet' type="text/css" href='assets/css/forum.css?v=1.30047'>
+	<link rel='stylesheet' type="text/css" href='assets/css/poll/poll.css?v=1.30047'>
+	<link rel='stylesheet' type="text/css" href='assets/css/daterangepicker.css?v=1.30047'>
+
+<script>
+	document.onkeydown = function (e) {
+	    e = e || window.event;//Get event
+		var code = e.which || e.keyCode;//Get key code
+	    if (e.ctrlKey) {
+	    	if(code == 80){
+	    		e.preventDefault();
+	            e.stopPropagation();
+			}
+	    }
+	};
+</script>
+
+</head>
+
+<body ondragstart="return false;" onload="pollCommon();">
+	<div class="paymentwarningclass" id="paymentwarningid"
+		style="display: none; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+		<p><i id="warning" class="fa fa-exclamation-triangle warningclass"></i><span id="billnotpaid"
+				class="billnotpaidclass"></span></p>
+		</div>
+    <div class="main-wrapper" style="overflow-y:hidden;display:none;" id="divmain">
+		<div class="header todolistid" id="divforum" style="height:56px;" > <!-- Drive start -->
+			<div class="row">
+				<div class="col-sm-1 col-1" style="padding-left: 0%;">
+					<div class="header-left" style="height:56px;">
+
+					<span class="logo">
+							<img src="assets/img/logo1.png"  id="clogoimg" alt="" id="customerLogo" style="width:60px;height:50px;margin-top:-8px;">
+
+						</span>
+						<!--<p style="font-size: 12px; margin-top: -12% !important;" id="ltext">Powered by Dcirrus</p>-->
+					</div>
+				</div>
+
+				<div class="col-sm-11 col-11">
+					<div class="row nav user-menu ">
+						<div class="col-sm-10 col-10 ">
+								<h1 style="color:#01c0c8; margin-left:8%;" id="divpollheader">E-Voting</h1>
+						</div>
+						<div class="col-sm-2 col-2" style="margin-bottom:7px !important; margin-left: 0px auto; padding-left: 0px;">
+							<div class="flor">
+								<a href="javascript:void(0);" class="float-right btn btn-primary float-right btn-rounded"
+									title="Refresh" id="btn_refresh"
+									style="width:42px;height:42px;margin-top:9px;margin-left:10px;float:right !important;float:right !important;display:none;">
+									<i class="fa fa-refresh" aria-hidden="true" style="color:#fff;padding-top:6px;font-size:18px;"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="page-wrapper " style="margin-left:0px;height:100%;width:100%;margin-top:57px;overflow:hidden;padding:0px;">
+			<!-- content -->
+			<div class="content container-fluid" style="background:none;margin-top:0px;width:100%;padding:0px;">
+				<!-- right div starts -->
+				<div style="width:100%;float:left;border-left: 5px solid #ccc;padding:0px;overflow-y:auto;" id="divforumright">
+					<div class="inner-main-body p-2 p-sm-3 collapse forum-content show" id="div_single_poll" style="padding:0px !important;">
+
+					</div>
+					<div style="border-bottom:2px solid #000;margin-bottom:5px !important; text-align:center;">
+						<div class="mb-3 has-icon" style="font-weight:bold; width:100%; font-size:18px; line-height:25px;">
+							Agendas
+							<button class="btn btn-primary btn-rounded btn-sm navigate-ref-exp-btn-voterlist text-*-center font-weight-bold"
+								id="btn_poll_cast_vote" onclick="pollCastVotePrepareJSON();"
+								style="margin-top:3px;float:right;margin-right:23px;">Submit</button>
+							<button class="btn btn-primary btn-rounded btn-sm navigate-ref-exp-btn-voterlist text-*-center font-weight-bold"
+								id="btn_poll_cast_vote_reset" onclick="pollCastVoteReset();"
+								style="margin-top:3px;float:right;margin-right:23px;">Reset</button>
+						</div>
+						<label>
+							<strong class="vote_info_message">Please vote on each agenda. If you haven't voted on any agenda/s, you can
+								always
+								come back and vote. If you do not vote on the agenda/s by the end of the voting period, your vote will be
+								considered as "Abstain".</strong>
+						</label>
+					</div>
+					<div class="card mb-2" id="div_poll_agenda_list" style="width:98%;margin-left:1%;border:0px;box-shadow:none;max-height:66%;overflow-y:auto;">
+
+					</div>
+
+				</div>
+				<!-- right div ends -->
+			</div>
+		</div>
+	</div>
+
+	<!--Login popup modal for otp-->
+	<div class="modal fad" id="loginmodal1" style="display: none;">
+		<div class="modal-dialog modal-lg cls_voter_login_modal_width">
+			<div class="modal-content">
+				<div class="modal-header"
+					style="background-color:#23bbf3;border-top-left-radius:36px;border-top-right-radius:36px;padding:0px;">
+					<div class="col-md-11">
+						<h4 style="color:#fff;margin-top:20px;">LOGIN TO CAST VOTE</h4>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="form-group custom-mt-form-group">
+						<input type="email" id="loginid" value="" />
+						<label class="control-label" style="font-size:14px;font-weight:bold;">Login Id</label><i class="bar"></i>
+					</div>
+					<div class="form-group custom-mt-form-group" id="divotp" style="display:none;">
+						<input type="text" id="otp" maxlength="6"/>
+						<label class="control-label" style="font-size:14px;font-weight:bold;" >OTP</label><i class="bar"></i>
+					</div>
+					<div class="form-group custom-mt-form-group" id="divcaptcha" style="display:none;">
+						<input type="text" id="captcha"  maxlength="6"/>
+						<label class="control-label" style="font-size:14px;font-weight:bold;">Enter captcha</label><i class="bar"></i>
+					</div>
+					<div class="form-group custom-mt-form-group" id="divcaptchaimg" style="display:none;">
+						<img id="imgcaptcha" style="margin-right: -150px;"/> <span id="idRferesh" onclick="loginToCastVoteRefresh();" title="Refresh Captcha" style="display: none; line-height: 3.5em;">
+							<i class="fa fa-refresh fa-lg" style="color: rgb(42, 191, 193);"></i>
+						</span>
+					</div>
+					<div class="form-group custom-mt-form-group" id="divtimer">
+						<label class="control-label" style="font-size:14px;font-weight:bold;" id="lbltimer"></label>
+					</div>
+					<div class="form-group custom-mt-form-group" id="note2" style="display: none;">
+						<p id="poll_note2" class="text-justify"><strong>Note:</strong></p>
+					</div>
+					<div class="form-group custom-mt-form-group" id="divloginerrorlabel" style="display:none;">
+						<label class="control-label" style="font-size:14px;font-weight:bold;" id="lblcaptcha"></label>
+					</div>
+				</div>
+				<div class="modal-footer" id="admsharefooter" style="margin-top:20px;">
+					<button class="btn btn-primary btn-rounded float-right" style="background-color:#2abfc1;cursor:pointer;display:none;"
+						onclick="loginToCastVote();" id="btnlogin">Login</button>
+					<button class="btn btn-primary btn-rounded float-right" style="background-color:#2abfc1;cursor:pointer;"
+						onclick="pollValidateGenrateOTP();" id="btngencaptcha">Generate OTP</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Login popup modal for resolute-->
+	<div class="modal fad" id="loginmodal2" style="display: none;">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color:#23bbf3;border-top-left-radius:36px;border-top-right-radius:36px;padding:0px;">
+					<h4 style="color:#fff;margin-top:20px;margin-left:20px;">LOGIN TO CAST VOTE</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group custom-mt-form-group">
+						<input type="email" id="emailId" value="" />
+						<label id="pass_login_id_label" class="control-label"></label><i class="bar"></i>
+					</div>
+					<div class="form-group custom-mt-form-group">
+						<input type="text" id="password" value=""/>
+						<label id="pass_login_label" class="control-label identification_password text-justify"></label>
+						<i class="bar"></i>
+					</div>
+					<div class="form-group custom-mt-form-group" id="passcaptcha">
+						<input type="text" id="paswcaptcha"  maxlength="6"/>
+						<label class="control-label">Enter captcha</label><i class="bar"></i>
+					</div>
+					<div class="form-group custom-mt-form-group" id="divpasscaptchaimg" style="display:none;">
+						<img id="passimgcaptcha" class="captcha_width" style="margin-right: -150px;"/><span id="idRferesh" onclick="loginToCastVoteRefresh();" title="Refresh Captcha" style="line-height: 3.5em;">
+							<i class="fa fa-refresh fa-lg" style="color: rgb(42, 191, 193);"></i>
+					</div>
+					<div class="form-group custom-mt-form-group" id="note1" style="display: none;">
+						<p id="poll_note1" class="text-justify"><strong>Note:</strong></p>
+					</div>
+				</div>
+				<div class="modal-footer" id="admsharefooter">
+					<button class="btn btn-primary btn-rounded float-right" style="background-color:#2abfc1;cursor:pointer;"
+						onclick="passLoginToCastVote();" id="btnlogin">Submit</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--Login popup modal-->
+	<div class="modal fad" id="divresultmodal">
+		<div class="modal-dialog modal-lg cls_voter_login_modal_width">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color:#23bbf3;border-top-left-radius:36px;border-top-right-radius:36px;padding:0px;">
+					<h4 style="color:#fff;margin-top:20px;margin-left:20px;">POLL SUBMITTED</h4>
+				</div>
+			<div class="modal-body">
+				<div class="form-group custom-mt-form-group" >
+					<label class="control-label" style="font-size:14px;font-weight:bold;" id="lblopinion"></label>
+				</div>
+			</div>
+			<div class="modal-footer" id="admsharefooter">
+				<button class="btn btn-primary btn-rounded float-right" style="background-color:#2abfc1;cursor:pointer;"
+					onclick="viewPoll();">View Your POLL</button>
+			</div>
+		</div>
+	</div>
+	</div>
+
+
+
+	<div class="main-wrapper" style="overflow-y: scroll;display:none;" id="divmainprint">
+	</div>
+	<div class="modal fad" id="divtimeout" role="dialog"></div>
+
+	<script type="text/javascript" src="assets/js/jquery.min.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/jquery-migrate-1.4.1.min.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/intlTelInput-jquery.min.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/jquery-ui-1.12.0.min.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/popper.min.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/bootstrap.min.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/jquery.dataTables.min.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/dataTables.bootstrap4.min.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/jquery.slimscroll.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/select2.min.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/moment.min.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/jstz-1.0.4.min.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/bootstrap-datetimepicker.min.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/top-alertjs.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/plugins/summernote/dist/summernote-bs4.min.js?v=1.30047"></script>
+
+	<script type="text/javascript" src="assets/js/app.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/variables.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/validations.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/CustomAuthenticatorRealmChallengeHandler.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/tree/tree.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/aes.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/global_messages.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/jquery.scrollTo.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/mousedetect.js?v=1.30047"></script>
+
+	<script type="text/javascript" src="assets/js/firebase_app.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/firebase_messaging.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/firebase_config.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/load_lash.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/daterangepicker.js?v=1.30047"></script>
+
+	<script type="text/javascript" src="assets/js/poll/single_pollmessages.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/poll/single_pollservice.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/poll/single_polldetails.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/poll/single_pollvariables.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/poll/single_pollcommon.js?v=1.30047"></script>
+	<script type="text/javascript" src="assets/js/poll/single_pollevent.js?v=1.30047"></script>
+</body>
+
+</html>

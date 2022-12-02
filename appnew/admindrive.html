@@ -1,0 +1,2018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="robots" content="noindex,nofollow" />
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=.5, maximum-scale=1.0, user-scalable=yes" name="viewport" />
+	<meta http-equiv="X-UA-Compatible" content="IE=10" />
+	<meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
+	<META HTTP-EQUIV="EXPIRES" CONTENT="Mon, 22 Jul 2002 11:12:01 GMT">
+	<meta http-equiv="pragma" content="no-cache" />
+	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png?v=10.272">
+	<title>DCirrus Admin</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="assets/css/admin/bootstrap.min.css?v=10.272">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css?v=10.272">
+	<link rel="stylesheet" type="text/css" href="assets/css/select2.min.css?v=10.272">
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css?v=10.272">
+	<link rel="stylesheet" type="text/css" href="assets/css/admin/style.css?v=10.272">
+	<link rel="stylesheet" type="text/css" href="assets/css/custom.css?v=10.272">
+	<link rel="stylesheet" type="text/css" href="assets/css/top-alertjs.css?v=10.272">
+    <link rel="stylesheet" type="text/css" href="assets/plugins/summernote/dist/summernote-bs4.css?v=10.272">
+    <link rel="stylesheet" type="text/css" href="assets/css/intlTelInput.css?v=10.272"/>
+	<link rel="stylesheet" type="text/css" href="assets/css/buttons.css?v=10.272">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.css">
+</head>
+
+<body style="overflow-y: auto;" onload="adminCommonEvents();adminFetchUserList();">
+	<div>
+		<div class="col-md-12 colsm-12 col-xs-12" style="padding-right:0px;">
+			<div class="col-md-1 col-sm-1 col-xs-12 sidebar nopaddingLR pt20" id="sidebar">
+				<center>
+
+					<span>
+						<img src="assets/img/logo1.png" alt="dcirrus logo" width="88" height="78" style="margin-top: -10px; padding: 0px;display:none;" id="clogoimg">
+						<!--<p id="ltext" style="font-size: 12px;">Powered by Dcirrus</p>-->
+					</span>
+
+				</center>
+				<ul>
+					<a href='javascript:void(0);' id="adm_user" style="text-decoration: none;" >
+						<li id="manage_user_bg">
+							<img class='initial' src="assets/icons/L00011.png" id="img_manage_user" >
+							<p style="font-size: 14px;">Manage User</p>
+						</li>
+					</a>
+					<a href="javascript:void(0);" id="adm_devices" style="text-decoration: none;">
+						<li id="manage_device_bg" style="margin-top: 20px;">
+							<img class='initial manage-device-icon' src="assets/icons/ManageDevices.png" id="img_manage_devices">
+							<p style="font-size: 14px;">Manage Devices</p>
+						</li>
+					</a>
+					<a href="javascript:void(0);" id="adm_payment" style="text-decoration: none;display:none;">
+						<li id="payment_info_bg" style="margin-top: 20px;">
+							<img class='initial' src="assets/icons/Shape_1.png">
+							<p style="font-size: 14px;">Payment</p style="font-size: 14px;">
+						</li>
+					</a>
+					<a href="javascript:void(0);" id="adm_corpd" style="text-decoration: none;">
+						<li id="corporate_Details_bg" style="margin-top: 20px;">
+							<img class='initial setting-icon-admin' src="assets/icons/Settings.png" id="img_corp_details">
+							<p style="font-size: 14px;">Settings</p style="font-size: 14px;">
+						</li>
+					</a>
+				</ul>
+			</div>
+			<div class="col-md-11 col-sm-11 col-xs-12 pl0" style="padding-right:0px;">
+				<div class="paymentwarningclass" id="paymentwarningid"
+					style="display: none; text-align: center; padding-top: 5px; padding-bottom: 1px;">
+					<p><i id="warning" class="fa fa-exclamation-triangle warningclass"></i><span id="billnotpaid"
+							class="billnotpaidclass"></span></p>
+				</div>
+				<div class="col-md-12 colsm-12 col-xs-12 header pt10" style="padding-left:15px;padding-right:0px;" id="admin_searchbar">
+					<div class="container-fluid margin-padding">
+						<div class="col-lg-6 col-md-6 colsm-6 col-xs-6">
+							<i class="fa fa-search" aria-hidden="true" style="margin-top:1px;font-size:18px;" id="fasearchi"></i>
+							<input type="text" name="search" class="searchSec " placeholder="Search" id='circle' readonly id="seach_txt_open" style="font-size:18px;">
+							<div class='overlay' id='overlay_user' style="display: none;">
+								<div class='overlay' id='overlay'>
+									<div class='col-md-12 col-sm-12 col-xs-12 overlaySec' id='overlaySec' style="max-width:90%; padding-top:0px">
+										<div class='col-md-12 col-sm-12 col-xs-12 renewTab tabCont nopaddingLR tabactive'>
+											<div class='col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR'>
+												<div class='col-md-6 col-sm-6 col-xs-6  '>
+													<span class="clearable" style="font-weight:normal;">
+														<input type="text" name="fname" class='inputClass' placeholder="First Name" id="first_name">
+														<i class="clearable__clear">&times;</i>
+													</span>
+												</div>
+												<div class='col-md-6 col-sm-6 col-xs-6  '>
+													<span class="clearable" style="font-weight:normal;">
+														<input type="text" name="mname" class='inputClass' placeholder="Middle Name"  id="middle_name">
+														<i class="clearable__clear">&times;</i>
+													</span>
+												</div>
+											</div>
+											<div class='col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR'>
+												<div class='col-md-6 col-sm-6 col-xs-6  '>
+													<span class="clearable" style="font-weight:normal;">
+														<input type="text" name="lname" class='inputClass' placeholder="Last Name" id="last_name">
+														<i class="clearable__clear">&times;</i>
+													</span>
+												</div>
+												<div class='col-md-6 col-sm-6 col-xs-6  '>
+													<span class="clearable" style="font-weight:normal;">
+														<input type="text" name="storage" class='inputClass' placeholder="Login Id" id="log_id">
+														<i class="clearable__clear">&times;</i>
+													</span>
+												</div>
+											</div>
+											<div class='col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR' id="searchuserchoice">
+												<div class='col-md-3 col-sm-3 col-xs-3'>
+													<label class='container'>
+														<input type="checkbox" name="terms" checked="checked" id="search_admin_check">Admin	<span class="checkmark"></span>
+													</label>
+												</div>
+												<div class='col-md-3 col-sm-3 col-xs-3'>
+													<label class='container'>
+														<input type="checkbox" name="terms" id="search_user_check">User <span class="checkmark"></span>
+													</label>
+												</div>
+											</div>
+											<div class='col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR'>
+												<center>
+													<button class='tabBtn' id="search_user_btn">SEARCH</button>
+													<p class='themecolor cancelbtn mt10 pointerClass' style="text-decoration:none;" id="closesearchuser">CANCEL</p>
+												</center>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class='overlay' id='overlay_divc' style="display: none;">
+								<div class='overlay' id='overlay'>
+									<div class='col-md-12 col-sm-12 col-xs-12 overlaySec' id='overlaySec' style="max-width:94%;padding-top: 0px">
+										<div class='col-md-12 col-sm-12 col-xs-12 renewTab tabCont nopaddingLR tabactive'>
+											<div class='col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR'>
+												<div class='col-md-6 col-sm-6 col-xs-6'>
+													<span class="clearable" style="font-weight:normal;">
+														<input type="text" name="fname" class='inputClass' placeholder="Requestor Name" id="search_req_name">
+														<i class="clearable__clear">&times;</i>
+													</span>
+												</div>
+												<div class='col-md-6 col-sm-6 col-xs-6  '>
+													<span class="clearable" style="font-weight:normal;">
+														<input type="text" name="mname" class='inputClass' placeholder="Login Id" id="search_mail_id">
+														<i class="clearable__clear">&times;</i>
+													</span>
+												</div>
+											</div>
+											<div class='col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR'>
+												<div class='col-md-6 col-sm-6 col-xs-6  '>
+													<span class="clearable" style="font-weight:normal;">
+														<input type="text" name="lname" class='inputClass' placeholder="Device Name" id="search_dive_name">
+														<i class="clearable__clear">&times;</i>
+													</span>
+												</div>
+												<div class='col-md-6 col-sm-6 col-xs-6  '>
+													<span class="clearable" style="font-weight:normal;">
+														<input type="text" name="storage" class='inputClass' placeholder="IP Address" id="search_ip_add"
+															onkeypress="return isNumberKeyForIPAddress(event);">
+														<i class="clearable__clear">&times;</i>
+													</span>
+												</div>
+											</div>
+											<div class='col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR'>
+												<div class='col-md-6 col-sm-6 col-xs-6  '>
+													<span class="clearable" style="font-weight:normal;">
+														<input type="text" name="storage" class='inputClass' placeholder="From Date" id="search_from_date_div"
+														onfocus="(this.type='date')" onblur="(this.type='text')">
+														<i class="clearable__clear">&times;</i>
+													</span>
+												</div>
+												<div class='col-md-6 col-sm-6 col-xs-6  '>
+													<span class="clearable" style="font-weight:normal;">
+														<input type="text" name="storage" class='inputClass' placeholder="To Date" id="search_to_date_div"
+														onfocus="(this.type='date')" onblur="(this.type='text')">
+														<i class="clearable__clear">&times;</i>
+													</span>
+												</div>
+											</div>
+											<div class='col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR'>
+												<center>
+													<button class='tabBtn' id="search_btn_device">SEARCH</button>
+													<p class='themecolor cancelbtn mt10 pointerClass' style="text-decoration:none;" id="closesearchdevice">CANCEL</p>
+												</center>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6 colsm-6 col-xs-6">
+							<div class="container-fluid con-fluid margin-padding" style="width: 100%; margin: 0px; padding: 0px;">
+								<div class="col-lg-12 col-md-12 colsm-12 col-xs-12 margin-padding admin_icon_width_div">
+									<ul class="list-inline admin_icon_width pull-right">
+										<li class="list-inline-item">
+											<a href="javascript:void(0);" type="button" id="drive_link_admin" title="Go To Drive"
+												style="text-decoration: none;">
+												<i class="fa fa-home center refreshIco admindrive_header_icon" aria-hidden="true"></i>
+											</a>
+										</li>
+										<li class="list-inline-item">
+											<a href="javascript:void(0);" type="button" id="link_export_users" title="Export Users List"
+												style="text-decoration: none;">
+												<img src="assets/img/exportindex2.png?v=1.892" class="hover-item" alt="Export Users List" style="width:40px;height:40px;margin-top:-7px;">
+											</a>
+										</li>
+										<li class="list-inline-item">
+											<a href="javascript:void(0);" title="Refresh" id="btrefresh">
+												<i class="fa fa-refresh refreshIco admindrive_header_icon" aria-hidden="true"></i>
+											</a>
+										</li>
+										<li class="list-inline-item" id="addicon">
+											<div class="dropdown">
+												<a href="javascript:void(0);" title="Add users/Multiple Users" class="dropdown-toggle"
+													data-toggle="dropdown">
+													<i class="fa fa-plus refreshIco pr-15 admindrive_header_icon" aria-hidden="true"></i>
+												</a>
+												<div class="dropdown-menu admin_plusicon_dropdownmenu">
+													<a class="dropdown-item adminadduserlistclass" href="#" id="btnuser">Add User</a>
+													<a class="dropdown-item adminaddmutipleuserlistclass" href="#" id="addMultiUser">Add
+														multiple users</a>
+												</div>
+											</div>
+										</li>
+										<li class="list-inline-item admin_userprofilewidth profIm" id="profIm" style="padding-right: 32px !important; padding-left: 0px !important;">
+											<img class="admindrive_display_user_img " id="userimg" src="../assets/icons/Layer_1336.png">
+											<span class="admindrive_display_user_name" id="username"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12 bg" id="manage_user_div">
+						<div class="col-md-12 col-sm-12 col-xs-12 bg">
+							<div class="col-md-12 col-sm-12 col-xs-12 pt10">
+								<center>
+									<div class='tabHeadSecManage'>
+										<span class='manage_tabs active' id='active_users'>All Users</span>
+										<span class='manage_tabs' id='' style="display: none;"></span>
+										<span class='manage_tabs' id='live_users'>Active Users</span>
+									</div>
+								</center>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-12 col-sm-12 col-xs-12 bg" id="live_user_table_div_" style="padding-right:15px;padding-left:15px;display: none;">
+						<div class="col-md-12 col-sm-12 col-xs-12 pt10" style="padding-left: 0px; padding-right: 0px;">
+							<div class="col-md-12 col-sm-12 col-xs-12 white-bg" id="tableHeadLiveUserPages" style="border: 1px solid #D3D3D3; padding-left: 0px !important; padding-right: 0px !important;display:none;">
+								<div class='col-md-12 col-sm-12 heading'>
+									<center>Pages</center>
+								</div>
+								<div class='col-md-12 col-sm-12 scrollsec' id="divLiveUserpages">&nbsp;</div>
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 white-bg padding-top-bottom" id="" style="border: 1px solid #D3D3D3; padding-left: 0px !important; padding-right: 0px !important;">
+								<div class='col-md-3 col-sm-3 heading'>
+									<span style="padding-left: 5px;">User Name</span><span></span>&nbsp[<label id="totalliveusercount"></label>&nbspUsers]</span>
+								</div>
+								<div class='col-md-3 col-sm-3 heading'>Login Id</div>
+								<div class='col-md-2 col-sm-2 heading'>User Type</div>
+								<div class='col-md-4 col-sm-4 heading' style="padding-left: 170px">Last Login Date & Time</div>
+							</div>
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12 pb20" style="padding-left: 0px; padding-right: 0px;">
+							<div class="col-md-12 col-sm-12 col-xs-12 tablebodySec adm_display_table" id="table_liveUser"></div>
+						</div>
+					</div>
+
+					<!--Manage User-->
+					<div class="col-md-12 col-sm-12 col-xs-12 bg" id="mg_user" style="padding-right:15px;padding-left:15px;">
+						<div class="col-md-12 col-sm-12 col-xs-12 pt10" style="padding-left: 0px; padding-right: 0px;">
+							<div class="col-md-12 col-sm-12 col-xs-12 white-bg" id="tableHeadPages" style="border: 1px solid #D3D3D3; padding-left: 0px !important; padding-right: 0px !important;display:none;">
+								<div class='col-md-12 col-sm-12 heading'>
+									<center>Pages</center>
+								</div>
+								<div class='col-md-12 col-sm-12 scrollsec' id="divpages">&nbsp;</div>
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 white-bg padding-top-bottom" id="tableHeadSecB" style="border: 1px solid #D3D3D3; padding-left: 0px !important; padding-right: 0px !important;">
+								<div class='col-md-4 col-sm-4 heading'>
+									<span style="padding-left: 5px;">User Name</span><span></span>&nbsp[<label id="totalusercount"></label>&nbspUsers]</span>
+								</div>
+								<div class='col-md-3 col-sm-3 heading'>Login Id</div>
+								<div class='col-md-1 col-sm-1 heading'>User Type</div>
+								<div class='col-md-1 col-sm-1 heading admin_personal_row_header'>Personal <span>[<label id="totalpersonalCount"></label>]</span></div>
+								<div class='col-md-2 col-sm-2 heading'>Dataroom <span>[<label id="totalDataRoomCount"></label>]</span></div>
+								<div class='col-md-1 col-sm-1 heading more_class'>More</div>
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 tableHeadSec" id="tableHeadSecI" style="border: 1px solid #D3D3D3; padding-left: 0px !important; padding-right: 0px !important;display:none;">
+								<div class='col-md-4 col-sm-4 heading'>
+									<span style="padding-left: 5px;">User Name</span>
+								</div>
+								<div class='col-md-4 col-sm-4 heading'>Login Id</div>
+								<div class='col-md-2 col-sm-2 heading adminheaderpadding'>User Type</div>
+								<div class='col-md-1 col-sm-1 heading adminheaderpadding'>Data Used</div>
+								<div class='col-md-1 col-sm-1 heading adminheaderpadding'>More</div>
+							</div>
+						</div>
+						<div class=" pt20"></div>
+						<div class="col-md-12 col-sm-12 col-xs-12 pb20" style="padding-left: 0px; padding-right: 0px;">
+							<div class="col-md-12 col-sm-12 col-xs-12 tablebodySec adm_display_table" id="table_manageuser"></div>
+						</div>
+
+						<ul class="nav float-right" id="ulusername" style="display:none;">
+							<div class=" bg-light shadow-sm mb-4 rounded" style="width:auto;border-radius:500px!important;margin-left:-20px;border:1px solid #e1e1e1;height:41px;margin-top:7px;margin-bottom:7px !important;">
+								<li class="nav-item dropdown has-arrow dropdown-toggle" style="padding-right:32px;" data-toggle="dropdown">
+									<a href="javascript:void(0);" class="" id="userdropdown" style="padding:0px;">
+										<span class="user-img" style="height:40px;"><img id="user-img" src="assets/img/Layer_1.png" width="40" height="40"
+											alt="Admin" style="border-bottom-left-radius:20px;border-top-left-radius:20px;">
+										</span></span>
+										<span id="username" style="font-size:18px;text-transform:capitalize;">Admin</span>
+									</a>
+									<div class="dropdown-menu dropdown-menu-right" style="padding-top: 0px; border-radius: 20px;">
+										<div>
+											<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+													<div class="aboutprofile" >
+														<div class="card" style="background-color: #23bbf3;color:#fff;height:auto;padding:0px;border-top-left-radius: 20px;border-top-right-radius: 20px;">
+															<div class="card-body" style="padding:0px;">
+																<div class="row">
+																	<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+																		<div class="aboutprofile-pic img-circle" style="width:80px;height:80px;">
+																			<img class="card-img-top img-circle" id="muserimg_first" style="width:80px;height:80px;" src="assets/img/user_image.png" alt="Card image">
+																		</div>
+																		<div class="aboutprofile-name">
+																			<h5 class="text-center mt-2" id="musername_first">&nbsp;</h5>
+																			<p class="text-center" id="museremail_first">&nbsp;</p>
+																			<p class="text-center" id="musercorp_first">&nbsp;</p>
+																			<hr style="background-color: #fff !important;">
+																		</div>
+																		<div style="margin-top: 0px;">
+																			<p href="javascript:void(0);" class="nohover dropdown-item" style="color: #fff;cursor: pointer; margin-bottom: 4px; margin-top: 10px;" id="adm_myprofile"><img src="assets/img/userprof.png" alt="" style="height:25px; width:25px; margin-right: 5px;"> My Profile</p>
+																			<hr style="background-color: #fff !important;">
+																			<p href="javascript:void(0);" class="nohover dropdown-item" style="color:#fff;cursor: pointer;  margin-bottom: 5px;" id="adm_changepass" onclick="window.location.href='changepassword.html';"><img src="assets/img/changepass.png" alt="" style="height:22px; width:25px; margin-right: 5px;">Change Password</p>
+																			<hr style="background-color: #fff !important;">
+																			<p href="javascript:void(0);" class="nohover dropdown-item" style="color:#fff;cursor: pointer; margin-bottom: 5px;" id="adm_psignout"><img src="assets/img/signout.png" alt="" style="height:22px; width:25px; margin-right: 5px;">Sign Out</p>
+																			<hr style="background-color: #fff !important; margin-bottom: 0px;">
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div>
+											<div style="display: inline-flex;">
+												<p onclick="window.open('https://dcirrus.com/privacy-policy')"class="nohover dropdown-item" style="cursor: pointer; margin-bottom:0px;">Privacy Policy</p>
+												<p onclick="window.open('https://dcirrus.com/terms-of-service')"class="nohover dropdown-item" style="cursor: pointer; padding-left: 0px; margin-bottom:0px;">Terms & services</p>
+												<p onclick="window.open('https://dcirrus.com/contact')"class="nohover dropdown-item" style="cursor: pointer; padding-left: 0px; margin-bottom:0px;">Contact Us</p>
+											</div>
+										</div>
+									</div>
+								</li>
+							</div>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!--Manage User end-->
+
+			<!--add User start-->
+			<div class="col-md-11 col-sm-11 col-xs-12 pl0" id="adduser" style="display: none;padding-right:0px;padding-left:15px;margin-top:2%;">
+					<div class="col-md-12 col-sm-12 col-xs-12 bg" style="padding-right:15px;padding-left:15px;">
+						<div class="col-md-12 col-sm-12 col-xs-12 pt20">
+							<div class=" col-md-6 col-sm-6 col-xs-6 tabHeadSecspan"></div>
+							<div class=" col-md-6 col-sm-6 col-xs-6 tabHeadSecspan">
+								<button class='tabBtn' id="adduserconfirm">EDIT</button>
+								<p class='themecolor cancelbtndetails mt10 pointerClass' style="text-decoration:none;" id="addusercancel">CANCEL</p>
+							</div>
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12 pb20" id="myDIVuser" style="overflow: auto; height: 500px; padding-right: 0px; padding-left: 0px; margin-top: -5px !important;">
+							<div class="col-md-12 col-sm-12 col-xs-12 tableHeadSec margintop" style="border: 1px solid #D3D3D3;">
+								<div class='col-md-6 col-sm-6 heading pb20'>User Details</div>
+								<div class='col-md-6 col-sm-6 lsatCol heading' onclick="showStuff(this.id);" id="tabs1">
+									<img src="assets/icons/dddd.png" style="display: none;">
+								</div>
+								<div class='col-md-12 col-sm-12 col-xs-12 overlaySecc overlayuserdetails tabs1' id='overlaySecuserdetails'>
+									<div class='col-md-12 col-sm-12 col-xs-12 renewTab tabCont nopaddingLR tabactive'>
+										<div class='col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR' style="margin-top:0px;">
+											<div class='col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR' style="margin-top:0px;">
+												<div class='col-md-12 col-sm-12 col-xs-12'>
+													<img src="assets/icons/Layer_1336.png" style="width:65px;height:65px; margin-left: 3%;" id="userprfimg" class="img-circle">
+													<p style="margin-top: 5px;"><a href="javascript:void(0);" style="color: #333;"><b>change Your Picture</b></a></p>
+													<input type="file" id="changeuserimgfile" style="display:none;"/>
+												</div>
+											</div>
+
+											<div class='col-md-4 col-sm-4 col-xs-4'>
+												<span>First Name *</span>
+												<input type="text" name="storage" class='inputClass inputuser' placeholder="First Name" id="txt_adduser_firstname"
+													onkeypress="return !allowAlphaNumeric(event);">
+											</div>
+											<div class='col-md-4 col-sm-4 col-xs-4'>
+											<span>Middle Name</span>
+												<input type="text" name="storage" class='inputClass inputuser' placeholder="Middle Name" id="txt_adduser_middlename"
+													onkeypress="return !allowAlphaNumeric(event);">
+											</div>
+											<div class='col-md-4 col-sm-4 col-xs-4'>
+												<span>Last Name *</span>
+												<input type="text" name="storage" class='inputClass inputuser ' placeholder="Last Name" id="txt_adduser_lastname"
+													onkeypress="return !allowAlphaNumeric(event);">
+											</div>
+										</div>
+										<div class='col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR'>
+											<div class='col-md-4 col-sm-4 col-xs-4  '>
+												<span>Email Id *</span>
+												<input type="text" name="storage" class='inputClass inputuser' placeholder="Email Id" id="txt_adduser_loginid">
+											</div>
+											<div class='col-md-4 col-sm-4 col-xs-4'>
+												<span>Phone No Office</span>
+												<input type="number" class='inputClass inputuser' placeholder="Phone No Office" id="txt_adduser_phone"
+												maxlength="15"
+												oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+											</div>
+
+											<div class='col-md-4 col-sm-4 col-xs-4'>
+												<span>Company Name *</span>
+												<input type="text" class='inputClass inputuser' placeholder="Company Name" id="txt_companyname">
+											</div>
+										</div>
+										<!--10 NOV 2020-->
+										<div class="col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR">
+											<div class="row" style="margin-left: 3px;">
+												<!-- 1 -->
+												<div class="col-md-2 col-sm-2 col-xs-2">
+													<div class="custom-control custom-checkbox checkbox-xl">
+									            		<input type="checkbox" class="custom-control-input" id="chk_adduser_admin" checked="">
+									            		<label class="custom-control-label" for="chk_adduser_admin">Admin</label>
+									        		</div>
+												</div>
+
+												<!-- 2 -->
+												<div class="col-md-2 col-sm-2 col-xs-2">
+													<div class="custom-control custom-checkbox checkbox-xl">
+									            		<input type="checkbox" class="custom-control-input" id="chk_adduser_user" checked="">
+									            		<label class="custom-control-label" for="chk_adduser_user">User</label>
+									        		</div>
+												</div>
+
+												<!-- 3 -->
+												<div class="col-md-3 col-sm-3 col-xs-3" style="display: none;">
+													<div class="custom-control custom-checkbox checkbox-xl">
+									            		<input type="checkbox" class="custom-control-input" id="chk_adduser_sync_dataroom" checked="">
+									            		<label class="custom-control-label" for="chk_adduser_sync_dataroom">Data Room Sync</label>
+									        		</div>
+												</div>
+
+												<!-- 4 -->
+												<div class="col-md-3 col-sm-3 col-xs-3" style="display: none;">
+													<div class="custom-control custom-checkbox checkbox-xl">
+									            		<input type="checkbox" class="custom-control-input" id="chk_adduser_sync_personal" checked="">
+									            		<label class="custom-control-label" for="chk_adduser_sync_personal" id="personal_sync">Personal Folder Sync</label>
+									        		</div>
+												</div>
+
+												<!-- 5 -->
+												<div class="col-md-2 col-sm-2 col-xs-2">
+													<div class="custom-control custom-checkbox checkbox-xl">
+									            		<input type="checkbox" class="custom-control-input" id="chk_adduser_autologin" checked="">
+									            		<label class="custom-control-label" for="chk_adduser_autologin">Auto Login</label>
+									        		</div>
+												</div>
+											</div>
+									    </div>
+										<!--10 NOV 2020-->
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-12 col-sm-12 col-xs-12 tableHeadSec margintop" style="border: 1px solid #D3D3D3;display:none;z-index:0;" id="divuser2factauthdetail">
+								<div class="col-md-6 col-sm-6 lsatCol heading tabs" style="text-align:left;"> Advanced Security </div>
+								<div class="col-md-12 col-sm-12 col-xs-12 overlaySec_corp overlayuserdetails tabs3" style="z-index:0;">
+									<div class="col-md-12 col-sm-12 col-xs-12 renewTab tabCont nopaddingLR tabactive tabs3">
+										<div class="col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR">
+											<!-- 10 Nov 2020-->
+											<div class="custom-control custom-checkbox checkbox-xl">
+									          	<input type="checkbox" class="custom-control-input" id="admin_user_chk_two_factor_auth" checked="">
+									          	<label class="custom-control-label" for="admin_user_chk_two_factor_auth">Enable 2 factor authentication</label>
+									        </div>
+									        <!-- 10 Nov 2020-->
+
+										</div>
+										<div class="col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR">
+											<!-- 10 Nov 2020 -->
+											<div class="custom-control custom-radio custom-control-inline">
+											 	<!-- 1-->
+											    <input type="radio" class="custom-control-input" id="chk_user_mobile_security" name="radiosecurity"  value="1">
+											    <label class="custom-control-label labelradio" for="chk_user_mobile_security" id="chk_user_mobile_security_span">&nbsp;</label>
+
+										      	<!-- 3-->
+										      	<input type="radio" class="custom-control-input" id="chk_user_email_security" name="radiosecurity"  value="3">
+										      	<label class="custom-control-label labelradio" for="chk_user_email_security" id="chk_user_whatsapp_email_span">&nbsp;</label>
+
+										      	<!-- 4-->
+												<input type="radio" class="custom-control-input" id="chk_user_auth_security" name="radiosecurity"  value="4">
+										      	<label class="custom-control-label labelradio" for="chk_user_auth_security" id="chk_user_authenticator_span">&nbsp;</label>
+
+
+										    </div>
+										    <!-- 10 Nov 2020 -->
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-12 col-sm-12 col-xs-12 tableHeadSec margintop" style="border: 1px solid #D3D3D3; display: none;">
+								<div class='col-md-6 col-sm-6 heading pb20'>Advance Settings</div>
+								<div class='col-md-6 col-sm-6 lsatCol heading' id="tabs2">
+									<img src="assets/icons/dddd.png" style="display:none;">
+								</div>
+								<div class='col-md-12 col-sm-12 col-xs-12 overlaySec tabs2' id='overlaySecadvancesettings'>
+									<div class='col-md-12 col-sm-12 col-xs-12 renewTab tabCont nopaddingLR disf'>
+										<div class='col-md-4 col-sm-4 col-xs-4  tabContSingle nopaddingLR fullcheckone'>
+											<div class='col-md-12 col-sm-12 col-xs-12 checkhead'>
+												<center>
+													<label class='container containeradvance'>Permitted Apps</label>
+												</center>
+											</div>
+											<div class="col-md-12 col-sm-12 col-xs-12 advancechecked large-2" id="admin_permitted_apps">
+												<!--10 Nov 2020 -->
+												<!--1-->
+												<div class="col-md-12 col-sm-12 col-xs-12 permitted_app_checkbox_top_margin">
+													<div class="custom-control custom-checkbox checkbox-xl" id="admin_adduser_drive">
+											          	<input type="checkbox" name="terms" class="custom-control-input" id="chk_adduser_module_drive" checked="">
+											          	<label class="custom-control-label" for="chk_adduser_module_drive" id="chk_adduser_module_drive_span">DCirrus Drive</label>
+											        </div>
+										        </div>
+
+										        <!--2-->
+										        <div class="col-md-12 col-sm-12 col-xs-12">
+													<div class="custom-control custom-checkbox checkbox-xl" id="admin_adduser_admin">
+											          	<input type="checkbox" name="terms" class="custom-control-input" id="chk_adduser_module_admin" checked="">
+											          	<label class="custom-control-label" for="chk_adduser_module_admin" id="chk_adduser_module_admin_span">Admin</label>
+											        </div>
+										        </div>
+												<!--10 Nov 2020 -->
+
+												<div class='col-md-12 col-sm-12 col-xs-12' style='display:none;' id="admin_adduser_casemgmt">
+													<label class='container'>
+														<input type="checkbox" name="terms" class="label-to-bold-if-checked" id="chk_adduser_casemgmt">
+														<span> Case Management</span>
+														<span class="checkmark"></span>
+													</label>
+												</div>
+											</div>
+										</div>
+										<div class='col-md-4 col-sm-4 col-xs-4  tabContSingle nopaddingLR fullcheckone'>
+											<div class='col-md-12 col-sm-12 col-xs-12 checkhead'>
+												<center>
+													<label class='container containeradvance'>Block Device</label>
+												</center>
+											</div>
+											<div class="col-md-12 col-sm-12 col-xs-12 advancechecked large-2">
+												<!--10 Nov 2020-->
+												<!--1-->
+												<div class="col-md-12 col-sm-12 col-xs-12 permitted_app_checkbox_top_margin">
+													<div class="custom-control custom-checkbox checkbox-xl" >
+											          	<input type="checkbox" name="terms" class="custom-control-input" id="chk_adduser_usb" checked="">
+											          	<label class="custom-control-label" for="chk_adduser_usb">USB</label>
+											        </div>
+										        </div>
+										        <!--2-->
+										        <div class="col-md-12 col-sm-12 col-xs-12">
+													<div class="custom-control custom-checkbox checkbox-xl" >
+											          	<input type="checkbox" name="terms" class="custom-control-input" id="chk_adduser_dvd" checked="">
+											          	<label class="custom-control-label" for="chk_adduser_dvd">DVD</label>
+											        </div>
+										        </div>
+												<!--10 Nov 2020-->
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div id="more_info_div" class="col-md-12 col-sm-12 col-xs-12 tableHeadSec margintop" style="border: 1px solid #D3D3D3;display: none;">
+								<div class='col-md-12 col-sm-12 heading pb20' style="padding-bottom: 0px;">More Info</div>
+								<div class='col-md-12 col-sm-12 col-xs-12 overlaySecc overlayuserdetails tabs1'>
+									<div class='col-md-12 col-sm-12 col-xs-12 renewTab tabCont nopaddingLR tabactive'>
+										<div class='col-md-4 col-sm-4 col-xs-4'>
+											<span>Created On</span>
+											<input type="text" name="storage" class='inputClass inputuser' id="user_created_on" readonly>
+										</div>
+										<div class='col-md-4 col-sm-4 col-xs-4'>
+											<span>Last Login</span>
+											<input type="text" name="storage" class='inputClass inputuser' id="user_last_login" readonly>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			<!--add User end-->
+			<!--manage Device start-->
+			<div class="col-md-11 col-sm-11 col-xs-12 pl0" id="mg_divc" style="padding-right:0px;padding-left:15px;display: none;">
+				<div class="col-md-12 col-sm-12 col-xs-12 bg" >
+					<div class="col-md-12 col-sm-12 col-xs-12 ">
+						<div class="col-md-12 col-sm-12 col-xs-12 bg">
+							<div class="col-md-12 col-sm-12 col-xs-12 pt10">
+								<center>
+									<div class='tabHeadSecManage'>
+										<span class='manage_tabs active' id='pending_req'>Pending Devices</span>
+										<span class='manage_tabs' id='blocked_req'>Blocked Devices</span>
+										<span class='manage_tabs' id='approved_req'> Approved Devices</span>
+										<!-- <span class='manage_tabs' id='autoDevice_req'> Auto IP Device Approve</span> -->
+									</div>
+								</center>
+							</div>
+						</div>
+					</div>
+					<div class="pendingTab tabsContentcomm active">
+						<div class="col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px; padding-right: 5px;">
+							<div class="col-md-12 col-sm-12 col-xs-12 tableHeadSec" id="tableHeadSecDevice" style="margin-top: 10px; border: 1px solid #d3d3d3;">
+								<div class='col-md-2 col-sm-2 heading'>Requestor Name</div>
+								<div class='col-md-3 col-sm-3 heading'>Login Id</div>
+								<div class='col-md-1 col-sm-1 heading' style="width: 13%;">Device Name</div>
+								<div class='col-md-2 col-sm-2 heading'>IP Address</div>
+								<div id="divc_date_time_col" class='col-md-3 col-sm-3 heading' style="width: 28%;">Date & Time</div>
+							</div>
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12 " style="padding-left: 0px; padding-right: 5px;">
+							<!--Pending request tab start-->
+							<div class="tablebodySec nopaddingLR" id="pending_Tab" style="overflow: auto; height: 390px; margin-bottom: 30px; border: 1px solid #d3d3d3;">
+								<div class="col-md-12 col-sm-12 col-xs-12  single">
+									<div class='col-md-2 col-sm-2'>Emir Alexsandro
+										<div><span class='unblockColor pointerClass' id="unblock_divc">Block</span> | <span class='deleteColor pointerClass' id="dlt_divc">Delete</span>
+										</div>
+									</div>
+									<div class='col-md-3 col-sm-3'>tanmay.senapatii@gmail.com</div>
+									<div class='col-md-2 col-sm-2'>Samsung-SM-G9650</div>
+									<div class='col-md-5 col-sm-5'>
+										<span>103.74.109.127</span>
+									<span style="float: right;">11/11/2001 20:20:12</span></div>
+								</div>
+							</div>
+							<!--Pending request tab end-->
+
+							<!--Blocked request tab start-->
+							<div class="col-md-12 col-sm-12 col-xs-12 tablebodySec nopaddingLR" style="overflow:auto;height:390px;margin-bottom:30px;" id="blocked_Tab">
+								<div class="col-md-12 col-sm-12 col-xs-12  single">
+									<div class='col-md-2 col-sm-2'>Emir Alexsandro
+										<div><span class='unblockColor pointerClass' id="unblock_divc">Unblock</span> | <span class='deleteColor pointerClass' id="dlt_divc">Delete</span>
+										</div>
+									</div>
+									<div class='col-md-3 col-sm-3'>tanmay.senapatii@gmail.com</div>
+									<div class='col-md-2 col-sm-2'>Samsung-SM-G9650</div>
+									<div class='col-md-5 col-sm-5'>
+										<span>103.74.109.127</span>
+									<span style="float: right;">11/11/2001 20:20:12</span></div>
+								</div>
+							</div>
+							<!--Blocked request tab closed-->
+
+							<!--Approved request tab strt-->
+							<div class="col-md-12 col-sm-12 col-xs-12 tablebodySec nopaddingLR adminApprovTab"  id="approved_tab">
+								<div class="col-md-12 col-sm-12 col-xs-12  single">
+									<div class='col-md-2 col-sm-2'>Emir Alexsandro
+										<div><span class='unblockColor pointerClass' id="unblock_divc">Unblock</span> | <span class='deleteColor pointerClass' id="dlt_divc">Delete</span>
+										</div>
+									</div>
+									<div class='col-md-3 col-sm-3'>tanmay.senapatii@gmail.com</div>
+									<div class='col-md-2 col-sm-2'>Samsung-SM-G9650</div>
+									<div class='col-md-5 col-sm-5'>
+										<span>103.74.109.127</span>
+									<span style="float: right;">11/11/2001 20:20:12</span></div>
+								</div>
+							</div>
+							<!--Approved request tab strt-->
+							<div class='autoDeviceTab tabsContentcomm admin_autoipTab' id="autoip_Tab">
+								<div class='col-md-12 col-sm-12 col-xs-12 autodeviceapprovemainSec'>
+								 <center>
+									<img src="assets/icons/Layer_1276.png" style='width:100%;'>
+									<div class='col-md-12 col-sm-12 col-xs-12 tabContSingle autoDbox' style="max-height: 250px;overflow-y: auto;">
+										<p>Auto approve device from the following IP address list</p>
+										<div id="diviplist">
+											<div class="cell iptextclass" style="outline: none; border: none;" id="diviplist_0">
+												<span class="cell">
+													<input type="text" class="inputClass1" maxlength="3" style="width: 20%;outline: none; border: none; background: none; border-bottom: 1px solid #01acb2;" onkeypress="return isNumberKeyForIPAddress(event)">
+												</span>
+												<span class="cell">.</span>
+												<span class="cell">
+													<input type="text" class="inputClass1" maxlength="3" style="width: 20%;outline: none; border: none; background: none; border-bottom: 1px solid #01acb2;" onkeypress="return isNumberKeyForIPAddress(event)">
+												</span>
+												<span class="cell">.</span>
+												<span class="cell">
+													<input type="text" class="inputClass1" maxlength="3" style="width: 20%;outline: none; border: none; background: none; border-bottom: 1px solid #01acb2;" onkeypress="return isNumberKeyForIPAddress(event)">
+												</span>
+												<span class="cell">.</span>
+												<span class="cell">
+													<input type="text" class="inputClass1" maxlength="3" style="width: 20%;outline: none; border: none; background: none; border-bottom: 1px solid #01acb2;" onkeypress="return isNumberKeyForIPAddress(event)">
+												</span>
+											</div>
+										</div>
+									  	<button class='tabBtn1' id="btnipadd">ADD</button>
+									</div>
+								 </center>
+								</div>
+							</div>
+						<!--<div class="col-md-12 col-sm-12 col-xs-12 tablebodySec nopaddingLR" style="overflow: auto; height: 390px;" id="autoip_Tab">
+								<center>
+									<div class='col-md-12 col-sm-12 col-xs-12 tabContSingle autoDbox'>
+										<p>Auto approve device from the following IP address list</p>
+										<p><button class="tabBtn1" style="width:7%;padding:2px 0px;">ADD</button></p>
+									</div>
+									<div class='col-md-12 col-sm-12 col-xs-12 tabContSingle autoDbox' id='diviplist'>
+										<p><input type="text" name="storage" class='inputClass1 ip-input-item' placeholder="IP Address" id="txtipaddr_0"
+											style="width:30%;color:black;" onkeypress="return isNumberKeyForIPAddress(event)"></p>
+										<p><input type="text" name="storage" class='inputClass1 ip-input-item' placeholder="IP Address" id="txtipaddr_1"
+											style="width:30%;color:black;" onkeypress="return isNumberKeyForIPAddress(event)"></p>
+										<p><input type="text" name="storage" class='inputClass1 ip-input-item' placeholder="IP Address" id="txtipaddr_2"
+											style="width:30%;color:black;" onkeypress="return isNumberKeyForIPAddress(event)"></p>
+									</div>
+								</center>
+							</div>-->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--Manage Device End-->
+
+			<!--Corporate start-->
+			<div class="col-md-11 col-sm-11 col-xs-12 pl0" id="mg_corp" style="display:none;padding-right:0px;padding-left:15px;margin-top:2%;">
+				<div class="col-md-12 col-sm-12 col-xs-12 bg" style="padding-right:15px;padding-left:15px;">
+					<div class="col-md-12 col-sm-12 col-xs-12 pt10">
+						<div class="col-md-6 col-sm-6 col-xs-6 tabHeadSecspan">
+							<span class="span" id="renewTab">Settings</span>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-6 ">
+							<span><button class="tabBtn" id="btnsavecorp">EDIT</button></span>
+							<p class="themecolor cancelbtndetails mt10 pointerClass" style="text-decoration:none;display:none;" id="btncorpcancel">CANCEL</p>
+						</div>
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12 admin_seeting_Screen" id="adminsetting">
+						<div class="col-md-12 col-sm-12 col-xs-12 tableHeadSec margintop" style="border: 1px solid #D3D3D3;">
+							<div class="col-md-6 col-sm-6 lsatCol heading tabs" >
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 overlaySec_corp overlayuserdetails tabs3">
+								<div class="col-md-12 col-sm-12 col-xs-12 renewTab tabCont nopaddingLR tabactive tabs3">
+									<div class="col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR">
+										<fieldset style="display: block;padding-inline-start:0.75em;border-width:2px;border-style:groove;border-color:threedface;border-image:initial;width:441px;">
+											<legend style="width:158px;padding-left:10px;border-bottom:none;border:1px;font-size:16px;font-weight:bold;">Enable Watermark</legend>
+											<!--10 NOV 2020-->
+											<div class="row">
+											<!-- ONE -->
+												<div class="col-md-6 custom-control custom-checkbox checkbox-xl">
+	          										<input type="checkbox" class="custom-control-input" id="admin_chk_watermark_view" checked="">
+	         										<label class="custom-control-label" for="admin_chk_watermark_view">View</label>
+	        									</div>
+	        									<!-- TWO -->
+	        									<div class="col-md-6 custom-control custom-checkbox checkbox-xl">
+	          										<input type="checkbox" class="custom-control-input" id="admin_chk_watermark_download" checked="">
+	         										<label class="custom-control-label" for="admin_chk_watermark_download">Download</label>
+	        									</div>
+        									</div>
+											<!--10 NOV 2020-->
+
+											<label class='container userspan' style="width:55%;float:left;display:none;">
+												<input type="checkbox" id="admin_chk_watermark_download_original"> <span style="font-weight: bold !important;">Download Original</span>
+												<span class="checkmark"></span>
+											</label>
+										</fieldset>
+										<!-- <div class="col-md-2 col-sm-2 col-xs-2" >
+											<label class='container userspan'>
+												<input type="checkbox" name="terms"> <span style="font-weight: bold !important;">View</span>
+												<span class="checkmark" id="chk_water_viw"></span>
+											</label>
+											<!-- <label class='container userspan'>
+												<input type="checkbox" name="terms"> <span style="font-weight: bold !important;">Download</span>
+												<span class="checkmark" id="chk_water_viw"></span>
+											</label>
+										</div>
+										<div class="col-md-2 col-sm-2 col-xs-2" >
+											<label class='container userspan'>
+												<input type="checkbox" name="terms"> <span style="font-weight: bold !important;">Download</span>
+												<span class="checkmark" id="chk_water_viw"></span>
+											</label>
+										</div> -->
+									</div>
+									<div class="col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR">
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span>Watermark</span>
+											<label>&nbsp<i class='fa fa-info-circle mt-2' aria-hidden='true' title='"Watermark will be truncated if number of characters exceed 62 in case of straight watermark and 92 in case of across watermark"'></i></label>
+											<input type="text" id="admin_watermark_text" class="inputClass inputuser "
+												placeholder="Watermark" onkeypress="return !allowCharacter(event, ',[,],')">
+											<p style="padding-top: 5px;">
+												Enter options from here
+												<span style="color:#6699cc;cursor:pointer;" id="admin_useremailadd">[useremail]</span>
+												<span style="color:#6699cc;cursor:pointer;" id="admin_dateadd">[date]</span>
+												<span style="color:#6699cc;cursor:pointer;" id="admin_ipaddressadd">[ipaddress]</span>
+												to print actual values in watermark
+											</p>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<span>Example</span>
+											<input type="text" name="storage" id="watermark_txt_read" class="inputClass inputuser" readonly value="Company john@dcirrus.com 05/05/2020 18.198.78.206">
+										</div>
+
+										<div class="col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR" style="margin-top: 10px !important;">
+											<span style="float: left; margin-left: 18px; margin-top: 10px;">Color</span>
+											<div id="primary-content" class="primary-content">
+												<div id="cp-background-color" class="color-picker">
+													<div onclick="adminChooseWaterMarkColor(this);" class="color watermarkcolor" value="0" style="background-color: blue;"></div>
+													<div onclick="adminChooseWaterMarkColor(this);" class="color watermarkcolor" value="1" style="background-color: cyan;"></div>
+													<div onclick="adminChooseWaterMarkColor(this);" class="color watermarkcolor" value="2" style="background-color: gray;"></div>
+													<div onclick="adminChooseWaterMarkColor(this);" class="color watermarkcolor" value="3" style="background-color: green;"></div>
+													<div onclick="adminChooseWaterMarkColor(this);" class="color watermarkcolor" value="4" style="background-color: magenta;"></div>
+													<div onclick="adminChooseWaterMarkColor(this);" class="color watermarkcolor" value="5" style="background-color: orange;"></div>
+													<div onclick="adminChooseWaterMarkColor(this);" class="color watermarkcolor" value="6" style="background-color: red;"></div>
+													<div onclick="adminChooseWaterMarkColor(this);" class="color watermarkcolor" value="7" style="background-color: lightgray;"></div>
+													<div onclick="adminChooseWaterMarkColor(this);" class="color watermarkcolor" value="8" style="background-color: yellow;"></div>
+												</div>
+											</div>
+										</div>
+
+									</div>
+									<div class="col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR">
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<fieldset style="display: block;padding-inline-start:0.75em;border-width:2px;border-style:groove;border-color:threedface;border-image:initial; width:68%;">
+												<legend style="width:154px;padding-left:10px;border-bottom:none;border:1px;font-size:16px;font-weight:bold;">Watermark Straight</legend>
+
+												<!--10 NOV 2020-->
+												<div class="row">
+												    <!-- ONE -->
+													<div class="col-md-3 custom-control custom-checkbox checkbox-xl">
+		          										<input type="checkbox" class="custom-control-input" id="admin_chk_watermark_left" checked="">
+		         										<label class="custom-control-label" for="admin_chk_watermark_left">Left</label>
+		        									</div>
+		        									<!-- TWO -->
+		        									<div class="col-md-3 custom-control custom-checkbox checkbox-xl" style="margin: 0px auto; padding: 0px;">
+		          										<input type="checkbox" class="custom-control-input" id="admin_chk_watermark_top" checked="">
+		         										<label class="custom-control-label" for="admin_chk_watermark_top">Top</label>
+		        									</div>
+
+		        									<!-- THREE -->
+		        									<div class="col-md-3 custom-control custom-checkbox checkbox-xl" style="margin: 0px auto; padding: 0px;">
+		          										<input type="checkbox" class="custom-control-input" id="admin_chk_watermark_right" checked="">
+		         										<label class="custom-control-label" for="admin_chk_watermark_right">Right</label>
+		        									</div>
+
+		        									<!-- FOUR -->
+		        									<div class="col-md-3 custom-control custom-checkbox checkbox-xl" style="margin: 0px auto; padding: 0px;">
+		          										<input type="checkbox" class="custom-control-input" id="admin_chk_watermark_bottom" checked="">
+		         										<label class="custom-control-label" for="admin_chk_watermark_bottom">Bottom</label>
+		        									</div>
+	        									</div>
+												<!--10 NOV 2020-->
+
+											</fieldset>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<fieldset style="display: block;padding-inline-start:0.75em;border-width:2px;border-style:groove;border-color:threedface;border-image:initial;width:320px;">
+												<legend style="width:154px;padding-left:10px;border-bottom:none;border:1px;font-size:16px;font-weight:bold;">Watermark Across</legend>
+												<!--10 NOV 2020-->
+												<div class="row">
+												    <!-- ONE -->
+													<div class="col-md-6 custom-control custom-checkbox checkbox-xl">
+		          										<input type="checkbox" class="custom-control-input" id="admin_chk_watermark_single" checked="">
+		         										<label class="custom-control-label" for="admin_chk_watermark_single">Single Line</label>
+		        									</div>
+		        									<!-- TWO -->
+		        									<div class="col-md-6 custom-control custom-checkbox checkbox-xl">
+		          										<input type="checkbox" class="custom-control-input" id="admin_chk_watermark_multiple" checked="">
+		         										<label class="custom-control-label" for="admin_chk_watermark_multiple">Multiple Lines</label>
+		        									</div>
+	        									</div>
+												<!--10 NOV 2020-->
+											</fieldset>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-12 col-sm-12 col-xs-12 tableHeadSec margintop" style="border: 1px solid #D3D3D3;display:none;" id="div2factauthdetail">
+							<div class="col-md-6 col-sm-6 lsatCol heading tabs" style="text-align:left;"> Advanced Security </div>
+							<div class="col-md-12 col-sm-12 col-xs-12 overlaySec_corp overlayuserdetails tabs3"style="z-index: 0;">
+								<div class="col-md-12 col-sm-12 col-xs-12 renewTab tabCont nopaddingLR tabactive tabs3">
+									<div class="col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR">
+										<!-- 10 NOV 2020-->
+										<div class="col-md-6 custom-control custom-checkbox checkbox-xl">
+		          							<input type="checkbox" class="custom-control-input" id="admin_chk_two_factor_auth" checked="">
+		         							<label class="custom-control-label" for="admin_chk_two_factor_auth">Enable 2 factor authentication</label><span style="margin-left: 1%;"><i class="fa fa-info-circle mt-2" aria-hidden="true" title="Please contact DCirrus Support to enable or disable 2FA for all users."></i></span>
+		        						</div>
+		        						<!-- 10 NOV 2020-->
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-12 col-sm-12 col-xs-12 tableHeadSec margintop" style="border: 1px solid #D3D3D3;">
+							<div class="col-md-6 col-sm-6 lsatCol heading tabs" >
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 overlaySec_corp overlayuserdetails tabs3">
+								<div class="col-md-12 col-sm-12 col-xs-12 renewTab tabCont nopaddingLR tabactive tabs3">
+									<div class="col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR">
+										<!-- 10 NOV 2020-->
+										<div class="col-md-6 custom-control custom-checkbox checkbox-xl">
+		          							<input type="checkbox" class="custom-control-input" id="admin_chk_prjindex_number" checked="">
+		         							<label class="custom-control-label" for="admin_chk_prjindex_number">Show Project Index Number</label>
+		        						</div>
+										<!--<div class="col-md-6 custom-control"></div>
+										<input  type="file" accept=".png" name="file" id="image-file" onchange="return validate();"/>
+										</div>-->
+		        						<!-- 10 NOV 2020-->
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-12 col-sm-12 col-xs-12 tableHeadSec margintop" style="border: 1px solid #D3D3D3;">
+							<div class='col-md-6 col-sm-6 heading'>Display Conditions of access</div>
+							<div class="col-md-6 col-sm-6 lsatCol heading tabs">
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 overlaySec_corp overlayuserdetails tabs1">
+								<div class="col-md-12 col-sm-12 col-xs-12 renewTab tabCont nopaddingLR tabactive">
+									<div class="col-sm-12 col-12 tabContSingle nopaddingLR">
+										<div class="col-md-3 col-sm-3 col-xs-3">
+											<span>Frequency</span> <br>  <br>
+											<select id="disclaimerfrequency">
+												<option value=1>Never</option>
+												<option value=2>First Time Login</option>
+												<option value=3>Every Time Login</option>
+											</select>
+										</div>
+										<div class="col-md-5 col-sm-5 col-xs-5">
+											<span>Title *</span>
+											<input type="text" name="storage" id="disclaimer_title" class="inputClass inputuser" readonly>
+										</div>
+										<div class="col-md-4 col-sm-4 col-xs-4 ">
+											<span><button class="tabBtn" id="disclaimermsg" style= "width: 50%;">Disclaimer Content</button></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Metadata update -->
+						<div class="col-md-12 col-sm-12 col-xs-12 tableHeadSec margintop" id="metadatadetail">
+							<div class='col-md-6 col-sm-6 heading'>Pre Configure Metadata(Max 30)</div>
+
+							<div class="col-md-4 col-sm-4 col-xs-4 ">
+							<div id="metadataservice">
+								<span><i class="fa fa-angle-double-right tabmetadata" id="dropdownMetadata" style="font-size: 32px; margin-right: -41%;margin-top: -5%; margin-bottom: 2%; text-align: center;"></i></span>
+							</div></div>
+							<div class="col-md-12 col-sm-12 col-xs-12 overlaySec_corp overlayuserdetails tabs1">
+								<div class="col-md-12">
+									<div class="col-md-11">
+										<input type="text" name="metadataKey" id="metadata_key" class="inputClass inputuser" placeholder="Enter new metadata key(max 30 character)" maxlength="30">
+									</div>
+								<div class="col-md-1" style="padding-left: 0;">
+									<span style="padding-top: 2%;"><i id="addMetadataKey" class="fa fa-save col-md-2 font-18 cursor-pointer" style="color: blue;"></i></span>
+								</div>
+								</div>
+								<div><h5 style="padding-top: 40px;padding-left: 20px;">Metadata Keys</h5></div>
+								<div id="metadataList" style="max-height:100%;margin-left:0px;"></div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-12 col-sm-12 col-xs-12 tableHeadSec margintop" style="border: 1px solid #D3D3D3;">
+							<div class='col-md-6 col-sm-6 heading'>Company/Project Details</div>
+							<div class="col-md-6 col-sm-6 lsatCol heading tabs">
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 overlaySec_corp overlayuserdetails tabs1">
+								<div class="col-md-12 col-sm-12 col-xs-12 renewTab tabCont nopaddingLR tabactive">
+									<div class="col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR">
+										<div class="col-md-4 col-sm-4 col-xs-4 ">
+											<span>Name *</span>
+											<input type="text" name="storage" id="admin_corporate_name" class="inputClass inputuser " readonly>
+										</div>
+										<div class="col-md-4 col-sm-4 col-xs-4  ">
+											<span>Select Document Storage Region</span>
+											<input type="text" name="storage" id="admin_s3_name" class="inputClass inputuser" readonly>
+										</div>
+
+										<div class="col-md-4 col-sm-6=4 col-xs-4 ">
+											<span id="lbl_upload_logo" style="display:none;">Upload Your Logo *</span>
+											<input type="file" accept=".png" title="" name="file" id="image-file" style="color:transparent;" onchange="this.style.color = 'black';"  disabled="disabled"/>
+											<img src="" style="width:50px;display:none;" id="img_logo_preview"/>
+											<span id="lbl_change_upload_logo" style="display:none;margin-right:100px;color:#cccccc;">Click on Logo to change*</span>
+											<button id="btn_image_file_remove" class="btn btn-primary" style="background-color:#23bbf3 !important;outline:#23c2bd;margin-bottom:3px;margin-top:10px;display:none;">Remove Logo</button>
+											<label style="margin-right: 100px;color: rgb(0, 0, 0); float:left; width:100%;">Logo should be less than 50 KB. Logo format should be PNG *</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12 tableHeadSec margintop" style="border: 1px solid #D3D3D3;">
+							<div class='col-md-6 col-sm-6 heading'>Contact Details
+							</div>
+							<div class="col-md-6 col-sm-6 lsatCol heading tabs">
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 overlaySec_corp overlayuserdetails tabs2">
+								<div class="col-md-12 col-sm-12 col-xs-12 renewTab tabCont nopaddingLR tabactive tabs2">
+									<div class="col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR">
+										<div class="col-md-4 col-sm-4 col-xs-4">
+											<span>First Name *</span>
+											<input type="text" name="storage" id="admin_corporate_firstname" class="inputClass inputuser "
+												 onkeypress="return !allowAlphaNumeric(event)">
+										</div>
+										<div class="col-md-4 col-sm-4 col-xs-4">
+											<span>Middle Name</span>
+											<input type="text" name="storage" id="admin_corporate_middlename" class="inputClass inputuser "
+												 onkeypress="return !allowAlphaNumeric(event)">
+										</div>
+										<div class="col-md-4 col-sm-4 col-xs-4">
+											<span>Last Name *</span>
+											<input type="text" name="storage" id="admin_corporate_lastname" class="inputClass inputuser "
+												 onkeypress="return !allowAlphaNumeric(event)">
+										</div>
+									</div>
+									<div class="col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR">
+										<div class="col-md-4 col-sm-4 col-xs-4">
+											<span>Phone No</span>
+											<input type="text" name="storage" id="admin_corporate_phone" class="inputClass inputuser "
+												maxlength="15" onkeypress="return isNumberKeyForPhone(event)">
+										</div>
+										<div class="col-md-4 col-sm-4 col-xs-4">
+											<span>Email Id</span>
+											<input type="text" name="storage" id="admin_corporate_email" class="inputClass inputuser" readonly>
+										</div>
+										<!--<div class="col-md-4 col-sm-4 col-xs-4">
+											<span>Fax</span>
+											<input type="text" name="storage" id="admin_corporate_fax" class="inputClass inputuser" maxlength="15" onkeypress="return isNumberKeyForPhone(event)">
+										</div>-->
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12 tableHeadSec margintop" style="border: 1px solid #D3D3D3;">
+							<div class='col-md-6 col-sm-6 heading'>Address</div>
+							<div class="col-md-6 col-sm-6 lsatCol heading tabs">
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 overlaySec_corp overlayuserdetails tabs3">
+								<div class="col-md-12 col-sm-12 col-xs-12 renewTab tabCont nopaddingLR tabactive tabs3">
+									<div class="col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR">
+										<div class="col-md-4 col-sm-4 col-xs-4">
+											<span>Place</span>
+											<input type="text" name="storage" id="admin_corporate_place" class="inputClass inputuser "
+												onkeypress="return !allowAlphaNumeric(event)">
+										</div>
+										<div class="col-md-4 col-sm-4 col-xs-4">
+											<span>Street</span>
+											<input type="text" name="storage" id="admin_corporate_street" class="inputClass inputuser "
+												onkeypress="return !allowAlphaNumeric(event)">
+										</div>
+										<div class="col-md-4 col-sm-4 col-xs-4">
+											<span>City</span>
+											<input type="text" name="storage" id="admin_corporate_city" class="inputClass inputuser "
+												onkeypress="return !allowAlphaNumeric(event)">
+										</div>
+									</div>
+									<div class="col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR">
+										<div class="col-md-4 col-sm-4 col-xs-4">
+											<span>State</span>
+											<input type="text" name="storage" id="admin_corporate_state" class="inputClass inputuser "
+												onkeypress="return !allowAlphaNumeric(event)">
+										</div>
+										<div class="col-md-4 col-sm-4 col-xs-4">
+											<span>Pincode</span>
+											<input type="text" name="storage" id="admin_corporate_zip" class="inputClass inputuser" maxlength="10" onkeypress="return isNumberKey(event)">
+										</div>
+										<div class="col-md-4 col-sm-4 col-xs-4">
+											<span>Country</span>
+											<input type="text" name="storage" id="admin_corporate_country" class="inputClass inputuser "
+												onkeypress="return !allowAlphaNumeric(event)">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-12 col-sm-12 col-xs-12 tableHeadSec margintop" style="border: 1px solid #D3D3D3; margin-bottom:20px">
+							<div class='col-md-6 col-sm-6 heading'>Start Date and End Date</div>
+							<div class="col-md-6 col-sm-6 lsatCol heading tabs">
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 tableHeadSec margintop">
+								<div class="col-md-12 col-sm-12 col-xs-12 overlaySec_corp overlayuserdetails tabs1">
+									<div class="col-md-12 col-sm-12 col-xs-12 renewTab tabCont nopaddingLR tabactive">
+										<div class="col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR">
+											<div class="col-md-6 col-sm-6 col-xs-6 ">
+												<span>Start Date</span>
+												<input type="text" name="storage" id="admin_corporate_startdate" class="inputClass inputuser" readonly>
+											</div>
+											<div class="col-md-6 col-sm-6 col-xs-6  ">
+												<span>Expiry Date</span>
+												<input type="text" name="storage" id="admin_corporate_expirydate" class="inputClass inputuser" readonly>
+											</div>
+										</div>
+										<div class="col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR" id="div_admin_close_dataroom" style="display:none;">
+											<div class="col-md-6 col-sm-6 col-xs-6 ">
+												<button id="btn_admin_close_dataroom" class="btn btn-primary" style="background-color:#23bbf3 !important;outline:#23c2bd;margin-bottom:3px;">Close Dataroom</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12 tableHeadSec margintop" style="border: 1px solid #D3D3D3; margin-bottom:20px">
+							<div class='col-md-6 col-sm-6 heading'>Update Time Zone</div>
+							<div class="col-md-6 col-sm-6 lsatCol heading tabs">
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12 tableHeadSec margintop">
+								<div class="col-md-12 col-sm-12 col-xs-12 overlaySec_corp overlayuserdetails tabs1">
+									<div class="col-md-12 col-sm-12 col-xs-12 renewTab tabCont nopaddingLR tabactive">
+										<div class="col-md-12 col-sm-12 col-xs-12  tabContSingle nopaddingLR">
+											<div class="col-md-6 col-sm-6 col-xs-6 ">
+												<span>Time Zone</span>
+												<select id="selectTimeZone">
+													<option value="">Select</option>
+													<option value="Australian Central Daylight Saving Time,GMT+10:30">Australian Central Daylight Saving Time,GMT+10:30</option>
+													<option value="Australian Central Standard Time,GMT+09:30">Australian Central Standard Time,GMT+09:30</option>
+													<option value="Acre Time,GMT-05:00">Acre Time,GMT-05:00</option>
+													<option value="Atlantic Daylight Time,GMT-03:00">Atlantic Daylight Time,GMT-03:00</option>
+													<option value="Australian Eastern Daylight Saving Time,GMT+11:00">Australian Eastern Daylight Saving Time,GMT+11:00</option>
+													<option value="Australian Eastern Standard Time,GMT+10:00">Australian Eastern Standard Time,GMT+10:00</option>
+													<option value="Australian Eastern Time,GMT+10:00">Australian Eastern Time,GMT+10:00</option>
+													<option value="Afghanistan Time,GMT+04:30">Afghanistan Time,GMT+04:30</option>
+													<option value="Alaska Daylight Time,GMT-08:00">Alaska Daylight Time,GMT-08:00</option>
+													<option value="Alaska Standard Time,GMT-09:00">Alaska Standard Time,GMT-09:00</option>
+													<option value="Alma-Ata Time,GMT+06:00">Alma-Ata Time[1],GMT+06:00</option>
+													<option value="Amazon Summer Time,GMT-03:00">Amazon Summer Time (Brazil)[2],GMT-03:00</option>
+													<option value="Amazon Time,GMT-04:00">Amazon Time (Brazil)[3],GMT-04:00</option>
+													<option value="Armenia Time,GMT+04:00">Armenia Time,GMT+04:00</option>
+													<option value="Anadyr Time,GMT+12:00">Anadyr Time[4],GMT+12:00</option>
+													<option value="Aqtobe Time,GMT+05:00">Aqtobe Time[5],GMT+05:00</option>
+													<option value="Argentina Time,GMT-03:00">Argentina Time,GMT-03:00</option>
+													<option value="Arabia Standard Time,GMT+03:00">Arabia Standard Time,GMT+03:00</option>
+													<option value="Atlantic Standard Time,GMT-04:00">Atlantic Standard Time,GMT-04:00</option>
+													<option value="Australian Western Standard Time,GMT+08:00">Australian Western Standard Time,GMT+08:00</option>
+													<option value="Azores Standard Time,GMT-01:00">Azores Standard Time,GMT-01:00</option>
+													<option value="Azerbaijan Time,GMT+04:00">Azerbaijan Time,GMT+04:00</option>
+													<option value="Brunei Time,GMT+08:00">Brunei Time,GMT+08:00</option>
+													<option value="British Indian Ocean Time,GMT+06:00">British Indian Ocean Time,GMT+06:00</option>
+													<option value="Baker Island Time,GMT-12:00">Baker Island Time,GMT-12:00</option>
+													<option value="Bolivia Time,GMT-04:00">Bolivia Time,GMT-04:00</option>
+													<option value="Brasília Summer Time,GMT-02:00">Brasília Summer Time,GMT-02:00</option>
+													<option value="Brasília Time,GMT-03:00">Brasília Time,GMT-03:00</option>
+													<option value="Bangladesh Standard Time,GMT+06:00">Bangladesh Standard Time,GMT+06:00</option>
+													<option value="Bougainville Standard Time,GMT+11:00">Bougainville Standard Time[6],GMT+11:00</option>
+													<option value="British Summer Time,GMT+01:00">British Summer Time,GMT+01:00</option>
+													<option value="Bhutan Time,GMT+06:00">Bhutan Time,GMT+06:00</option>
+													<option value="Central Africa Time,GMT+02:00">Central Africa Time,GMT+02:00</option>
+													<option value="Cocos Islands Time,GMT+06:30">Cocos Islands Time,GMT+06:30</option>
+													<option value="Central Daylight Time,GMT-05:00">Central Daylight Time (North America),GMT-05:00</option>
+													<option value="Cuba Daylight Time,GMT-04:00">Cuba Daylight Time[7],GMT-04:00</option>
+													<option value="Central European Summer Time,GMT+02:00">Central European Summer Time (Cf. HAEC),GMT+02:00</option>
+													<option value="Central European Time,GMT+01:00">Central European Time,GMT+01:00</option>
+													<option value="Chatham Daylight Time,GMT+13:45">Chatham Daylight Time,GMT+13:45</option>
+													<option value="Chatham Standard Time,GMT+12:45">Chatham Standard Time,GMT+12:45</option>
+													<option value="Choibalsan Standard Time,GMT+08:00">Choibalsan Standard Time,GMT+08:00</option>
+													<option value="Choibalsan Summer Time,GMT+09:00">Choibalsan Summer Time,GMT+09:00</option>
+													<option value="Chamorro Standard Time,GMT+10:00">Chamorro Standard Time,GMT+10:00</option>
+													<option value="Chuuk Time,GMT+10:00">Chuuk Time,GMT+10:00</option>
+													<option value="Clipperton Island Standard Time,GMT-08:00">Clipperton Island Standard Time,GMT-08:00</option>
+													<option value="Central Indonesia Time,GMT+08:00">Central Indonesia Time,GMT+08:00</option>
+													<option value="Cook Island Time,GMT-10:00">Cook Island Time,GMT-10:00</option>
+													<option value="Chile Summer Time,GMT-03:00">Chile Summer Time,GMT-03:00</option>
+													<option value="Chile Standard Time,GMT-04:00">Chile Standard Time,GMT-04:00</option>
+													<option value="Colombia Summer Time,GMT-04:00">Colombia Summer Time,GMT-04:00</option>
+													<option value="Colombia Time,GMT-05:00">Colombia Time,GMT-05:00</option>
+													<option value="Central Standard Time,GMT-06:00">Central Standard Time (North America),GMT-06:00</option>
+													<option value="China Standard Time,GMT+08:00">China Standard Time,GMT+08:00</option>
+													<option value="Cuba Standard Time,GMT-05:00">Cuba Standard Time,GMT-05:00</option>
+													<option value="China Time,GMT+08:00">China Time,GMT+08:00</option>
+													<option value="Cape Verde Time,GMT-01:00">Cape Verde Time,GMT-01:00</option>
+													<option value="Christmas Island Time,GMT+07:00">Christmas Island Time,GMT+07:00</option>
+													<option value="Davis Time,GMT+07:00">Davis Time,GMT+07:00</option>
+													<option value="Dumont d'Urville Time,GMT+10:00">Dumont d'Urville Time,GMT+10:00</option>
+													<option value="AIX-specific equivalent of Central European Time,GMT+01:00">AIX-specific equivalent of Central European Time[NB 1],GMT+01:00</option>
+													<option value="Easter Island Summer Time,GMT-05:00">Easter Island Summer Time,GMT-05:00</option>
+													<option value="Easter Island Standard Time,GMT-06:00">Easter Island Standard Time,GMT-06:00</option>
+													<option value="East Africa Time,GMT+03:00">East Africa Time,GMT+03:00</option>
+													<option value="Eastern Caribbean Time,GMT-04:00">Eastern Caribbean Time (does not recognise DST),GMT-04:00</option>
+													<option value="Ecuador Time,GMT-05:00">Ecuador Time,GMT-05:00</option>
+													<option value="Eastern Daylight Time,GMT-04:00">Eastern Daylight Time (North America),GMT-04:00</option>
+													<option value="Eastern European Summer Time,GMT+03:00">Eastern European Summer Time,GMT+03:00</option>
+													<option value="Eastern European Time,GMT+02:00">Eastern European Time,GMT+02:00</option>
+													<option value="Eastern Greenland Summer Time,GMT+00:00">Eastern Greenland Summer Time,GMT+00:00</option>
+													<option value="Eastern Greenland Time,GMT-01:00">Eastern Greenland Time,GMT-01:00</option>
+													<option value="Eastern Indonesian Time,GMT+09:00">Eastern Indonesian Time,GMT+09:00</option>
+													<option value="Eastern Standard Time,GMT-05:00">Eastern Standard Time (North America),GMT-05:00</option>
+													<option value="Further-eastern European Time,GMT+03:00">Further-eastern European Time,GMT+03:00</option>
+													<option value="Fiji Time,GMT+12:00">Fiji Time,GMT+12:00</option>
+													<option value="Falkland Islands Summer Time,GMT-03:00">Falkland Islands Summer Time,GMT-03:00</option>
+													<option value="Falkland Islands Time,GMT-04:00">Falkland Islands Time,GMT-04:00</option>
+													<option value="Fernando de Noronha Time,GMT-02:00">Fernando de Noronha Time,GMT-02:00</option>
+													<option value="Galápagos Time,GMT-06:00">Galápagos Time,GMT-06:00</option>
+													<option value="Gambier Islands Time,GMT-09:00">Gambier Islands Time,GMT-09:00</option>
+													<option value="Georgia Standard Time,GMT+04:00">Georgia Standard Time,GMT+04:00</option>
+													<option value="French Guiana Time,GMT-03:00">French Guiana Time,GMT-03:00</option>
+													<option value="Gilbert Island Time,GMT+12:00">Gilbert Island Time,GMT+12:00</option>
+													<option value="Gambier Island Time,GMT-09:00">Gambier Island Time,GMT-09:00</option>
+													<option value="Greenwich Mean Time,GMT+0:00">Greenwich Mean Time,GMT+0:00</option>
+													<option value="South Georgia and the South Sandwich Islands Time,GMT-02:00">South Georgia and the South Sandwich Islands Time,GMT-02:00</option>
+													<option value="Gulf Standard Time,GMT+04:00">Gulf Standard Time,GMT+04:00</option>
+													<option value="Guyana Time,GMT-04:00">Guyana Time,GMT-04:00</option>
+													<option value="Hawaii–Aleutian Daylight Time,GMT-09:00">Hawaii–Aleutian Daylight Time,GMT-09:00</option>
+													<option value="Heure Avancée d'Europe Centrale French-language name for CEST,GMT+02:00">Heure Avancée d'Europe Centrale French-language name for CEST,GMT+02:00</option>
+													<option value="Hawaii–Aleutian Standard Time,GMT-10:00">Hawaii–Aleutian Standard Time,GMT-10:00</option>
+													<option value="Hong Kong Time,GMT+08:00">Hong Kong Time,GMT+08:00</option>
+													<option value="Heard and McDonald Islands Time,GMT+05:00">Heard and McDonald Islands Time,GMT+05:00</option>
+													<option value="Hovd Summer Time,GMT+08:00">Hovd Summer Time (not used from 2017-present),GMT+08:00</option>
+													<option value="Hovd Time,GMT+07:00">Hovd Time,GMT+07:00</option>
+													<option value="Indochina Time,GMT+07:00">Indochina Time,GMT+07:00</option>
+													<option value="International Day Line West time zone,GMT-12:00">International Day Line West time zone,GMT-12:00</option>
+													<option value="Israel Daylight Time,GMT+03:00">Israel Daylight Time,GMT+03:00</option>
+													<option value="Indian Ocean Time,GMT+03:00">Indian Ocean Time,GMT+03:00</option>
+													<option value="Iran Daylight Time,GMT+04:30">Iran Daylight Time,GMT+04:30</option>
+													<option value="Irkutsk Time,GMT+08:00">Irkutsk Time,GMT+08:00</option>
+													<option value="Iran Standard Time,GMT+03:30">Iran Standard Time,GMT+03:30</option>
+													<option value="Indian Standard Time,GMT+05:30">Indian Standard Time,GMT+05:30</option>
+													<option value="Irish Standard Time,GMT+01:00">Irish Standard Time[8],GMT+01:00</option>
+													<option value="Israel Standard Time,GMT+02:00">Israel Standard Time,GMT+02:00</option>
+													<option value="Japan Standard Time,GMT+09:00">Japan Standard Time,GMT+09:00</option>
+													<option value="Kaliningrad Time,GMT+02:00">Kaliningrad Time,GMT+02:00</option>
+													<option value="Kyrgyzstan Time,GMT+06:00">Kyrgyzstan Time,GMT+06:00</option>
+													<option value="Kosrae Time,GMT+11:00">Kosrae Time,GMT+11:00</option>
+													<option value="Krasnoyarsk Time,GMT+07:00">Krasnoyarsk Time,GMT+07:00</option>
+													<option value="Korea Standard Time,GMT+09:00">Korea Standard Time,GMT+09:00</option>
+													<option value="Lord Howe Standard Time,GMT+10:30">Lord Howe Standard Time,GMT+10:30</option>
+													<option value="Lord Howe Summer Time,GMT+11:00">Lord Howe Summer Time,GMT+11:00</option>
+													<option value="Line Islands Time,GMT+14:00">Line Islands Time,GMT+14:00</option>
+													<option value="Magadan Time,GMT+12:00">Magadan Time,GMT+12:00</option>
+													<option value="Marquesas Islands Time,GMT-09:30">Marquesas Islands Time,GMT-09:30</option>
+													<option value="Mawson Station Time,GMT+05:00">Mawson Station Time,GMT+05:00</option>
+													<option value="Mountain Daylight Time,GMT-06:00">Mountain Daylight Time (North America),GMT-06:00</option>
+													<option value="Middle European Time Same zone as CET,GMT+01:00">Middle European Time Same zone as CET,GMT+01:00</option>
+													<option value="Middle European Summer Time Same zone as CEST,GMT+02:00">Middle European Summer Time Same zone as CEST,GMT+02:00</option>
+													<option value="Marshall Islands Time,GMT+12:00">Marshall Islands Time,GMT+12:00</option>
+													<option value="Macquarie Island Station Time,GMT+11:00">Macquarie Island Station Time,GMT+11:00</option>
+													<option value="Marquesas Islands Time,GMT-09:30">Marquesas Islands Time,GMT-09:30</option>
+													<option value="Myanmar Standard Time,GMT+06:30">Myanmar Standard Time,GMT+06:30</option>
+													<option value="Moscow Time,GMT+03:00">Moscow Time,GMT+03:00</option>
+													<option value="Malaysia Standard Time,GMT+08:00">Malaysia Standard Time,GMT+08:00</option>
+													<option value="Mountain Standard Time,GMT-07:00">Mountain Standard Time (North America),GMT-07:00</option>
+													<option value="Mauritius Time,GMT+04:00">Mauritius Time,GMT+04:00</option>
+													<option value="Maldives Time,GMT+05:00">Maldives Time,GMT+05:00</option>
+													<option value="Malaysia Time,GMT+08:00">Malaysia Time,GMT+08:00</option>
+													<option value="New Caledonia Time,GMT+11:00">New Caledonia Time,GMT+11:00</option>
+													<option value="Newfoundland Daylight Time,GMT-02:30">Newfoundland Daylight Time,GMT-02:30</option>
+													<option value="Norfolk Island Time,GMT+11:00">Norfolk Island Time,GMT+11:00</option>
+													<option value="Novosibirsk Time,GMT+07:00">Novosibirsk Time [9],GMT+07:00</option>
+													<option value="Nepal Time,GMT+05:45">Nepal Time,GMT+05:45</option>
+													<option value="Newfoundland Standard Time,GMT-03:30">Newfoundland Standard Time,GMT-03:30</option>
+													<option value="Newfoundland Time,GMT-03:30">Newfoundland Time,GMT-03:30</option>
+													<option value="Niue Time,GMT-11:00">Niue Time,GMT-11:00</option>
+													<option value="New Zealand Daylight Time,GMT+13:00">New Zealand Daylight Time,GMT+13:00</option>
+													<option value="New Zealand Standard Time,GMT+12:00">New Zealand Standard Time,GMT+12:00</option>
+													<option value="Omsk Time,GMT+06:00">Omsk Time,GMT+06:00</option>
+													<option value="Oral Time,GMT+05:00">Oral Time,GMT+05:00</option>
+													<option value="Pacific Daylight Time,GMT-07:00">Pacific Daylight Time (North America),GMT-07:00</option>
+													<option value="Peru Time,GMT-05:00">Peru Time,GMT-05:00</option>
+													<option value="Kamchatka Time,GMT+12:00">Kamchatka Time,GMT+12:00</option>
+													<option value="Papua New Guinea Time,GMT+10:00">Papua New Guinea Time,GMT+10:00</option>
+													<option value="Phoenix Island Time,GMT+13:00">Phoenix Island Time,GMT+13:00</option>
+													<option value="Philippine Time,GMT+08:00">Philippine Time,GMT+08:00</option>
+													<option value="Pakistan Standard Time,GMT+05:00">Pakistan Standard Time,GMT+05:00</option>
+													<option value="Saint Pierre and Miquelon Daylight Time,GMT-02:00">Saint Pierre and Miquelon Daylight Time,GMT-02:00</option>
+													<option value="Saint Pierre and Miquelon Standard Time,GMT-03:00">Saint Pierre and Miquelon Standard Time,GMT-03:00</option>
+													<option value="Pohnpei Standard Time,GMT+11:00">Pohnpei Standard Time,GMT+11:00</option>
+													<option value="Pacific Standard Time,GMT-08:00">Pacific Standard Time (North America),GMT-08:00</option>
+													<option value="Philippine Standard Time,GMT+08:00">Philippine Standard Time,GMT+08:00</option>
+													<option value="Paraguay Summer Time,GMT-03:00">Paraguay Summer Time[10],GMT-03:00</option>
+													<option value="Paraguay Time,GMT-04:00">Paraguay Time[11],GMT-04:00</option>
+													<option value="Réunion Time,GMT+04:00">Réunion Time,GMT+04:00</option>
+													<option value="Rothera Research Station Time,GMT-03:00">Rothera Research Station Time,GMT-03:00</option>
+													<option value="Sakhalin Island Time,GMT+11:00">Sakhalin Island Time,GMT+11:00</option>
+													<option value="Samara Time,GMT+04:00">Samara Time,GMT+04:00</option>
+													<option value="South African Standard Time,GMT+02:00">South African Standard Time,GMT+02:00</option>
+													<option value="Solomon Islands Time,GMT+11:00">Solomon Islands Time,GMT+11:00</option>
+													<option value="Seychelles Time,GMT+04:00">Seychelles Time,GMT+04:00</option>
+													<option value="Samoa Daylight Time,GMT-10:00">Samoa Daylight Time,GMT-10:00</option>
+													<option value="Singapore Time,GMT+08:00">Singapore Time,GMT+08:00</option>
+													<option value="Sri Lanka Standard Time,GMT+05:30">Sri Lanka Standard Time,GMT+05:30</option>
+													<option value="Srednekolymsk Time,GMT+11:00">Srednekolymsk Time,GMT+11:00</option>
+													<option value="Suriname Time,GMT-03:00">Suriname Time,GMT-03:00</option>
+													<option value="Samoa Standard Time,GMT-11:00">Samoa Standard Time,GMT-11:00</option>
+													<option value="Singapore Standard Time,GMT+08:00">Singapore Standard Time,GMT+08:00</option>
+													<option value="Showa Station Time,GMT+03:00">Showa Station Time,GMT+03:00</option>
+													<option value="Tahiti Time,GMT-10:00">Tahiti Time,GMT-10:00</option>
+													<option value="Thailand Standard Time,GMT+07:00">Thailand Standard Time,GMT+07:00</option>
+													<option value="French Southern and Antarctic Time,GMT+05:00">French Southern and Antarctic Time[12],GMT+05:00</option>
+													<option value="Tajikistan Time,GMT+05:00">Tajikistan Time,GMT+05:00</option>
+													<option value="Tokelau Time,GMT+13:00">Tokelau Time,GMT+13:00</option>
+													<option value="Timor Leste Time,GMT+09:00">Timor Leste Time,GMT+09:00</option>
+													<option value="Turkmenistan Time,GMT+05:00">Turkmenistan Time,GMT+05:00</option>
+													<option value="Turkey Time,GMT+03:00">Turkey Time,GMT+03:00</option>
+													<option value="Tonga Time,GMT+13:00">Tonga Time,GMT+13:00</option>
+													<option value="Tuvalu Time,GMT+12:00">Tuvalu Time,GMT+12:00</option>
+													<option value="Ulaanbaatar Summer Time,GMT+09:00">Ulaanbaatar Summer Time,GMT+09:00</option>
+													<option value="Ulaanbaatar Standard Time,GMT+08:00">Ulaanbaatar Standard Time,GMT+08:00</option>
+													<option value="Uruguay Summer Time,GMT-02:00">Uruguay Summer Time,GMT-02:00</option>
+													<option value="Uruguay Standard Time,GMT-03:00">Uruguay Standard Time,GMT-03:00</option>
+													<option value="Uzbekistan Time,GMT+05:00">Uzbekistan Time,GMT+05:00</option>
+													<option value="Venezuelan Standard Time,GMT-04:00">Venezuelan Standard Time,GMT-04:00</option>
+													<option value="Vladivostok Time,GMT+10:00">Vladivostok Time,GMT+10:00</option>
+													<option value="Volgograd Time,GMT+04:00">Volgograd Time,GMT+04:00</option>
+													<option value="Vostok Station Time,GMT+06:00">Vostok Station Time,GMT+06:00</option>
+													<option value="Vanuatu Time,GMT+11:00">Vanuatu Time,GMT+11:00</option>
+													<option value="Wake Island Time,GMT+12:00">Wake Island Time,GMT+12:00</option>
+													<option value="West Africa Summer Time,GMT+02:00">West Africa Summer Time,GMT+02:00</option>
+													<option value="West Africa Time,GMT+01:00">West Africa Time,GMT+01:00</option>
+													<option value="Western European Summer Time,GMT+01:00">Western European Summer Time,GMT+01:00</option>
+													<option value="Western Indonesian Time,GMT+07:00">Western Indonesian Time,GMT+07:00</option>
+													<option value="West Greenland Summer Time,GMT-02:00">West Greenland Summer Time[13],GMT-02:00</option>
+													<option value="West Greenland Time,GMT-03:00">West Greenland Time[14],GMT-03:00</option>
+													<option value="Western Standard Time,GMT+08:00">Western Standard Time,GMT+08:00</option>
+													<option value="Yakutsk Time,GMT+09:00">Yakutsk Time,GMT+09:00</option>
+													<option value="Yekaterinburg Time,GMT+05:00">Yekaterinburg Time,GMT+05:00</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!--Corporate end-->
+		</div>
+
+		<!--Share Security popup modal-->
+		<div class="modal fad" id="sharemgmtfileinfo">
+			<div class="modal-dialog modal-lg" style="width:50%;max-width:90%;">
+				<div class="modal-content">
+					<div class="modal-header" style="background-color:#23bbf3;border-top-left-radius:36px;border-top-right-radius:36px;padding:0px;">
+						<h4 style="color:#fff;margin-top:20px;margin-left:20px;">Share management Folder/File Info</h4>
+					</div>
+					<div class="modal-body">
+						<div class="" id="tblsharemgmtinforows" style="max-height:350px;overflow-y:auto;overflow-x:hidden;"></div>
+					</div>
+					<div class="modal-footer">
+						<a data-dismiss="modal" style="color:#2abfc1;font-size:15px;margin-top:1px;text-align:center;cursor:pointer;">Close</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--Reset Password Start-->
+		<!--<div class="passfield modal fad" id="modalresetpss" style="display: none;">
+			<div class="passheader">
+				<span class="passwordback" id="passwordback" aria-hidden="true" id="javascript:void(0);"><a href="javascript:void(0);"><img src="assets/icons/backicon.png" style="padding-left: 5px;"></a></span>
+				<span>Reset Password</span>
+				<span style="padding-top:3px;padding-right:12px;float:right;">
+					<button class="btn btn-primary" style="background-color:#23bbf3 !important;outline:#23c2bd;margin-bottom:3px;" id="resetpassconfirm">Done</button>
+				</span>
+			</div>
+			<div class="passtextbox" style="padding-top:10px;padding-bottom:10px;padding-right:6px;">
+				<div class="fake-input">
+					<input type="password" id="newpassword" class="form-control" placeholder="New Password" style="margin-left:10px;width:98%;border: 1.5px solid #ccc;">
+					<label id="lblshowpassnew" style="top:11px;">SHOW</label>
+				</div>
+				<div class="fake-input" style="padding-top: 8px;">
+					<input type="password" id="confirmpassword" class="form-control" placeholder="Confirm Password" style="margin-left:10px;width:98%;border: 1.5px solid #ccc;">
+					<label id="lblshowpasscnf" style="top:20px;">SHOW</label>
+				</div>
+			</div>
+		</div>-->
+
+		<div class="passfield modal fad" id="modalresetpss" style="display:none;">
+		    <div class="delheader">
+		        <div style="text-align:center; font-size: 18px;">Reset Password</div>
+		    </div>
+		    <div class="passtextbox" style="padding-top:10px; border-left:1px solid #ccc; border-right:1px solid #ccc;">
+		        <div style="margin-left:3%;font-size:13px;margin-right:5%;">
+		            <div class="fake-input">
+		                <input type="password" id="newpassword" class="form-control" placeholder="New Password" style="margin-left:10px;width:98%;border-bottom:1.5px solid #ccc;box-shadow:none;border-radius:0;padding:0px;">
+		                <label style="top:11px;"><i id="lblshowpassnew" class="fa fa-eye" aria-hidden="true" style="cursor:pointer;"></i></label>
+		            </div>
+		            <div class="fake-input" style="padding-top: 8px;">
+		                <input type="password" id="confirmpassword" class="form-control" placeholder="Confirm Password" style="margin-left:10px;width:98%;border-bottom: 1.5px solid #ccc;box-shadow: none;border-radius:0;padding:0px;">
+		                <label style="top:20px;"><i id="lblshowpasscnf" class="fa fa-eye" aria-hidden="true" style="cursor:pointer;"></i></label>
+					</div>
+					<div style="width:100%;justify-content:end;text-align:end;padding-bottom: 10px;">
+						<button class="delbtn" id="passwordback" style="margin-left:5%; cursor:pointer;">CANCEL</button>
+		            	<button class="delbtn" id="resetpassconfirm" style="margin-left:5%; cursor:pointer;">DONE</button>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+
+		<!--Reset Password End-->
+
+		<!--Delete user popup start-->
+		<div class="passfield modal fad" id="deleteusercont" style="display: none;">
+			<div class="delheader">
+				<div style="text-align:center;font-size: 18px;">Do you want to delete user?</div>
+			</div>
+			<div class="passtextbox">
+				<div style="width:100%;justify-content:center;text-align:center;padding-right:5%;padding-bottom: 10px;">
+					<span class="themecolor mt10 pointerClass" id="canceldelete">CANCEL</span>
+					<button class="delbtn" id="deleteuserconfirm" style="margin-left: 5%;">DELETE</button>
+				</div>
+			</div>
+		</div>
+		<!--Delete user popup end-->
+
+		<!--Retain data  user popup start-->
+		<div class="passfield modal fad" id="retainuserdata" style="display: none;">
+			<div class="delheader">
+				<div style="text-align:center;font-size: 18px;">Do you want to retain all data of this user ?</div>
+			</div>
+			<div class="passtextbox">
+				<div style="width:100%;justify-content:center;text-align:center;padding-right:5%;padding-bottom: 10px;">
+					<span class="themecolor mt10 pointerClass" id="retaincancel">No</span>
+					<button class="delbtn" id="retainconfirm" style="margin-left: 5%;">Yes</button>
+				</div>
+			</div>
+		</div>
+		<!--Retain data user popup end-->
+
+		<!--Block user popup start-->
+		<div class="passfield modal fad" id="blockusercont" style="display: none;">
+			<div class="delheader">
+				<div style="text-align:center;font-size: 18px;">Do you want to block user?</div>
+			</div>
+			<div class="passtextbox">
+				<div style="width:100%;justify-content:center;text-align:center;padding-right:5%;padding-bottom: 10px;">
+					<span class="themecolor mt10 pointerClass" id="cancelblcok">CANCEL</span>
+					<button class="delbtn" id="blockuserconfirm" style="margin-left: 5%;">BLOCK</button>
+				</div>
+			</div>
+		</div>
+		<!--Block user popup end-->
+
+		<!--Block user popup start-->
+		<div class="passfield modal fad" id="unblockusercont" style="display: none;">
+			<div class="delheader">
+				<div style="text-align:center;font-size: 18px;">Do you want to unblock user?</div>
+			</div>
+			<div class="passtextbox">
+				<div style="width:100%;justify-content:center;text-align:center;padding-right:5%;padding-bottom: 10px;">
+					<!--<div style="margin-left: 10%; font-size: 18px;">Are you sure you want to unblock this user</div>-->
+					<span class="themecolor mt10 pointerClass" id="uncancelblcok">CANCEL</span>
+					<button class="delbtn" id="unblockuserconfirm" style="margin-left: 5%;">UNBLOCK</button>
+				</div>
+			</div>
+		</div>
+		<!--Block user popup end-->
+
+		<!--Block device popup start-->
+		<div class="passfield modal fad" id="unblockdivccont" style="display: none;">
+			<div class="delheader">
+				<div style="text-align:center;font-size: 18px;" id="divapproveask">Do you want to approve the device?</div>
+			</div>
+			<div class="passtextbox">
+				<div>
+					<div style="margin-left:5%;font-size:13px;margin-right:5%;">
+						<input type="text" id="admin_approve_cmt" class="inputClass" placeholder="Comment" maxlength="" onkeypress=""
+							style="border-bottom:1.5px solid #ccc;">
+					
+						<div id="date_min_div">
+							<div class="form-group custom-mt-form-group" style="margin-bottom:10px;padding:0px;padding-top: 15px;">
+								<p>Start Date<input type="date" id="admin_approve_start_date" style="font-size: 15px;border-bottom:1.5px solid #ccc;" /></p>
+							</div>
+							<div class="form-group custom-mt-form-group" style="margin-bottom:10px;padding:0px;padding-top: 15px;">
+								<p>End Date<input type="date" id="admin_approve_end_date" style="font-size: 15px;border-bottom:1.5px solid #ccc;" /></p>
+							</div>
+						</div>
+						<label class='container userspan' style="margin-top:5%;">
+							<input type="checkbox" name="terms" id="chk_admin_approve_infinite"><span>Infinite Duration(10 Years)</span>
+							<span class="checkmark"></span>
+						</label>
+					</div>
+					<div style="width:95%;justify-content:end;text-align:end;margin-right:5%;padding-bottom: 10px;">
+						<!--<div style="margin-left: 5%; font-size: 18px;">Are you sure you want to approve this device</div>-->
+						<span class="themecolor mt10 pointerClass" id="cancel_divc_unblock" style="margin-left: 30%;">CANCEL</span>
+						<button class="delbtn" id="unblockdeviceconfirm" style="margin-left:5%;">APPROVE</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--Block device popup end-->
+
+		<!--Delete device popup start-->
+		<div class="passfield modal fad" id="delete_divc_cont" style="display: none;">
+			<div class="delheader">
+				<div style="text-align:center;font-size: 18px;">Do you want to delete the device?</div>
+			</div>
+			<div class="passtextbox">
+				<div style="margin-left:5%;font-size:13px;margin-right:5%;">
+					<!--<input type="text" id="admin_delete_cmt" class="inputClass" placeholder="Comment" maxlength="" onkeypress="" style="border-bottom:1.5px solid #ccc;">-->
+					<!--<div style="margin-left: 6%; font-size: 18px;">Are you sure you want to Delete this device</div>-->
+					<div style="width:100%;justify-content:center;text-align:center;padding-bottom: 10px;">
+						<span class="themecolor mt10 pointerClass" id="cancel_divc_delete">CANCEL</span>
+						<button class="delbtn" id="deletedeviceconfirm" style="margin-left:5%;">DELETE</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--Delete device popup end-->
+
+		<!--Block device popup start-->
+		<div class="passfield modal fad" id="blockdivccont" style="display: none;">
+			<div class="delheader">
+				<div style="text-align:center;font-size: 18px;">Do you want to block the device?</div>
+			</div>
+			<div class="passtextbox">
+				<div style="margin-left:5%;font-size:13px;margin-right:5%;">
+					<input type="text" id="admin_block_cmt" class="inputClass" placeholder="Comment" maxlength="" onkeypress="" style="border-bottom:1.5px solid #ccc;">
+					<!--<div style="margin-left: 5%; font-size: 18px;">Are you sure you want to block this device</div>-->
+					<div style="width:100%;justify-content:end;text-align:end;padding-bottom: 10px;">
+						<span class="themecolor mt10 pointerClass" id="cancel_divc_block" style="margin-left: 30%;">CANCEL</span>
+						<button class="delbtn" id="blockdeviceconfirm" style="margin-left:5%;">BLOCK</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--Block device popup end-->
+
+		<!--Comment device popup start-->
+		<div class="passfield modal fad" id="div_device_comment" style="display: none;width:70%;">
+			<div class="delheader">
+				<div style="text-align:center;font-size: 18px;">Device Comments</div>
+			</div>
+			<div class="passtextbox" style="width:100%;overflow:none;">
+				<div style="font-size:13px;width:100%;overflow:none;">
+					<div class="col-md-12 col-sm-12 col-xs-12 pt10" style="padding-left: 0px; padding-right: 0px; ">
+						<div class="col-md-12 col-sm-12 col-xs-12 tableHeadSec" style="border: 1px solid #D3D3D3; padding-left: 0px !important; padding-right: 0px !important;width: 98%; margin-left: 1%;">
+							<div class='col-md-4 col-sm-4 heading'>Comment</div>
+							<div class='col-md-2 col-sm-2 heading'>Action</div>
+							<div class='col-md-3 col-sm-3 heading'>Date</div>
+							<div class='col-md-3 col-sm-3 heading'>Updated By</div>
+						</div>
+					</div>
+					<div class='col-md-12 col-sm-12 col-xs-12 single tablebodySec nopaddingLR'
+						style="max-height:230px;overflow-y:auto;margin-bottom:20px;width:98%;margin-left: 1%;border: 1px solid #D3D3D3;" id="div_comments_list">
+
+					</div>
+					<div style="width:100%;justify-content:end;text-align:end;padding-bottom:10px;padding-right:20px;">
+						<span class="themecolor mt10 pointerClass" id="cancel_divc_block_comment" style="margin-left: 30%;">CLOSE</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--Comment device popup end-->
+
+		<!--Profile popup modal-->
+		<div class="modal fad" id="userprofilemodal">
+			<div class="modal-dialog modal-lg" style="width:60%;max-width:90%;">
+				<div class="modal-content">
+					<div class="modal-header" style="background-color:#23bbf3;border-top-left-radius:36px;border-top-right-radius:36px;padding:0px;">
+						<h4 style="color:#fff;margin-top:20px;margin-left:20px;">User Profile</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-lg-5 col-md-12 col-sm-12 col-12">
+								<div class="aboutprofile">
+									<div class="card" style="background-color: #23bbf3; color: #fff; height: 380px;padding:0px;">
+										<div class="card-body" style="padding:0px;">
+											<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+													<div class="aboutprofile-pic img-circle" style="width:80px;height:80px;">
+														<img class="card-img-top img-circle" id="muserimg" style="width:80px;height:80px;" src="assets/img/user_image.png" alt="Card image">
+													</div>
+													<div class="aboutprofile-name">
+														<h5 class="text-center mt-2" id="musername">Michael V. Buttars</h5>
+														<p class="text-center" id="museremail">info@dcurris.com</p>
+														<p class="text-center" id="musercorp">0020170</p>
+														<hr>
+													</div>
+													<div class="aboutprofile-name" >
+														<p class="text-center mt-2" id="mallocatedspacepersonal" style="display:none;">&nbsp;</p>
+														<p class="text-center mt-2" id="mallocatedspacedataroom" style="display:none;">&nbsp;</p>
+														<p class="text-center mt-2" id="mallocatedspace">&nbsp;</p>
+													</div>
+													<div class="aboutprofile-name" id="storageused" style="width:100%;text-align:center;">
+														<div class="counter" data-cp-percentage="25" data-cp-color="#00bfeb"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-7 col-md-12 col-sm-12 col-12" style="height: 350px;max-height: 350px;overflow-y: auto;">
+								<div class="profile-content" style="border: none;">
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="card" style="border: none;padding:15px;">
+												<!-- Nav tabs -->
+												<ul class="nav customtab" style="padding-bottom:0px;">
+													<li class="nav-item" style="padding-bottom:0px;"><a href="javascript:void(0);" class="nav-link active show" style="color:#06b4c2; margin-left: -14px;">Edit Profile</a></li>
+												</ul>
+												<!-- Tab panes -->
+												<div class="tab-content" style="padding-bottom:0px;padding-top:20px;">
+													<div class="tab-pane active show" id="tab1">
+														<div id="biography" class="sidebar-menu">
+															<p>
+																<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+																	<span style="color:#0D246E;"> First Name</span>
+																	<input type="text" id="mfirstname" class="fs_15" onkeypress="return !allowAlphaNumeric(event);"/>
+																	<i class="bar"></i>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+																	<span style="color:#0D246E;"> Middle Name</span>
+																	<input type="text" id="mmiddlename" class="fs_15" onkeypress="return !allowAlphaNumeric(event);" />
+																	<i class="bar"></i>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+																	<span style="color:#0D246E;"> Last Name</span>
+																	<input type="text" id="mlastname" class="fs_15" onkeypress="return !allowAlphaNumeric(event);" />
+																	<i class="bar"></i>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+																	<div><span style="color:#0D246E;"> Mobile Number</span></div>
+																	<div style="width:100%;">
+																	<input type="text" id="mmobilenumber" maxlength="15" class='inputClass inputuser disablepasteonly' onkeypress="return isNumberKeyOnly(event)" autocomplete="off"
+																	style="font-size:15px;"/>
+																	</div>
+																	<i class="bar"></i>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+																	<span style="color:#0D246E;"> User Type</span>
+																	<input type="text" id="muserType" readonly style="color:black;" class="fs_15"/>
+																	<i class="bar"></i>
+																</div>
+															</p>
+
+															<p style="display:none;">
+																<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;display:none;">
+																	<span style="color:#0D246E;"> Sync Type</span>
+																	<input type="text" id="msynctype" readonly style="color:black;" class="fs_15"/>
+																	<i class="bar"></i>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+																	<span style="color:#0D246E;"> Fax Number</span>
+																	<input type="text" id="mfaxnumber" maxlength="15" onkeypress="return isNumberKeyForPhone(event)" class="fs_15" />
+																	<i class="bar"></i>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;" id="pcompany">
+																	<span style="color:#0D246E;"> Company</span>
+																	<input type="text" id="mcompany" class="fs_15" style="border: none;" />
+																	<i class="bar"></i>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group custom-mt-form-group" style="margin-bottom: 20px; padding: 0px;display:none;" id="padvsecurity">
+																	<div style="width:100%;margin-bottom: 2%;">
+																		<span style="color:#007bff;font-weight:bold;"> Advanced Security </span>
+																	</div>
+
+																	<!-- 16 NOV 2020-->
+																	<div class="row" style="margin: 0px auto; padding: 0px;">
+																		<div class=" col-md-12 custom-control custom-checkbox" >
+																			<div class="col-md-2" style="margin-left: -31px;">
+										          								<input type="checkbox" class="custom-control-input" id="adm_2_fact_enabled" checked="" readonly="" disabled="">
+										          							</div>
+										          							<div class="col-md-10" style="margin-left: -38px; margin-top: 9px;">
+										         								<label class="custom-control-label" for="adm_2_fact_enabled" style="font-style: normal; font-weight: 400;">Enable 2 Factor Authentication</label>
+										         							</div>
+									        						    </div>
+									        						</div>
+		        													<!-- 16 NOV 2020-->
+
+																	<div id="div_otpcontaineradmin" style="width:100%;display: flex;margin-top: 0%;padding-top: 1%;">
+																		<span style="color:#0D246E;width: 25%;margin-top:5px;" id="adm_user_security_name">&nbsp;</span>
+																		<input type="text" id="adm_user_security_carrier" class="inputClass inputuser disablepasteonly" readonly style="width:75%;color:black;font-size:13px;margin-left: -48px;">
+																	</div>
+																	<em class="bar"></em>
+																</div>
+															</p>
+
+
+															<input type="file" id="pickuserimg" style="display:none;" accept="image/x-png,image/jpeg,image/png" />
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<a data-dismiss="modal" style="color:#2abfc1;font-size:15px;margin-top:1px;text-align:center;cursor:pointer;padding-right:10px;" id="btn_admin_close_profile">Close</a>
+						<button class="btn btn-primary btn-rounded float-right" style="background-color: #2abfc1;cursor: pointer;border-radius: 50px;border: 1px solid #2abfc1;outline: none;padding: 7px 16px;" id="btn_save_profile">Save</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--Close Dataroom popup modal-->
+		<div class="modal fad" id="dataroomclosuremodal">
+			<div class="modal-dialog modal-lg" style="width:50%;">
+				<div class="modal-content">
+					<div class="modal-header" style="background-color:#23bbf3;border-top-left-radius:36px;border-top-right-radius:36px;padding:0px;">
+						<h4 style="color:#fff;margin-top:20px;margin-left:20px;">Close Data Room</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-12" style="height: 350px;max-height: 350px;overflow-y: auto;">
+								<div class="profile-content" style="border: none;">
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="card" style="border: none;padding:15px;">
+												<!-- Tab panes -->
+												<div class="tab-content" style="padding-bottom:0px;">
+													<div class="tab-pane active show" id="tab1">
+														<div id="biography" class="sidebar-menu">
+															<p>
+																<div class="form-group" style="margin-bottom:10px;padding:0px;">
+																	<span style="color:#0D246E;">Dataroom Termination Date *</span>
+																	<div class="custom-control custom-radio custom-control-inline" style="margin-top:20px;">
+																		<!-- 1-->
+																		<input type="radio" class="custom-control-input" id="chk_close_dataroom_now" name="radioclosedataroom" value="1" style="margin-right:5px;">
+																		<label class="custom-control-label labelradio" for="chk_close_dataroom_now" id="chk_close_dataroom_now_span" style="margin-right:20px;">Now</label>
+
+																		<!-- 2-->
+																		<input type="radio" class="custom-control-input" id="chk_close_dataroom_later" name="radioclosedataroom" value="0" style="margin-right:5px;">
+																		<label class="custom-control-label labelradio" for="chk_close_dataroom_later" id="chk_close_dataroom_later_span">Later</label>
+																	</div>
+																</div>
+																<i class="bar"></i>
+															</p>
+															<p>
+																<div id="div_dataroom_close_later_date" class="form-group custom-mt-form-group" style="display:none;margin-bottom:20px;padding:0px;">
+																	<span style="color:#0D246E;"> Select Date *&nbsp;&nbsp;&nbsp;</span>
+																	<input type="date" id="date_dataroom_close" placeholder="Select Date" style="font-size:14px;"/>
+																	<i class="bar"></i>
+																</div>
+															</p>
+															<p>
+																<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;">
+																	<span style="color:#0D246E;float:left;margin-right:20px;"> Reason to Close *</span>
+																	<select id="sel_admin_dataroom_close_reason" style="width:20%;border:1px solid #000;font-size:14px;height:24px;margin-bottom:5px;">
+																		<option value="1" selected>Deal Finalized</option>
+																		<option value="2">Deal Suspended</option>
+																		<option value="3">Deal Cancelled</option>
+																		<option value="4">Other Platform Preferred</option>
+																		<option value="5">Others</option>
+																	</select>
+																	<i class="bar"></i>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;" id="div_dataroom_close_experience">
+																	<span style="color:#0D246E;float:left;"> Experience with DCirrus Dataroom *&nbsp;&nbsp;&nbsp;</span>
+																	<select id="sel_dataroom_close_experience" style="width:20%;border:1px solid #000;font-size:14px;height:24px;margin-top:5px;">
+																		<option value="1">Low</option>
+																		<option value="2">Need to Improve</option>
+																		<option value="3">Moderate</option>
+																		<option value="4" selected>Excellent</option>
+																	</select>
+																	<i class="bar"></i>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;display:none;" id="div_dataroom_close_initby">
+																	<span style="color:#0D246E;"> Initiated By </span>
+																	<input type="text" id="txt_dataroom_close_initby" readonly style="font-size:14px;color:black;">
+																	<i class="bar"></i>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group" style="margin-bottom:10px;padding:0px;">
+																	<span style="color:#0D246E;font-weight:bold;">Do you need flash drive?</span>
+																	<div class="custom-control custom-radio custom-control-inline" style="margin-top:20px;">
+																		<!-- 1-->
+																		<input type="radio" class="custom-control-input" id="chk_close_dataroom_flashdrive_yes" name="radioclosedataroomflashdrive" value="1" style="margin-right:5px;">
+																		<label class="custom-control-label labelradio" for="chk_close_dataroom_flashdrive_yes" id="chk_close_dataroom_flashdrive_yes_span" style="margin-right:20px;">Yes</label>
+
+																		<!-- 2-->
+																		<input type="radio" class="custom-control-input" id="chk_close_dataroom_flashdrive_no" name="radioclosedataroomflashdrive" value="0" style="margin-right:5px;">
+																		<label class="custom-control-label labelradio" for="chk_close_dataroom_flashdrive_no" id="chk_close_dataroom_flashdrive_no_span">No</label>
+																	</div>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group custom-mt-form-group" style="display:none;margin-bottom:20px;padding:0px;" id="div_dataroom_close_flashdrive_no">
+																	<span style="color:#0D246E;"> No of flash drives *</span>
+																	<input type="text" id="txt_dataroom_close_flashdrive_no" style="color:black;" class="fs_15" maxlength="1" onkeypress="return isNumberKey(event)"/>
+																	<i class="bar"></i>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group custom-mt-form-group" style="display:none;margin-bottom:20px;padding:0px;" id="div_dataroom_close_doc_format">
+																	<span style="color:#0D246E;float:left;margin-right:20px;"> Document Format : </span>
+																	<span style="color:#0D246E;"> Original</span>
+																	<i class="bar"></i>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group custom-mt-form-group" style="display:none;margin-bottom:20px;padding:0px;" id="div_dataroom_close_drive_type">
+																	<span style="color:#0D246E;float:left;margin-right:24px;"> Flash Drive Type *</span>
+																	<select id="sel_dataroom_close_drive_type" style="font-size:14px;width:30%;margin-bottom:5px;">
+																		<option value="0" selected>Editable</option>
+																		<option value="1">Readonly</option>
+																	</select>
+																	<i class="bar"></i>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group custom-mt-form-group" style="display:none;margin-bottom:20px;padding:0px;" id="div_dataroom_close_flashdrive">
+																	<span style="color:#0D246E;font-weight:bold;">Flash drive reciepient details</span>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group custom-mt-form-group" style="display:none;margin-bottom:20px;padding:0px;" id="div_dataroom_close_flashdrive_name">
+																	<span style="color:#0D246E;"> Full Name *</span>
+																	<input type="text" id="txt_dataroom_close_flashdrive_rec_name" style="color:black;" class="fs_15"/>
+																	<i class="bar"></i>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group custom-mt-form-group" style="display:none;margin-bottom:20px;padding:0px;" id="div_dataroom_close_flashdrive_email">
+																	<span style="color:#0D246E;"> Email *</span>
+																	<input type="text" id="txt_dataroom_close_flashdrive_rec_email" style="color:black;" class="fs_15"/>
+																	<i class="bar"></i>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group custom-mt-form-group" style="display:none;margin-bottom:20px;padding:0px;" id="div_dataroom_close_flashdrive_phone">
+																	<span style="color:#0D246E;"> Phone *</span>
+																	<input type="text" id="txt_dataroom_close_flashdrive_rec_phone" maxlength="20" onkeypress="return isNumberKeyForPhone(event)" class="fs_15" />
+																	<i class="bar"></i>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group custom-mt-form-group" style="display:none;margin-bottom:20px;padding:0px;" id="div_dataroom_close_flashdrive_address">
+																	<span style="color:#0D246E;"> Address *</span>
+																	<input type="text" id="txt_dataroom_close_flashdrive_rec_address" class="fs_15" style="border: none;" />
+																	<i class="bar"></i>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;" id="div_dataroom_close_flashdrive_docs">
+																	<span style="color:#0D246E;font-weight:bold;"> Additional documents and reports</span>
+																</div>
+															</p>
+
+															<p>
+																<div class="form-group custom-mt-form-group" style="margin-bottom:20px;padding:0px;" id="div_dataroom_close_flashdrive_doc_1">
+																	<label class='container' style='font-weight:normal;'>
+																		<input type="checkbox" checked="checked" id="chk_dataroom_close_prj_index">Project index <span class="checkmark"></span>
+																	</label>
+																	<label class='container' style='font-weight:normal;'>
+																		<input type="checkbox" checked="checked" id="chk_dataroom_close_user_list">User list <span class="checkmark"></span>
+																	</label>
+																	<label class='container' style='font-weight:normal;'>
+																		<input type="checkbox" checked="checked" id="chk_dataroom_close_history">History report <span class="checkmark"></span>
+																	</label>
+																	<label class='container' style='font-weight:normal;'>
+																		<input type="checkbox" checked="checked" id="chk_dataroom_close_perm_list">User permission list <span class="checkmark"></span>
+																	</label>
+																</div>
+															</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<a data-dismiss="modal" style="color:#2abfc1;font-size:15px;margin-top:1px;text-align:center;cursor:pointer;padding-right:10px;" id="btn_dataroom_close_cancel">Close</a>
+						<button class="btn btn-primary btn-rounded float-right" style="background-color: #2abfc1;cursor: pointer;border-radius: 50px;border: 1px solid #2abfc1;outline: none;padding: 7px 16px;display:none;" id="btn_dataroom_close_req_cancel">Cancel Request</button>
+						<button class="btn btn-primary btn-rounded float-right" style="background-color: #2abfc1;cursor: pointer;border-radius: 50px;border: 1px solid #2abfc1;outline: none;padding: 7px 16px;" id="btn_dataroom_close_confirm">Confirm</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--Disclaimer message popup modal-->
+		<div class="modal fad" id="disclaimermsgmodal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header" style="background-color:#23bbf3;border-top-left-radius:36px;border-top-right-radius:36px;padding:0px;">
+						<div class="row">
+							<div class="col-sm-10 sol-10">
+								<h4 style="color:#fff;margin-top:20px;margin-left:20px;" id="disclaimermsgmodalheader">Disclaimer Message</h4>
+							</div>
+							<div class="col-sm-2 sol-2 float-right">
+								<button type="button" class="btn" data-dismiss="modal" aria-label="Close" style="background:none;color:white;font-size:26px;opacity:0.7; font-weight:bold; margin-left: 69px;">
+								<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="modal-body"  style = "height:60vh; overflow-y: auto;">
+						<div class="form-group custom-mt-form-group">
+						<!--	<textarea id="txtcontent" class="form-control" style="font-size:14px" placeholder="Enter message" rows="20">
+							</textarea> -->
+							 <div id="txtcontent2">  </div>
+
+						</div>
+					</div>
+					<div class="modal-footer" id="admsharefooter">
+						<button class="msgbtn" style="cursor:pointer; width: 85px;" data-dismiss="modal" aria-label="Close">Cancel</button>
+						<button class="msgbtn" style="cursor:pointer; width: 85px;" id="btnmsgsave">Save</button>
+					<!--<button class="msgbtn" style="cursor:pointer; width: 85px;" id="btnmsgexport">Export</button>-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- MUTLIPLE USER CREATION MODAL-->
+		<!-- The Modal -->
+		<div class="modal" id="multiUserCreationModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+
+					<!-- Modal Header -->
+					<div class= "modal-header multiusermodal_header_background">
+						<div class="row">
+							<div class="col-11 col-sm-11">
+								<h4 class="modal-title text_white">Multi User Creation</h4>
+							</div>
+							<div class="col-1 col-sm-1">
+								<button type="button" class="close text_white" data-dismiss="modal">&times;</button>
+							</div>
+						</div>
+					</div>
+
+					<!-- Modal body -->
+					<div class="modal-body">
+						<button class="btn btn-primary btn-rounded dropdown-toggle upload_download_btn" type="button" id="uploadcsv" aria-haspopup="true"
+							aria-expanded="false" style="outline:none;">
+							Upload CSV
+						</button>
+						<button class="btn btn-primary btn-rounded dropdown-toggle upload_download_btn" type="button" id="downloadcsv" aria-haspopup="true"
+						aria-expanded="false" style="outline:none;">
+						Download Template
+						</button><br>
+						<span class="uploadcsvlableclass">Selected file : <label id="uploadcsvlable" ></label></span>
+						<!-- Input Form -->
+						<input type="file" id="btnuserfilechoose" accept=".csv" style="display: none;">
+						<!-- Preview-->
+						<div id='preview'></div>
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary btn-rounded cancel_UploadUser_btn" data-dismiss="modal" style="outline:none;">cancel</button>
+						<button type="button" class="btn btn-primary btn-rounded cancel_UploadUser_btn" id="uploadUsers" data-dismiss="modal" style="outline:none;">Upload Users</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fad" id="divtimeout" role="dialog"></div>
+		<!-- <script type="text/javascript" src="assets/js/jquery-3.5.0.min.js?v=10.272"></script> -->
+		<script type="text/javascript" src="assets/js/jquery.min.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/jquery-ui-1.12.0.min.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/jquery-migrate-1.4.1.min.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/intlTelInput-jquery.min.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/popper.min.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/bootstrap.min.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/jquery.dataTables.min.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/dataTables.bootstrap4.min.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/jquery.slimscroll.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/select2.min.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/moment.min.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/jstz-1.0.4.min.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/bootstrap-datetimepicker.min.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/top-alertjs.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/plugins/summernote/dist/summernote-bs4.min.js?v=10.272"></script>
+
+		<script type="text/javascript" src="assets/js/app.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/variables.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/aes.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/validations.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/CustomAuthenticatorRealmChallengeHandler.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/admin/admin_common.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/admin/admin_event.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/admin/admin_service.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/admin/admin_details.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/admin/admin_messages.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/admin/admin_variables.js?v=10.272"></script>
+		<script type="text/javascript" src="assets/js/mousedetect.js?v=10.272"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote.min.js"></script>
+</body>
+</body>
+
+</html>

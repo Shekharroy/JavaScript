@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Metadata</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css?=1.1029">
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css?=1.1029">
+    <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap4.min.css?=1.1029">
+    <link rel="stylesheet" type="text/css" href="assets/css/select2.min.css?=1.1029">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css?=1.1029">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css?=1.1029">
+    <link rel="stylesheet" type="text/css" href="assets/css/custom.css?=1.1029">
+    <link rel="stylesheet" type="text/css" href="assets/css/top-alertjs.css?=1.1029">
+    <link rel="stylesheet" type="text/css" href="assets/plugins/summernote/dist/summernote-bs4.css?=1.1029">
+    <link rel="stylesheet" type="text/css" href="assets/css/tree/tree.css?=1.1029">
+    <link rel="stylesheet" type="text/css" href="assets/css/adm/adm.css?=1.1029">
+	<link rel="stylesheet" type="text/css" href="assets/css/intlTelInput.css?=1.1029"/>
+	<link rel='stylesheet' type="text/css" href='assets/css/daterangepicker.css?v=1.1011'>
+	<link rel='stylesheet' type="text/css" href='assets/css/datepickr.css?v=1.1011'>
+
+	<style>
+
+
+
+	select:focus{
+        outline: none;
+    }
+
+	input:focus{
+        outline: none;
+    }
+
+		.col-1 {
+			position: relative;
+			width: 60%;
+			float: left;
+			height: 650px;
+			background-color: #fff;
+			border-right: groove;
+			z-index: 1010101010
+		}
+		.col-2 {
+			position: relative;
+			width: 39%;
+			float: left;
+			height: 650px;
+			background-color: #fff;
+			z-index: 1010101010
+		}
+	input[type=text], select {
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+	}
+	input[type=date], select {
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		display: inline-block;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		box-sizing: border-box;
+	}
+	input[type=submit] {
+		width: 32%;
+		background-color: #2abfc1;
+		color: white;
+		padding: 14px 20px;
+		margin: 8px 0;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+		text-align: center;
+	}
+
+	input[type=submit]:hover {
+		background-color: #73d6c9;
+		color: rgb(20, 17, 17);
+	}
+	.v1{
+		border-left: 6px solid green;
+  		height: 500px;
+	}
+
+	.import_button:hover{
+		background-color: #2abfc1;
+		color: rgb(20, 17, 17);
+	}
+
+
+        .input-icons i {
+            position: absolute;
+        }
+
+        .input-icons {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .icon {
+            padding: 10px;
+            min-width: 40px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+        }
+
+	</style>
+</head>
+
+
+<body onload="fetchMetadata();">
+	<!-- Document view -->
+	<div class="metadata_document_div" style="width:61%;float:left;height:100%;padding-top: 2px;">
+		<div style="padding-left: 40%;"><h2 style=" font-size: 28px;color: rgb(56, 68, 67);font-style: inherit;font-family: Sans-serif;">Document<i id="expand_arrow" class="fa fa-window-maximize cursor-pointer metadata_expand_errow" style="float: right;font-size: 20px;color: rgba(59, 59, 63, 0.979);padding-top: 10px;padding-right: 20px;"></i></h2></div><hr>
+
+		<iframe class="document_view_div" name='adm_viewerboxid' id='metadata_viewerboxid' src='' width='100%' height='100%' style='overflow:auto;border:0px;margin-left:-5px;'></iframe>
+		<div class="document_error_div" style="padding-top: 20%; float:left;height:100%;display: none;color: red;font-family: Verdana, Geneva, Tahoma, sans-serif;text-align: center;">
+			<h2>This file type is not supported to be viewed in the system. Please download the file if allowed and view it locally.</h2>
+		</div>
+		<div class="document_error_size_div" style="padding-top: 20%; float:left;height:100%;display: none;color: red;font-family: Verdana, Geneva, Tahoma, sans-serif;text-align: center;">
+			<h2>Sorry can not display more than 300 Mb files. Please download the file to view</h2>
+		</div>
+	</div>
+
+
+	<div class="vl" style="width:0%;float:left;border-left: 6px solid #1e88e5;height: 100%;"></div>
+
+	<!-- Metadata -->
+	<div class="content container-fluid" style="height:100%;width:38%;float:left;padding-left:0px;padding-right:0px;">
+		<div style="padding-left: 40%;"><h2 style=" font-size: 28px;color: rgb(56, 68, 67);font-style: inherit;font-family: Sans-serif;">Metadata</h2></div><hr>
+		<div class="input_div" style="border-radius: 5px;padding: 5px;display: none;">
+			<!--<label class="contner" style="margin-bottom: 5px;"><input class="check_box" type="checkbox" id="metadata_date_checkbox"><span class="checkmark"></span><span style="font-size: 16px;"><b>Date</b></span></label>-->
+
+			<!--<input type="date" class="date_class" id="metadataDate" placeholder="Date" style=""/>-->
+			<!--<input type="text" class="metadata_value_class" id="metadataValue" name="metadata_value" placeholder="Enter New Metadata Value(Max 70 Character)" maxlength="70">-->
+			<div class="">
+
+		<input type="text" id="metadataKey" autocomplete="new-password" name="metadata_key" placeholder="Enter new metadata key(max 30 character)" style="width: 94%;padding-right:0;font-size: 16px; border-right: none;height: 50px;" maxlength="30">
+
+		<span><select id="metadata_key_list" style="width: 6%;margin-left: -1%; border-left: none; padding-left: 0; height: 50px; font-size: 16px;" ></select></span>
+		</div>
+
+		<div class="input-icons">
+			<div class="input-group date">
+				<input class="input-field form-control" id="metadataValue" type="text" placeholder="Enter New Metadata Value(Max 70 Character)/Date" style="text-align:left;margin-top: 5px;">
+				<i class="fa fa-calendar icon calendar-icon" style="font-size:25px;z-index:9;display:none;margin-top: 5px;"></i>
+			</div>
+		</div>
+
+			<input id="add_metadata" type="submit" value="Save" title="Save">
+			<input id="importMetadata" type="submit" value="Import Metadata" title="Import Metadata">
+			<input id="exportMetadata" type="submit" value="Download Template" title="Download Template" style="padding: 14px 10px;">
+			<input type="file" id="btnImportMetadata" accept=".csv" style="display: none;">
+			<!--<datalist id="metadata_key_list"></datalist>-->
+
+		</div>
+		<div class="table-responsive new-tabl" style="overflow-x:initial;">
+			<table class="table table-striped custom-table">
+			<thead>
+				<th class="col-md-1 up" style="font-size:14px;padding-left:5px;cursor:pointer;">
+						<label class="contner metadata_allcheckbox" style="margin-bottom: 15px;">
+							<input class="check_box" type="checkbox" id="metadataAllcheckbox">
+							<span class="checkmark"></span>
+						</label>
+				</th>
+				<th class='col-md-4 up'>Key</th>
+				<th class='col-md-4 up'>Value</th>
+				<th class='col-md-1 up'>
+					<i id='deleteMetadata_all' class='fa fa-trash font-18 cursor-pointer all_delete_icon' title="Delete" style='color:blue;margin-top:13px;'></i>
+				</th>
+			</thead>
+			</table>
+		</div>
+
+		<div id="metadatalist" class="metadata_row_div_0" style="height:55%;overflow-y: auto;overflow-x: hidden;width:100%;float:left;padding-left: 3px;"></div>
+	</div>
+
+	<div class="modal fad" id="divtimeout" role="dialog"></div>
+
+	<script type="text/javascript" src="assets/js/jquery.min.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/jquery-migrate-1.4.1.min.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/intlTelInput-jquery.min.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/jquery-ui-1.12.0.min.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/popper.min.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/jquery.dataTables.min.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/dataTables.bootstrap4.min.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/jquery.slimscroll.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/select2.min.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/moment.min.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/jstz-1.0.4.min.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/bootstrap-datetimepicker.min.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/top-alertjs.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/plugins/summernote/dist/summernote-bs4.min.js?=1.1029"></script>
+
+    <script type="text/javascript" src="assets/js/app.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/variables.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/validations.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/CustomAuthenticatorRealmChallengeHandler.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/tree/tree.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/download.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/aes.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/firebase_app.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/firebase_messaging.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/firebase_config.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/daterangepicker.js?=1.1029"></script>
+	<script type="text/javascript" src="assets/js/mousedetect.js?=1.1029"></script>
+
+    <script type="text/javascript" src="assets/js/login/login_message.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/login/login_service.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/login/login_details.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/login/login_variables.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/login/login_common.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/login/login_event.js?=1.1029"></script>
+
+    <script type="text/javascript" src="assets/js/adm/adm_message.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/adm/adm_service.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/adm/adm_details.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/adm/adm_variables.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/adm/adm_common.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/adm/adm_event.js?=1.1029"></script>
+
+    <script type="text/javascript" src="assets/js/adm/notes_common.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/adm/notes_service.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/adm/notes_event.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/adm/notes_messages.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/adm/notes_details.js?=1.1029"></script>
+
+	<script type="text/javascript" src="assets/js/metadata/metadata_event.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/metadata/metadata_service.js?=1.1029"></script>
+    <script type="text/javascript" src="assets/js/metadata/metadata_details.js?=1.1029"></script>
+	<script type="text/javascript" src="assets/js/datepickr.js?=1.1029"></script>
+
+
+
+
+	<script type="text/javascript">
+
+        datepickr('.calendar-icon', { altInput: document.getElementById('metadataValue') , dateFormat: 'd-m-Y'});
+
+        $(".calendar-icon").show();
+
+    </script>
+
+</body>
+</html>
